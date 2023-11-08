@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\User\IndexRequest;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth:sanctum');
+    }
 
     public function allUsers(IndexRequest $request) {
 
@@ -34,4 +39,7 @@ class UserController extends Controller
         return response()->json($data, 200);
     }
     
+    public function index(IndexRequest $request) {
+        return UserResource::collection(User::all());
+    }
 }
