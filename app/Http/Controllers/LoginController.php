@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exceptions\AuthenticateException;
 
 class LoginController extends Controller
 {
@@ -21,11 +22,10 @@ class LoginController extends Controller
                 'token' => $token
             ]);
 
-        } else {
-
-            return response()->json([
-                'error' => 'Credenciales incorrectas. Por favor, inténtalo de nuevo.'
-            ], 400);
         }
+
+        return response()->json([
+            'error' => 'Credenciales incorrectas. Por favor, inténtalo de nuevo.'
+        ], 401); 
     }
 }
