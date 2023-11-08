@@ -23,3 +23,4 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'LoginController@authenticate');
 
 Route::get('user/allUsers', 'UserController@allUsers')->name('user');
+Route::get('user/user/{userId}', 'UserController@getUserById')->name('user.getById');
