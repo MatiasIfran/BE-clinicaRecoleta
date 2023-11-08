@@ -20,7 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Rutas disponibles
+
+//  Post
 Route::post('login', 'LoginController@authenticate');
 
+//  Get
 Route::get('user/allUsers', 'UserController@allUsers')->name('user');
 Route::get('user/user/{userId}', 'UserController@getUserById')->name('user.getById');
