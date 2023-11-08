@@ -2,12 +2,9 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Exceptions\JsonAuthorizationException;
-use App\Exceptions\JsonValidationException;
-use \Illuminate\Contracts\Validation\Validator;
+use App\Http\Requests\BaseFormRequest;
 
-class IndexRequest extends FormRequest
+class IndexRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,6 +13,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
+        //return true;
         return false;
     }
 
@@ -27,33 +25,8 @@ class IndexRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            //'foo' => 'required'
         ];
-    }
-
-     /**
-     * Handle a failed authorization attempt.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Exceptions\JsonAuthorizationException
-     */
-    protected function failedAuthorization()
-    {
-        throw new JsonAuthorizationException;
-    }
-
-     /**
-     * Handle a failed validation attempt.
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        throw new JsonValidationException($validator);
     }
     
 }
