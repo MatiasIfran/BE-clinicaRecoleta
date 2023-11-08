@@ -14,6 +14,7 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //Son las ecepciones donde no quiero que se guarden
+        JsonAuthorizationException::class
     ];
 
     /**

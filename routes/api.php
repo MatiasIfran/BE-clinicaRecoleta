@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+*/
 
+//Rutas disponibles
 Route::post('login', 'LoginController@authenticate');
+
+Route::get('user/index', 'UserController@index')->name('user');
