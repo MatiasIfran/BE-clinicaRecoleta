@@ -22,4 +22,4 @@ use Illuminate\Support\Facades\Route;
 //Rutas disponibles
 Route::post('login', 'LoginController@authenticate');
 
-Route::get('user/index', 'UserController@index')->name('user');
+Route::get('user/allUsers', 'UserController@allUsers')->name('user');

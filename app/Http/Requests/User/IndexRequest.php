@@ -13,8 +13,8 @@ class IndexRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        //return true;
-        return false;
+        return true;
+        //return false;
     }
 
     /**

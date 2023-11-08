@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Api\Models\User;
+use App\Models\User;
 use App\Http\Requests\User\IndexRequest;
 
 class UserController extends Controller
 {
-    public function index(IndexRequest $request) {
 
+    public function allUsers(IndexRequest $request) {
+
+        $users = User::all();
+
+        $data = [
+            'status'    => true,
+            'users'     => $users,
+        ];
+
+        return response()->json($data, 200);
     }
 }
