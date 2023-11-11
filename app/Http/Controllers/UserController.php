@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\User\IndexRequest;
+use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Resources\UserResource;
 
 class UserController extends Controller
@@ -37,6 +38,10 @@ class UserController extends Controller
         ];
     
         return response()->json($data, 200);
+    }
+
+    public function createUser(CreateUserRequest $request) {
+
     }
     
     public function index(IndexRequest $request) {
