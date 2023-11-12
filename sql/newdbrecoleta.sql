@@ -1,5 +1,5 @@
--- Tabla de Pacientes
-CREATE TABLE IF NOT EXISTS Pacientes (
+-- Tabla de Personas
+CREATE TABLE IF NOT EXISTS Personas (
     ID INT PRIMARY KEY,
     Nombre VARCHAR(50),
     Apellido VARCHAR(50),
@@ -10,26 +10,42 @@ CREATE TABLE IF NOT EXISTS Pacientes (
     Mail VARCHAR(100), -- Correo Electrónico
     Sexo VARCHAR(10), -- Sexo
     NumDocumento INT, -- Número de Documento como número entero
+    fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
+    usuario VARCHAR(50)
+);
+
+-- Tabla de Pacientes
+CREATE TABLE IF NOT EXISTS Pacientes (
+    ID INT PRIMARY KEY,
+    PersonaID INT,
     HistorialMedico TEXT,
     SeguroMedico VARCHAR(50),
     fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
-    usuario VARCHAR(50)
+    usuario VARCHAR(50),
+    FOREIGN KEY (PersonaID) REFERENCES Personas(ID),
 );
 
 -- Tabla de Médicos
 CREATE TABLE IF NOT EXISTS Medicos (
     ID INT PRIMARY KEY,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
+    MedicoId INT,
     Especialidad VARCHAR(50),
     Telefono VARCHAR(15),
     ConsultorioDireccion VARCHAR(100),
     HorarioTrabajo VARCHAR(100),
-    Mail VARCHAR(100), -- Correo Electrónico
-    Sexo VARCHAR(10), -- Sexo
-    NumDocumento INT, -- Número de Documento como número entero
     fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
-    usuario VARCHAR(50)
+    usuario VARCHAR(50),
+    FOREIGN KEY (MedicoId) REFERENCES Personas(ID),
+);
+
+-- Tabla de Empleados (si es necesario)
+CREATE TABLE IF NOT EXISTS Empleados (
+    ID INT PRIMARY KEY,
+    EmpleadoId INT,
+    Puesto VARCHAR(50),
+    fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
+    usuario VARCHAR(50),
+    FOREIGN KEY (EmpleadoId) REFERENCES Personas(ID),
 );
 
 -- Tabla de Turnos (anteriormente Citas)
@@ -82,21 +98,6 @@ CREATE TABLE IF NOT EXISTS InventarioMedicamentos (
     CantidadStock INT,
     FechaVencimiento DATE,
     Proveedor VARCHAR(100),
-    fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
-    usuario VARCHAR(50)
-);
-
--- Tabla de Empleados (si es necesario)
-CREATE TABLE IF NOT EXISTS Empleados (
-    ID INT PRIMARY KEY,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
-    Puesto VARCHAR(50),
-    Telefono VARCHAR(15),
-    Direccion VARCHAR(100),
-    Mail VARCHAR(100), -- Correo Electrónico
-    Sexo VARCHAR(10), -- Sexo
-    NumDocumento INT, -- Número de Documento como número entero
     fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
     usuario VARCHAR(50)
 );
