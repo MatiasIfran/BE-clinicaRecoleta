@@ -25,7 +25,23 @@ class CreateUserRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            //
+            'name'  =>  'required|string|max:191',
+            'email' =>  'required|string|email|max:191|unique:users',
+            'password'  =>  'required|string|min:6|max:191|confirmed',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El campo nombre es obligatorio.',
+            'email.required' => 'El campo correo electrónico es obligatorio.',
+            'email.email' => 'Por favor, introduce una dirección de correo electrónico válida.',
+            'email.unique' => 'Ya existe un usuario con esta dirección de correo electrónico.',
+            'password.required' => 'El campo contraseña es obligatorio.',
+            'password.min' => 'La contraseña debe tener al menos :min caracteres.',
+            'password.max' => 'La contraseña no puede tener más de :max caracteres.',
+            'password.confirmed' => 'La confirmación de la contraseña no coincide.',
         ];
     }
 }
