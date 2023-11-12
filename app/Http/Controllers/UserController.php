@@ -41,7 +41,9 @@ class UserController extends Controller
     }
 
     public function createUser(CreateUserRequest $request) {
-
+        return response()->json([
+            'success'   =>  true
+        ], 200);
     }
     
     public function index(IndexRequest $request) {

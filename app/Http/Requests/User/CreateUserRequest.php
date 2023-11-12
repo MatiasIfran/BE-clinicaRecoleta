@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\Models\User;
 use App\Http\Requests\BaseFormRequest;
 
 class CreateUserRequest extends BaseFormRequest
@@ -13,7 +14,7 @@ class CreateUserRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('create', User::class);
     }
 
     /**
