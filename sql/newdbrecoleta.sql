@@ -101,17 +101,6 @@ CREATE TABLE IF NOT EXISTS Empleados (
     usuario VARCHAR(50)
 );
 
--- Tabla de Usuarios
-CREATE TABLE IF NOT EXISTS Usuarios (
-    ID INT PRIMARY KEY,
-    NombreUsuario VARCHAR(50) NOT NULL,
-    Contrasena VARCHAR(100) NOT NULL,
-    Rol VARCHAR(50), -- Puedes definir roles como "Administrador," "Médico," "Enfermera," etc.
-    Activo BOOLEAN DEFAULT true, -- Puedes usar un campo "Activo" para desactivar cuentas
-    fechaultmdf TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Valor predeterminado: fecha y hora actual
-    usuario VARCHAR(50)
-);
-
 -- Tabla de ObraSocial
 CREATE TABLE IF NOT EXISTS ObraSocial (
     ID INT PRIMARY KEY,
