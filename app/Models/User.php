@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /* Validacion de metodos */
+
+    public function createUserModel($request) {
+        $data = $request->only([
+            'name',
+            'email',
+            'password'
+        ]);
+        $data['password'] = bcrypt($data['password']);
+
+        $user = $this->create($data);
+
+        return $user;
+    }
 }
