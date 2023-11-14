@@ -31,7 +31,6 @@ class CreatePersonaRequest extends BaseFormRequest
             'Direccion' => 'nullable|string|max:100',
             'Telefono' => 'nullable|string|max:15',
             'Mail' => 'required|string|email|unique:personas',
-            'Sexo' => 'nullable|string',
             'NumDocumento' => 'required|integer|unique:personas',
         ];
     }

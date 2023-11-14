@@ -18,7 +18,6 @@ class Persona extends Model
         'Direccion',
         'Telefono',
         'Mail',
-        'Sexo',
         'NumDocumento',
         'fechaultmdf',
         'usuario',
