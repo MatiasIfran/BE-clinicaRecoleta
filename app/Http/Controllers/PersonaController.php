@@ -31,7 +31,11 @@ class PersonaController extends Controller
         $persona = Persona::find($personaId);
 
         if (!$persona) {
-            return response()->json(['message' => 'Persona no encontrada'], 404);
+            $data = [
+                'status'    => false,
+                'error' => 'Persona no encontrada',
+            ];
+            return response()->json($data, 404);
         }
 
         $data = [
@@ -46,7 +50,11 @@ class PersonaController extends Controller
         $persona = Persona::where('NumDocumento', $dni)->first();
 
         if (!$persona) {
-            return response()->json(['message' => 'Persona no encontrada'], 404);
+            $data = [
+                'status'    => false,
+                'error' => 'Persona no encontrada',
+            ];
+            return response()->json($data, 404);
         }
 
         $data = [
