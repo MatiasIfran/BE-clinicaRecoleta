@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Persona;
 
+use App\Models\Persona;
 use App\Http\Requests\BaseFormRequest;
 
 class CreatePersonaRequest extends BaseFormRequest
@@ -13,7 +14,7 @@ class CreatePersonaRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('create', new Persona);
     }
 
     /**
