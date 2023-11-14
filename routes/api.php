@@ -23,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 
 //  Post
 Route::post('login', 'LoginController@authenticate');
+Route::post('user/create', 'UserController@createUser')->name("createUser");
+Route::post('persona/create', 'PersonaController@createPersona')->name('createPersona');
 
 //  Get
 Route::get('user/allUsers', 'UserController@allUsers')->name('user');
 Route::get('user/user/{userId}', 'UserController@getUserById')->name('user.getById');
 Route::get('user/index', 'UserController@index')->name('user.getById');
-
-// Post
-Route::post('user/create', 'UserController@createUser')->name("createUser");
+Route::get('persona/allPersonas', 'PersonaController@allPersonas')->name('allPersonas');
