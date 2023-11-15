@@ -20,7 +20,7 @@ class Persona extends Model
         'Direccion',
         'Telefono',
         'Mail',
-        'TipoDocumento',
+        'tipoDocumento',
         'NumDocumento',
         'updated_at',
         'created_at',

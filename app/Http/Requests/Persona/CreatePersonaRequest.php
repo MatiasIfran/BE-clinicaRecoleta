@@ -34,9 +34,9 @@ class CreatePersonaRequest extends BaseFormRequest
             'Telefono' => 'nullable|string|max:15',
             'Mail' => 'nullable|string|email|unique:personas',
             'NumDocumento' => 'required|integer|unique:personas',
-            'TipoDocumento' => ['required',
+            'tipoDocumento' => ['required',
                                 'integer', 
-                                Rule::exists('TipoDocumento', 'idTipoDocumento')
+                                Rule::exists('tipoDocumento', 'idTipoDocumento')
             ],
             'usuario' => 'required|string|max:50',
         ];
@@ -52,7 +52,7 @@ class CreatePersonaRequest extends BaseFormRequest
             'Apellido.string' => 'El campo Apellido debe ser una cadena de texto.',
             'Apellido.max' => 'El campo Apellido no debe tener más de :max caracteres.',
             'Mail.unique' => 'La dirección de correo electrónico ya está en uso.',
-            'TipoDocumento.required' => 'El tipo de documento es obligatorio.',
+            'tipoDocumento.required' => 'El tipo de documento es obligatorio.',
             'NumDocumento.required' => 'El numero de documento es obligatorio.',
             'NumDocumento.unique' => 'El numero de documento ya está en uso.',
         ];
