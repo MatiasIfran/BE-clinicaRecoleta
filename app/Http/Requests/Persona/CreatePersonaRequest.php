@@ -4,6 +4,7 @@ namespace App\Http\Requests\Persona;
 
 use App\Models\Persona;
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Validation\Rule;
 
 class CreatePersonaRequest extends BaseFormRequest
 {
@@ -31,8 +32,13 @@ class CreatePersonaRequest extends BaseFormRequest
             'Genero' => 'nullable|string',
             'Direccion' => 'nullable|string|max:100',
             'Telefono' => 'nullable|string|max:15',
-            'Mail' => 'required|string|email|unique:personas',
+            'Mail' => 'nullable|string|email|unique:personas',
             'NumDocumento' => 'required|integer|unique:personas',
+            'TipoDocumento' => ['required',
+                                'integer', 
+                                Rule::exists('TipoDocumento', 'idTipoDocumento')
+            ],
+            'usuario' => 'required|string|max:50',
         ];
     }
 
@@ -46,6 +52,8 @@ class CreatePersonaRequest extends BaseFormRequest
             'Apellido.string' => 'El campo Apellido debe ser una cadena de texto.',
             'Apellido.max' => 'El campo Apellido no debe tener más de :max caracteres.',
             'Mail.unique' => 'La dirección de correo electrónico ya está en uso.',
+            'TipoDocumento.required' => 'El tipo de documento es obligatorio.',
+            'NumDocumento.required' => 'El numero de documento es obligatorio.',
             'NumDocumento.unique' => 'El numero de documento ya está en uso.',
         ];
     }
