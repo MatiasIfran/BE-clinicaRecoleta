@@ -1,18 +1,28 @@
+-- Tabla tipoDocumento
+CREATE TABLE tipoDocumento (
+    idTipoDocumento INT PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario VARCHAR(50) NOT NULL
+);
+
 -- Tabla de Personas
 CREATE TABLE IF NOT EXISTS Personas (
     ID INT PRIMARY KEY,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
+    Nombre VARCHAR(50) NOT NULL,
+    Apellido VARCHAR(50) NOT NULL,
     FechaNacimiento DATE,
     Genero VARCHAR(10),
     Direccion VARCHAR(100),
     Telefono VARCHAR(15),
     Mail VARCHAR(100),
-    Sexo VARCHAR(10),
-    NumDocumento INT,
+    TipoDocumento INT NOT NULL,
+    NumDocumento INT NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    usuario VARCHAR(50)
+    usuario VARCHAR(50) NOT NULL,
+    FOREIGN KEY (TipoDocumento) REFERENCES tipoDocumento(ID)
 );
 
 -- Tabla de Pacientes
