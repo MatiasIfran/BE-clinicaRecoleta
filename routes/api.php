@@ -30,8 +30,8 @@ Route::post('persona/createPersona', 'PersonaController@createPersona')->name('c
 Route::get('user/allUsers', 'UserController@allUsers')->name('allUser');
 Route::get('persona/allPersonas', 'PersonaController@allPersonas')->name('allPersonas');
 
-Route::get('userId/{userId}', 'UserController@getUserById')->name('user.getById');
-Route::get('personaId/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
+Route::get('user/{userId}', 'UserController@getUserById')->name('user.getById');
+Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
 
 Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name('persona.getPersonaByDni');
 
