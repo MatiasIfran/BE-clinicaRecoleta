@@ -20,6 +20,15 @@ class CreateTipoDocumentoTable extends Migration
             $table->timestamp('created_at')->default(now());
             $table->string('usuario', 50)->nullable(false);
         });
+
+        //Insercion de datos
+        DB::table('tipoDocumento')->insert([
+            ['descripcion' => 'DNI', 'usuario' => 'admin'],
+            ['descripcion' => 'Libreta cívica', 'usuario' => 'admin'],
+            ['descripcion' => 'Libreta de Enrolamiento', 'usuario' => 'admin'],
+            ['descripcion' => 'Pasaporte', 'usuario' => 'admin'],
+
+        ]);
     }
 
     /**
