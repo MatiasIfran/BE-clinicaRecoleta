@@ -38,6 +38,6 @@ class CreateTipoDocumentoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_documento');
+        Schema::dropIfExists('tipoDocumento');
     }
 }
