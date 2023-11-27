@@ -29,11 +29,10 @@ Route::post('paciente/createPaciente', 'PacienteController@createPaciente')->nam
 
 //  Get
 Route::get('user/allUsers', 'UserController@allUsers')->name('allUser');
-Route::get('persona/allPersonas', 'PersonaController@allPersonas')->name('allPersonas');
-
 Route::get('user/{userId}', 'UserController@getUserById')->name('user.getById');
-Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
 
+Route::get('persona/allPersonas', 'PersonaController@allPersonas')->name('allPersonas');
+Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
 Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name('persona.getPersonaByDni');
 
 Route::get('paciente/allPacientes', 'PacienteController@allPacientes')->name('allPacientes');
