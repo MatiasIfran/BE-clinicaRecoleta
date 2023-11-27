@@ -24,7 +24,7 @@ class Pacientes extends Migration
             $table->string('Telefono', 15)->nullable();
             $table->string('Mail', 100)->nullable();
             $table->unsignedBigInteger('TipoDocumento')->nullable(false);
-            $table->unsignedBigInteger('NumDocumento')->nullable(false);
+            $table->unsignedBigInteger('NumDocumento')->nullable(false)->unique();
             $table->unsignedBigInteger('Cuit')->nullable();
             $table->unsignedBigInteger('NumAfiliado')->nullable();
             $table->unsignedBigInteger('Empres')->nullable();

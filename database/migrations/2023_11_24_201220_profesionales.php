@@ -24,7 +24,7 @@ class Profesionales extends Migration
             $table->string('Telefono', 15)->nullable();
             $table->string('Mail', 100)->nullable();
             $table->unsignedBigInteger('TipoDocumento')->nullable(false);
-            $table->unsignedBigInteger('NumDocumento')->nullable(false);
+            $table->unsignedBigInteger('NumDocumento')->nullable(false)->unique();
             $table->unsignedBigInteger('Matricula')->nullable();
             $table->unsignedBigInteger('Categoria')->nullable();
             $table->unsignedBigInteger('Cuit')->nullable();
