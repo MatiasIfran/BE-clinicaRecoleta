@@ -36,5 +36,6 @@ Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('per
 
 Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name('persona.getPersonaByDni');
 
-
-Route::get('user/index', 'UserController@index')->name('user.getById');
+Route::get('paciente/allPacientes', 'PacienteController@allPacientes')->name('allPacientes');
+Route::get('paciente/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
+Route::get('pacienteDni/{dni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
