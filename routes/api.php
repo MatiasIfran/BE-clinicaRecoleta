@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'LoginController@authenticate');
 Route::post('user/createUser', 'UserController@createUser')->name("createUser");
 Route::post('persona/createPersona', 'PersonaController@createPersona')->name('createPersona');
+Route::post('paciente/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
 
 //  Get
 Route::get('user/allUsers', 'UserController@allUsers')->name('allUser');
