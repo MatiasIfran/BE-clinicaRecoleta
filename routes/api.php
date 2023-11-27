@@ -26,6 +26,7 @@ Route::post('login', 'LoginController@authenticate');
 Route::post('user/createUser', 'UserController@createUser')->name("createUser");
 Route::post('persona/createPersona', 'PersonaController@createPersona')->name('createPersona');
 Route::post('paciente/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
+Route::post('profesional/createProfesional', 'ProfesionalController@createProfesional')->name('createProfesional');
 
 //  Get
 Route::get('user/allUsers', 'UserController@allUsers')->name('allUser');
@@ -38,3 +39,7 @@ Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name
 Route::get('paciente/allPacientes', 'PacienteController@allPacientes')->name('allPacientes');
 Route::get('paciente/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
 Route::get('pacienteDni/{dni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
+
+Route::get('profesional/all', 'ProfesionalController@allProfesionales')->name('allProfesionales');
+Route::get('profesional/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
+Route::get('profesional/dni/{dni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
