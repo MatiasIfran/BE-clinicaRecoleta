@@ -21,7 +21,7 @@ class ProfesionalPaciente extends Migration
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);
             $table->foreign('profesional_id')->references('id')->on('profesionales')->onDelete('cascade');
-            $table->foreign('paciente_id')->references('id')->on('paciente')->onDelete('cascade');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
         });
     }
 
