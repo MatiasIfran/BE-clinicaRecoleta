@@ -38,8 +38,10 @@ Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name
 
 Route::get('paciente/allPacientes', 'PacienteController@allPacientes')->name('allPacientes');
 Route::get('paciente/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
-Route::get('pacienteDni/{dni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
+Route::get('pacienteDni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
 
 Route::get('profesional/all', 'ProfesionalController@allProfesionales')->name('allProfesionales');
 Route::get('profesional/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
-Route::get('profesional/dni/{dni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
+Route::get('profesionalDni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
+
+// Put
