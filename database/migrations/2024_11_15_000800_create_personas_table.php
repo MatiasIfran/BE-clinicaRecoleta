@@ -13,7 +13,7 @@ class CreatePersonasTable extends Migration
      */
     public function up()
     {
-        Schema::create('personas', function (Blueprint $table) {
+       /* Schema::create('personas', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre', 50)->nullable(false);
             $table->string('Apellido', 50)->nullable(false);
@@ -28,7 +28,7 @@ class CreatePersonasTable extends Migration
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);
             $table->foreign('TipoDocumento')->references('idTipoDocumento')->on('tipoDocumento');
-        });
+        });*/
     }
 
     /**
