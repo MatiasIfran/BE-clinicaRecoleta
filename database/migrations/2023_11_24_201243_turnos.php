@@ -16,7 +16,6 @@ class Turnos extends Migration
         Schema::create('turnos', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha');
-            $table->unsignedBigInteger('profesional_id');
             $table->timestamp('updated_at')->default(now());
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);

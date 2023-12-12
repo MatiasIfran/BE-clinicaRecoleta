@@ -29,7 +29,6 @@ class Profesionales extends Migration
             $table->unsignedBigInteger('Categoria')->nullable();
             $table->unsignedBigInteger('Cuit')->nullable();
             $table->unsignedBigInteger('Codigo')->nullable();
-            $table->unsignedBigInteger('ProfesionalTurno')->nullable();
             $table->timestamp('updated_at')->default(now());
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);
