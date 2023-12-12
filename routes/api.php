@@ -44,8 +44,8 @@ Route::get('profesional/all', 'ProfesionalController@allProfesionales')->name('a
 Route::get('profesional/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
 Route::get('profesionalDni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
 
-Route::get('codigoPostal/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
-Route::get('codigoPostal/id/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
-Route::get('codigoPostal/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
+Route::get('cp/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
+Route::get('cp/id/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
+Route::get('cp/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
 
 // Put
