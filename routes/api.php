@@ -29,19 +29,23 @@ Route::post('paciente/createPaciente', 'PacienteController@createPaciente')->nam
 Route::post('profesional/createProfesional', 'ProfesionalController@createProfesional')->name('createProfesional');
 
 //  Get
-Route::get('user/allUsers', 'UserController@allUsers')->name('allUser');
+Route::get('user/all', 'UserController@allUsers')->name('allUser');
 Route::get('user/{userId}', 'UserController@getUserById')->name('user.getById');
 
-Route::get('persona/allPersonas', 'PersonaController@allPersonas')->name('allPersonas');
+Route::get('persona/all', 'PersonaController@allPersonas')->name('allPersonas');
 Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
 Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name('persona.getPersonaByDni');
 
-Route::get('paciente/allPacientes', 'PacienteController@allPacientes')->name('allPacientes');
+Route::get('paciente/all', 'PacienteController@allPacientes')->name('allPacientes');
 Route::get('paciente/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
 Route::get('pacienteDni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
 
 Route::get('profesional/all', 'ProfesionalController@allProfesionales')->name('allProfesionales');
 Route::get('profesional/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
 Route::get('profesionalDni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
+
+Route::get('codigoPostal/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
+Route::get('codigoPostal/id/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
+Route::get('codigoPostal/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
 
 // Put
