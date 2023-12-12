@@ -12,6 +12,7 @@ use Illuminate\Routing\Controller as BaseController;
 *    title="Api's Clinica Recoleta", 
 *    version="1.0")
 * @OA\Server(url="http://localhost:8000")
+* @OA\Server(url="https://endpoint.centrooftalmorecoleta.net")
 * @OA\SecurityScheme(
 *     type="http",
 *     description="Login with email and password to get the authentication token",
