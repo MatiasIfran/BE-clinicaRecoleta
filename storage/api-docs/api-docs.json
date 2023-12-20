@@ -13,6 +13,249 @@
         }
     ],
     "paths": {
+        "/api/paciente/all": {
+            "get": {
+            "tags": [
+                "Paciente"
+            ],
+            "summary": "Obtener todos los pacientes",
+            "description": "Retorna una lista de todos los pacientes disponibles",
+            "operationId": "AllPacientes",
+            "responses": {
+                "200": {
+                "description": "Operación exitosa",
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "properties": {
+                        "status": {
+                            "type": "boolean"
+                        },
+                        "pacientes": {
+                            "type": "array",
+                            "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                "type": "number"
+                                },
+                                "Nombre": {
+                                "type": "string"
+                                },
+                                "Apellido": {
+                                "type": "string"
+                                },
+                                "FechaNacimiento": {
+                                "type": "string"
+                                },
+                                "Genero": {
+                                "type": "string"
+                                },
+                                "Direccion": {
+                                "type": "string"
+                                },
+                                "Telefono": {
+                                "type": "string"
+                                },
+                                "Mail": {
+                                "type": "string"
+                                },
+                                "tipoDocumento": {
+                                "type": "number"
+                                },
+                                "NumDocumento": {
+                                "type": "number"
+                                },
+                                "Cuit": {
+                                "type": "number"
+                                },
+                                "usuario": {
+                                "type": "string"
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            "security": [
+                {
+                "apiAuth": []
+                }
+            ]
+            }
+        },
+        "/api/paciente/{id}": {
+            "get": {
+            "tags": [
+                "Paciente"
+            ],
+            "summary": "Obtener paciente por ID",
+            "description": "Retorna un paciente específico por su ID",
+            "operationId": "getPacienteById",
+            "parameters": [
+                {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                },
+                "description": "ID del paciente a obtener"
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "Operación exitosa",
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                        "status": {
+                            "type": "boolean"
+                        },
+                        "paciente": {
+                            "type": "object",
+                            "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "Nombre": {
+                                "type": "string"
+                            },
+                            "Apellido": {
+                                "type": "string"
+                            },
+                            "FechaNacimiento": {
+                                "type": "string"
+                            },
+                            "Genero": {
+                                "type": "string"
+                            },
+                            "Direccion": {
+                                "type": "string"
+                            },
+                            "Telefono": {
+                                "type": "string"
+                            },
+                            "Mail": {
+                                "type": "string"
+                            },
+                            "tipoDocumento": {
+                                "type": "number"
+                            },
+                            "NumDocumento": {
+                                "type": "number"
+                            },
+                            "Cuit": {
+                                "type": "number"
+                            },
+                            "usuario": {
+                                "type": "string"
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            "security": [
+                {
+                "apiAuth": []
+                }
+            ]
+            }
+        },
+        "/api/pacienteDni/{pacienteDni}": {
+            "get": {
+              "tags": [
+                "Paciente"
+              ],
+              "summary": "Obtener paciente por DNI",
+              "description": "Retorna un paciente específico por su número de documento",
+              "operationId": "getPacienteByDni",
+              "parameters": [
+                {
+                  "name": "pacienteDni",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  },
+                  "description": "Número de documento del paciente a obtener"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Operación exitosa",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "boolean"
+                          },
+                          "paciente": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "Nombre": {
+                                "type": "string"
+                              },
+                              "Apellido": {
+                                "type": "string"
+                              },
+                              "FechaNacimiento": {
+                                "type": "string"
+                              },
+                              "Genero": {
+                                "type": "string"
+                              },
+                              "Direccion": {
+                                "type": "string"
+                              },
+                              "Telefono": {
+                                "type": "string"
+                              },
+                              "Mail": {
+                                "type": "string"
+                              },
+                              "tipoDocumento": {
+                                "type": "number"
+                              },
+                              "NumDocumento": {
+                                "type": "number"
+                              },
+                              "Cuit": {
+                                "type": "number"
+                              },
+                              "usuario": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+            }
+        },             
         "/api/cp/all": {
             "get": {
                 "tags": [
@@ -20,7 +263,7 @@
                 ],
                 "summary": "Obtener todos los códigos postales",
                 "description": "Retorna una lista de todos los códigos postales disponibles",
-                "operationId": "getAllCodigosPostales",
+                "operationId": "allCodigoPostal",
                 "responses": {
                     "200": {
                         "description": "Operación exitosa",
@@ -65,7 +308,7 @@
                 ]
             }
         },
-        "/api/cp/id/{codigoPostalId}": {
+        "/api/cp/{codigoPostalId}": {
             "get": {
                 "tags": [
                     "Codigo Postal"
@@ -127,7 +370,7 @@
                 ]
             }
         },
-        "/api/cp/{codigoPostalNumber}": {
+        "/api/cpNumber/{codigoPostalNumber}": {
             "get": {
                 "tags": [
                     "Codigo Postal"
