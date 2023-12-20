@@ -255,7 +255,467 @@
                 }
               ]
             }
-        },             
+        },
+        "/api/paciente/createPaciente": {
+            "post": {
+              "tags": [
+                "Paciente"
+              ],
+              "summary": "Crear un nuevo paciente",
+              "description": "Crea un nuevo registro de paciente",
+              "operationId": "createPaciente",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "Nombre": {
+                          "type": "string"
+                        },
+                        "Apellido": {
+                          "type": "string"
+                        },
+                        "FechaNacimiento": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "Genero": {
+                          "type": "string"
+                        },
+                        "CodPos": {
+                          "type": "string"
+                        },
+                        "Direccion": {
+                          "type": "string"
+                        },
+                        "Telefono": {
+                          "type": "string"
+                        },
+                        "Mail": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "tipoDocumento": {
+                          "type": "number"
+                        },
+                        "NumDocumento": {
+                          "type": "number"
+                        },
+                        "Cuit": {
+                          "type": "string"
+                        },
+                        "NumAfiliado": {
+                          "type": "string"
+                        },
+                        "Empres": {
+                          "type": "string"
+                        },
+                        "DetaPlan": {
+                          "type": "string"
+                        },
+                        "Plan": {
+                          "type": "string"
+                        },
+                        "Antecedentes": {
+                          "type": "string"
+                        },
+                        "usuario": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "Nombre",
+                        "Apellido",
+                        "FechaNacimiento",
+                        "Genero",
+                        "NumDocumento",
+                        "tipoDocumento",
+                        "usuario"
+                      ]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Operación exitosa"
+                }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+            }
+        },          
+        "/api/profesional/all": {
+            "get": {
+              "tags": [
+                "Profesional"
+              ],
+              "summary": "Obtener todos los profesionales",
+              "description": "Retorna una lista de todos los profesionales disponibles",
+              "operationId": "allProfesional",
+              "responses": {
+                "200": {
+                  "description": "Operación exitosa",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "boolean"
+                          },
+                          "profesionales": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "Nombre": {
+                                  "type": "string"
+                                },
+                                "Apellido": {
+                                  "type": "string"
+                                },
+                                "FechaNacimiento": {
+                                  "type": "string"
+                                },
+                                "Genero": {
+                                  "type": "string"
+                                },
+                                "Direccion": {
+                                  "type": "string"
+                                },
+                                "Telefono": {
+                                  "type": "string"
+                                },
+                                "Mail": {
+                                  "type": "string"
+                                },
+                                "tipoDocumento": {
+                                  "type": "number"
+                                },
+                                "NumDocumento": {
+                                  "type": "number"
+                                },
+                                "Matricula": {
+                                  "type": "number"
+                                },
+                                "Categoria": {
+                                  "type": "number"
+                                },
+                                "Cuit": {
+                                  "type": "number"
+                                },
+                                "Codigo": {
+                                  "type": "number"
+                                },
+                                "ProfesionalTurno": {
+                                  "type": "number"
+                                },
+                                "usuario": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+            }
+        },
+        "/api/profesional/{profesionalId}": {
+            "get": {
+              "tags": [
+                "Profesional"
+              ],
+              "summary": "Obtener un profesional por ID",
+              "description": "Retorna un profesional según su ID",
+              "operationId": "getProfesionalById",
+              "parameters": [
+                {
+                  "name": "profesionalId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "number"
+                  },
+                  "description": "ID del profesional"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Operación exitosa",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "boolean"
+                          },
+                          "profesional": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "Nombre": {
+                                "type": "string"
+                              },
+                              "Apellido": {
+                                "type": "string"
+                              },
+                              "FechaNacimiento": {
+                                "type": "string"
+                              },
+                              "Genero": {
+                                "type": "string"
+                              },
+                              "Direccion": {
+                                "type": "string"
+                              },
+                              "Telefono": {
+                                "type": "string"
+                              },
+                              "Mail": {
+                                "type": "string"
+                              },
+                              "tipoDocumento": {
+                                "type": "number"
+                              },
+                              "NumDocumento": {
+                                "type": "number"
+                              },
+                              "Matricula": {
+                                "type": "number"
+                              },
+                              "Categoria": {
+                                "type": "number"
+                              },
+                              "Cuit": {
+                                "type": "number"
+                              },
+                              "Codigo": {
+                                "type": "number"
+                              },
+                              "ProfesionalTurno": {
+                                "type": "number"
+                              },
+                              "usuario": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+            }
+        },     
+        "/api/profesionalDni/{profesionalDni}": {
+            "get": {
+              "tags": [
+                "Profesional"
+              ],
+              "summary": "Obtener un profesional por DNI",
+              "description": "Retorna un profesional según su número de documento",
+              "operationId": "getProfesionalByDni",
+              "parameters": [
+                {
+                  "name": "profesionalDni",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "number"
+                  },
+                  "description": "Número de documento del profesional"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Operación exitosa",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "boolean"
+                          },
+                          "profesional": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "Nombre": {
+                                "type": "string"
+                              },
+                              "Apellido": {
+                                "type": "string"
+                              },
+                              "FechaNacimiento": {
+                                "type": "string"
+                              },
+                              "Genero": {
+                                "type": "string"
+                              },
+                              "Direccion": {
+                                "type": "string"
+                              },
+                              "Telefono": {
+                                "type": "string"
+                              },
+                              "Mail": {
+                                "type": "string"
+                              },
+                              "tipoDocumento": {
+                                "type": "number"
+                              },
+                              "NumDocumento": {
+                                "type": "number"
+                              },
+                              "Matricula": {
+                                "type": "number"
+                              },
+                              "Categoria": {
+                                "type": "number"
+                              },
+                              "Cuit": {
+                                "type": "number"
+                              },
+                              "Codigo": {
+                                "type": "number"
+                              },
+                              "ProfesionalTurno": {
+                                "type": "number"
+                              },
+                              "usuario": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+            }
+        },
+        "/api/profesional/createProfesional": {
+            "post": {
+              "tags": [
+                "Profesional"
+              ],
+              "summary": "Crear un nuevo profesional",
+              "description": "Crea un nuevo registro de profesional",
+              "operationId": "createProfesional",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "Nombre": {
+                          "type": "string"
+                        },
+                        "Apellido": {
+                          "type": "string"
+                        },
+                        "FechaNacimiento": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "Genero": {
+                          "type": "string"
+                        },
+                        "Direccion": {
+                          "type": "string"
+                        },
+                        "Telefono": {
+                          "type": "string"
+                        },
+                        "Mail": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "tipoDocumento": {
+                          "type": "number"
+                        },
+                        "NumDocumento": {
+                          "type": "number"
+                        },
+                        "Matricula": {
+                          "type": "number"
+                        },
+                        "Categoria": {
+                          "type": "number"
+                        },
+                        "Cuit": {
+                          "type": "number"
+                        },
+                        "Codigo": {
+                          "type": "number"
+                        },
+                        "ProfesionalTurno": {
+                          "type": "number"
+                        },
+                        "usuario": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "Nombre",
+                        "Apellido",
+                        "FechaNacimiento",
+                        "Genero",
+                        "NumDocumento",
+                        "tipoDocumento",
+                        "usuario"
+                      ]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Operación exitosa"
+                }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+            }
+        },                               
         "/api/cp/all": {
             "get": {
                 "tags": [
