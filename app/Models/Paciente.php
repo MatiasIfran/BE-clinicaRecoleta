@@ -29,8 +29,6 @@ class Paciente extends Model
         'DetaPlan',
         'Plan',
         'Antecedentes',
-        'updated_at',
-        'created_at',
         'usuario',
     ];
 
