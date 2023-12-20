@@ -15,7 +15,7 @@ class ProfesionalController extends Controller
         $this->middleware('auth:sanctum');
     }
 
-    public function allProfesional(IndexRequest $request)
+    public function allProfesionales(IndexRequest $request)
     {
         $Profesionales = Profesional::all();
         $data = [
