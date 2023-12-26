@@ -25,10 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'LoginController@authenticate');
 Route::post('user/createUser', 'UserController@createUser')->name("createUser");
 Route::post('persona/createPersona', 'PersonaController@createPersona')->name('createPersona');
-Route::post('paciente/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
-Route::post('profesional/createProfesional', 'ProfesionalController@createProfesional')->name('createProfesional');
 
-//  Get
 Route::get('user/all', 'UserController@allUsers')->name('allUser');
 Route::get('user/{userId}', 'UserController@getUserById')->name('user.getById');
 
@@ -36,16 +33,31 @@ Route::get('persona/all', 'PersonaController@allPersonas')->name('allPersonas');
 Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
 Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name('persona.getPersonaByDni');
 
-Route::get('paciente/all', 'PacienteController@allPacientes')->name('allPacientes');
-Route::get('paciente/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
-Route::get('pacienteDni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
+Route::prefix('paciente')->group(function () {
+    Route::get('/all', 'PacienteController@allPacientes')->name('allPacientes');
+    Route::get('/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
+    Route::get('/dni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
+});
 
-Route::get('profesional/all', 'ProfesionalController@allProfesionales')->name('allProfesionales');
-Route::get('profesional/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
-Route::get('profesionalDni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
+Route::prefix('profesional')->group(function () {
+    Route::get('/all', 'ProfesionalController@allProfesionales')->name('allProfesionales');
+    Route::get('/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
+    Route::get('/dni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
+    Route::post('/createProfesional', 'ProfesionalController@createProfesional')->name('createProfesional');
+    Route::post('/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
+});
 
-Route::get('cp/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
-Route::get('cp/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
-Route::get('cpNumber/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
+Route::prefix('cp')->group(function () {
+    Route::get('/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
+    Route::get('/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
+    Route::get('/dni/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
+});
+
+Route::prefix('turno')->group(function () {
+    Route::get('/all', 'TurnoController@allTurnos')->name('allTurnos');
+    Route::get('/id/{turnoId}', 'TurnoController@getTurnoById')->name('getTurnoById');
+    Route::get('/date', 'TurnoController@getTurnoByDate')->name('getTurnoByDate');
+    Route::post('/createTurno', 'TurnoController@createTurno')->name('createTurno');
+});
 
 // Put
