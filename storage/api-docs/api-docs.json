@@ -172,7 +172,7 @@
             ]
             }
         },
-        "/api/pacienteDni/{pacienteDni}": {
+        "/api/paciente/dni/{pacienteDni}": {
             "get": {
               "tags": [
                 "Paciente"
@@ -533,7 +533,7 @@
               ]
             }
         },     
-        "/api/profesionalDni/{profesionalDni}": {
+        "/api/profesional/dni/{profesionalDni}": {
             "get": {
               "tags": [
                 "Profesional"
@@ -830,7 +830,7 @@
                 ]
             }
         },
-        "/api/cpNumber/{codigoPostalNumber}": {
+        "/api/cp/codigo/{codigoPostalNumber}": {
             "get": {
                 "tags": [
                     "Codigo Postal"
@@ -891,7 +891,238 @@
                     }
                 ]
             }
+        },
+        "/api/turno/all": {
+          "get": {
+              "tags": [
+                  "Turno"
+              ],
+              "summary": "Obtener todos los turnos",
+              "description": "Retorna un array de todos los turnos disponibles",
+              "operationId": "getAllTurnos",
+              "responses": {
+                  "200": {
+                      "description": "Operación exitosa",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "object",
+                                  "properties": {
+                                      "status": {
+                                          "type": "boolean"
+                                      },
+                                      "turnos": {
+                                          "type": "array",
+                                          "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                  "id": {
+                                                      "type": "number"
+                                                  },
+                                                  "fecha": {
+                                                      "type": "string"
+                                                  },
+                                                  "usuario": {
+                                                      "type": "string"
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "security": [
+                {
+                    "apiAuth": []
+                }
+            ]
+          }
+      },
+      "/api/turno/id/{turnoId}": {
+          "get": {
+              "tags": [
+                  "Turno"
+              ],
+              "summary": "Obtener turno por ID",
+              "description": "Retorna un turno específico por su ID",
+              "operationId": "getTurnoById",
+              "parameters": [
+                  {
+                      "name": "turnoId",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                          "type": "integer"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Operación exitosa",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "object",
+                                  "properties": {
+                                      "status": {
+                                          "type": "boolean"
+                                      },
+                                      "turno": {
+                                          "type": "object",
+                                          "properties": {
+                                              "id": {
+                                                  "type": "number"
+                                              },
+                                              "fecha": {
+                                                  "type": "string"
+                                              },
+                                              "usuario": {
+                                                  "type": "string"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+          }
+      },
+      "/api/turno/date": {
+        "get": {
+            "tags": [
+                "Turno"
+            ],
+            "summary": "Obtener turnos por fecha",
+            "description": "Retorna turnos para una fecha específica",
+            "operationId": "getTurnoByDate",
+            "parameters": [
+              {
+                  "name": "fecha",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                      "type": "string",
+                      "format": "date"
+                  }
+              }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Operación exitosa",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "boolean"
+                                    },
+                                    "turnos": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "fecha": {
+                                                    "example": "aaaa/mm/dd",
+                                                    "type": "string"
+                                                },
+                                                "usuario": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "apiAuth": []
+                }
+            ]
         }
+      },    
+      "/api/turno/createTurno": {
+          "post": {
+              "tags": [
+                  "Turno"
+              ],
+              "summary": "Crear un nuevo turno",
+              "description": "Crea un nuevo turno",
+              "operationId": "createTurno",
+              "requestBody": {
+                  "required": true,
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "properties": {
+                                  "fecha": {
+                                      "type": "string",
+                                      "format": "date"
+                                  },
+                                  "usuario": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Operación exitosa",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "object",
+                                  "properties": {
+                                      "status": {
+                                          "type": "boolean"
+                                      },
+                                      "turno_creado": {
+                                          "type": "object",
+                                          "properties": {
+                                              "id": {
+                                                  "type": "number"
+                                              },
+                                              "fecha": {
+                                                  "type": "string"
+                                              },
+                                              "usuario": {
+                                                  "type": "string"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "security": [
+                {
+                  "apiAuth": []
+                }
+              ]
+          }
+      }
     },
     "components": {
         "securitySchemes": {
