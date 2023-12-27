@@ -37,6 +37,7 @@ Route::prefix('paciente')->group(function () {
     Route::get('/all', 'PacienteController@allPacientes')->name('allPacientes');
     Route::get('/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
     Route::get('/dni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
+    Route::post('/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
 });
 
 Route::prefix('profesional')->group(function () {
@@ -44,13 +45,12 @@ Route::prefix('profesional')->group(function () {
     Route::get('/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
     Route::get('/dni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
     Route::post('/createProfesional', 'ProfesionalController@createProfesional')->name('createProfesional');
-    Route::post('/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
 });
 
 Route::prefix('cp')->group(function () {
     Route::get('/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
     Route::get('/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
-    Route::get('/dni/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
+    Route::get('/codigo/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
 });
 
 Route::prefix('turno')->group(function () {
