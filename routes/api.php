@@ -60,4 +60,10 @@ Route::prefix('turno')->group(function () {
     Route::post('/createTurno', 'TurnoController@createTurno')->name('createTurno');
 });
 
+Route::prefix('obrasocial')->group(function () {
+    Route::get('/all', 'ObraSocialController@allObrasSociales')->name('allObrasSociales');
+    Route::get('/{obraSocialId}', 'ObraSocialController@getObraSocialById')->name('getObraSocialById');
+    Route::get('/codigo/{obraSocialCodigo}', 'ObraSocialController@getObraSocialByCodigo')->name('getObraSocialByCodigo');
+});
+
 // Put
