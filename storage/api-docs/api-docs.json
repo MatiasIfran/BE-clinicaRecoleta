@@ -1075,7 +1075,10 @@
                               "properties": {
                                   "fecha": {
                                       "type": "string",
-                                      "format": "date"
+                                      "format": "date-time"
+                                  },
+                                  "profesional_id": {
+                                    "type": "integer"
                                   },
                                   "usuario": {
                                       "type": "string"
@@ -1104,6 +1107,9 @@
                                               },
                                               "fecha": {
                                                   "type": "string"
+                                              },
+                                              "profesional_id": {
+                                                "type": "integer"
                                               },
                                               "usuario": {
                                                   "type": "string"
