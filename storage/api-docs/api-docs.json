@@ -1128,7 +1128,206 @@
                 }
               ]
           }
+      },
+      "/api/obrasocial/all": {
+        "get": {
+            "tags": [
+                "Obra Social"
+            ],
+            "summary": "Obtener todas las Obras Sociales",
+            "description": "Retorna todas las Obras Sociales disponibles",
+            "operationId": "getAllObrasSociales",
+            "responses": {
+                "200": {
+                    "description": "Operación exitosa",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "codigo": {
+                                            "type": "string"
+                                        },
+                                        "descripcion": {
+                                            "type": "string"
+                                        },
+                                        "codArancel": {
+                                            "type": "string"
+                                        },
+                                        "activa": {
+                                            "type": "boolean"
+                                        },
+                                        "valor": {
+                                            "type": "number"
+                                        },
+                                        "maxAnual": {
+                                            "type": "number"
+                                        },
+                                        "maxMensual": {
+                                            "type": "number"
+                                        },
+                                        "obraSocial": {
+                                            "type": "string"
+                                        },
+                                        "usuario": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "apiAuth": []
+                }
+            ]
+        }
+    },
+    "/api/obrasocial/{obraSocialId}": {
+      "get": {
+          "tags": [
+              "Obra Social"
+          ],
+          "summary": "Obtener Obra Social por ID",
+          "description": "Retorna la información de una Obra Social por su ID",
+          "operationId": "getObraSocialById",
+          "parameters": [
+              {
+                  "name": "obraSocialId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                      "type": "string"
+                  }
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "Operación exitosa",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "properties": {
+                                  "codigo": {
+                                      "type": "string"
+                                  },
+                                  "descripcion": {
+                                      "type": "string"
+                                  },
+                                  "codArancel": {
+                                      "type": "string"
+                                  },
+                                  "activa": {
+                                      "type": "boolean"
+                                  },
+                                  "valor": {
+                                      "type": "number"
+                                  },
+                                  "maxAnual": {
+                                      "type": "number"
+                                  },
+                                  "maxMensual": {
+                                      "type": "number"
+                                  },
+                                  "obraSocial": {
+                                      "type": "string"
+                                  },
+                                  "usuario": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "404": {
+                  "description": "Obra Social no encontrada"
+              }
+          },
+          "security": [
+              {
+                  "apiAuth": []
+              }
+          ]
       }
+  },
+  "/api/obrasocial/codigo/{obraSocialCodigo}": {
+    "get": {
+        "tags": [
+            "Obra Social"
+        ],
+        "summary": "Obtener Obra Social por Código",
+        "description": "Retorna la información de una Obra Social por su código",
+        "operationId": "getObraSocialByCodigo",
+        "parameters": [
+            {
+                "name": "obraSocialCodigo",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Operación exitosa",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "codigo": {
+                                    "type": "string"
+                                },
+                                "descripcion": {
+                                    "type": "string"
+                                },
+                                "codArancel": {
+                                    "type": "string"
+                                },
+                                "activa": {
+                                    "type": "boolean"
+                                },
+                                "valor": {
+                                    "type": "number"
+                                },
+                                "maxAnual": {
+                                    "type": "number"
+                                },
+                                "maxMensual": {
+                                    "type": "number"
+                                },
+                                "obraSocial": {
+                                    "type": "string"
+                                },
+                                "usuario": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Obra Social no encontrada"
+            }
+        },
+        "security": [
+            {
+                "apiAuth": []
+            }
+        ]
+    }
+}
+
+  
     },
     "components": {
         "securitySchemes": {
