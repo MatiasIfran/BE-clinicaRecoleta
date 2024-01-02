@@ -14,6 +14,7 @@ class Turno extends Model
 
     protected $fillable = [
         'fecha',
+        'profesional_id',
         'usuario'
     ];
 

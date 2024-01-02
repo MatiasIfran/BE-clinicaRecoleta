@@ -79,6 +79,7 @@ class TurnoController extends Controller
 
         $turno = Turno::create([
             'fecha' => $validated['fecha'],
+            'profesional_id' => $validated['profesional_id'],
             'usuario' => $validated['usuario'],
         ]);
 
