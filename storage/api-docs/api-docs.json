@@ -922,6 +922,12 @@
                                                   "fecha": {
                                                       "type": "string"
                                                   },
+                                                  "profesional_id": {
+                                                    "type": "integer"
+                                                  },
+                                                  "paciente_id": {
+                                                    "type": "integer"
+                                                  },
                                                   "usuario": {
                                                       "type": "string"
                                                   }
@@ -978,6 +984,12 @@
                                               },
                                               "fecha": {
                                                   "type": "string"
+                                              },
+                                              "profesional_id": {
+                                                "type": "integer"
+                                              },
+                                              "paciente_id": {
+                                                "type": "integer"
                                               },
                                               "usuario": {
                                                   "type": "string"
@@ -1039,6 +1051,12 @@
                                                     "example": "aaaa/mm/dd",
                                                     "type": "string"
                                                 },
+                                                "profesional_id": {
+                                                  "type": "integer"
+                                                },
+                                                "paciente_id": {
+                                                  "type": "integer"
+                                                },
                                                 "usuario": {
                                                     "type": "string"
                                                 }
@@ -1080,6 +1098,9 @@
                                   "profesional_id": {
                                     "type": "integer"
                                   },
+                                  "paciente_id": {
+                                    "type": "integer"
+                                  },
                                   "usuario": {
                                       "type": "string"
                                   }
@@ -1109,6 +1130,9 @@
                                                   "type": "string"
                                               },
                                               "profesional_id": {
+                                                "type": "integer"
+                                              },
+                                              "paciente_id": {
                                                 "type": "integer"
                                               },
                                               "usuario": {
