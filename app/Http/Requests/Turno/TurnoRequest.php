@@ -28,6 +28,7 @@ class TurnoRequest extends BaseFormRequest
         return [
             'fecha' => 'required|date',
             'profesional_id' => 'required|integer',
+            'paciente_id' => 'required|integer',
             'usuario' => 'required|max:50',
         ];
     }
@@ -38,6 +39,7 @@ class TurnoRequest extends BaseFormRequest
             'fecha.required' => 'La fecha del turno es obligatoria.',
             'fecha.date' => 'La fecha del turno debe ser una fecha válida.',
             'profesional_id.required' => 'El id del profesional es obligatorio.',
+            'paciente_id.required' => 'El id del paciente es obligatorio.',
             'usuario.required' => 'El nombre de usuario es obligatorio.',
             'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
         ];
