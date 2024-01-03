@@ -31,7 +31,7 @@ class Pacientes extends Migration
             $table->unsignedBigInteger('DetaPlan')->nullable();
             $table->unsignedBigInteger('Plan')->nullable();
             $table->unsignedBigInteger('Antecedentes')->nullable();
-            $table->timestamp('updated_at')->default(now());
+            $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);
             $table->foreign('TipoDocumento')->references('idTipoDocumento')->on('tipoDocumento');
