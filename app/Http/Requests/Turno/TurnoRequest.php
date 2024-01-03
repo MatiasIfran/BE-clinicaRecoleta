@@ -27,7 +27,7 @@ class TurnoRequest extends BaseFormRequest
     {
         return [
             'fecha' => 'required|date',
-            'profesional_id' => 'required|integer',
+            'horario_id' => 'required|integer',
             'paciente_id' => 'required|integer',
             'usuario' => 'required|max:50',
         ];
