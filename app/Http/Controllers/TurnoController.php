@@ -75,15 +75,10 @@ class TurnoController extends Controller
 
     public function createTurno(TurnoRequest $request)
     {
-        $validated = $request->validated();
+        $turno = new Turno;
 
-        $turno = Turno::create([
-            'fecha' => $validated['fecha'],
-            'profesional_id' => $validated['profesional_id'],
-            'paciente_id' => $validated['paciente_id'],
-            'usuario' => $validated['usuario'],
-        ]);
-
+        $turno = $turno->createTurnoModel($request);
+        
         $data = [
             'status' => true,
             'turno' => $turno,
