@@ -51,13 +51,23 @@ Route::prefix('cp')->group(function () {
     Route::get('/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
     Route::get('/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
     Route::get('/codigo/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
+    //Route::post('/createCodigoPostal', 'CodigoPostalController@createCodigoPostal')->name('createCodigoPostal');
 });
 
 Route::prefix('turno')->group(function () {
     Route::get('/all', 'TurnoController@allTurnos')->name('allTurnos');
     Route::get('/id/{turnoId}', 'TurnoController@getTurnoById')->name('getTurnoById');
     Route::get('/date', 'TurnoController@getTurnoByDate')->name('getTurnoByDate');
+    Route::get('/datePaciente/{idPaciente}', 'TurnoController@getTurnoByPacienteId')->name('getTurnoByPaciente');
     Route::post('/createTurno', 'TurnoController@createTurno')->name('createTurno');
+});
+
+Route::prefix('horario')->group(function () {
+    Route::get('/all', 'horarioController@allHorarios')->name('allHorarios');
+    Route::get('/{horarioId}', 'horarioController@getHorarioById')->name('getHorarioById');
+    Route::get('/date', 'horarioController@getHorarioByDate')->name('getHorarioByDate');
+    Route::get('/dateprofesional/{idProfesional}', 'horarioController@getHorarioByProfesionalId')->name('getHorarioByProfesionalId');
+    Route::post('/createHorario', 'horarioController@createHorario')->name('createHorario');
 });
 
 Route::prefix('obrasocial')->group(function () {

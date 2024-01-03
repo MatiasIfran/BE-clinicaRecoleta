@@ -73,6 +73,26 @@ class TurnoController extends Controller
         return response()->json($data, 200);
     }
 
+    public function getTurnoByPaciente($pacienteId)
+    {
+        $turnos = Turno::where('paciente_id', $pacienteId)->get();
+
+        if ($turnos->isEmpty()) {
+            $data = [
+                'status' => false,
+                'error' => 'No se encontraron turnos para el paciente especificado',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'status' => true,
+            'turnos' => $turnos,
+        ];
+        return response()->json($data, 200);
+    }
+
+
     public function createTurno(TurnoRequest $request)
     {
         $turno = new Turno;
