@@ -29,10 +29,6 @@ Route::post('persona/createPersona', 'PersonaController@createPersona')->name('c
 Route::get('user/all', 'UserController@allUsers')->name('allUser');
 Route::get('user/{userId}', 'UserController@getUserById')->name('user.getById');
 
-Route::get('persona/all', 'PersonaController@allPersonas')->name('allPersonas');
-Route::get('persona/{personaId}', 'PersonaController@getPersonaById')->name('persona.getPersonaById');
-Route::get('personaDni/{personaDni}', 'PersonaController@getPersonaByDni')->name('persona.getPersonaByDni');
-
 Route::prefix('paciente')->group(function () {
     Route::get('/all', 'PacienteController@allPacientes')->name('allPacientes');
     Route::get('/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
@@ -51,7 +47,7 @@ Route::prefix('cp')->group(function () {
     Route::get('/all', 'CodigoPostalController@allCodigoPostal')->name('allCodigoPostal');
     Route::get('/{codigoPostalId}', 'CodigoPostalController@getCodPostById')->name('getCodPostById');
     Route::get('/codigo/{codigoPostalNumber}', 'CodigoPostalController@getCodPostByCodigo')->name('getCodPostByCodigo');
-    //Route::post('/createCodigoPostal', 'CodigoPostalController@createCodigoPostal')->name('createCodigoPostal');
+    Route::post('/createCodigoPostal', 'CodigoPostalController@createCodigoPostal')->name('createCodigoPostal');
 });
 
 Route::prefix('turno')->group(function () {

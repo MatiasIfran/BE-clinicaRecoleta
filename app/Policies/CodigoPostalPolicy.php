@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\CodigoPostal;
 
 class CodigoPostalPolicy
 {
@@ -17,5 +18,10 @@ class CodigoPostalPolicy
     public function __construct()
     {
         //
+    }
+
+    public function create(User $user, CodigoPostal $cp) 
+    {
+        return true; //Hacer logica de creacion y permisos
     }
 }

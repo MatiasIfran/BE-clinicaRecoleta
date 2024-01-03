@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\CodigoPostal;
+use App\Http\Requests\User\IndexRequest;
+use App\Http\Requests\codigoPostal\CodigoPostalRequest;
+use App\Http\Resources\UserResource;
 
 use Illuminate\Http\Request;
 
@@ -59,4 +62,18 @@ class CodigoPostalController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+    public function createCodigoPostal(CodigoPostalRequest $request)
+    {
+        $codigoPostal = new CodigoPostal;
+        $codigoPostal = $codigoPostal->createCodigoPostalModel($request);
+
+        $data = [
+            'status'    => true,
+            'codigoPostal'  => new UserResource($codigoPostal),
+        ];
+
+        return response()->json($data, 201);
+    }
+
 }
