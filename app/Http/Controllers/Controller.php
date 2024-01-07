@@ -26,4 +26,9 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function isJsonResponse($response)
+    {
+        return $response instanceof \Illuminate\Http\JsonResponse;
+    }
 }

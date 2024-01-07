@@ -99,6 +99,9 @@ class HorarioController extends Controller
         $horario = new Horario;
         $horario = $horario->createHorarioModel($request);
 
+        if ($this->isJsonResponse($horario)) {
+            return $horario;
+        }
         $data = [
             'status' => true,
             'horario' => $horario,

@@ -96,9 +96,11 @@ class TurnoController extends Controller
     public function createTurno(TurnoRequest $request)
     {
         $turno = new Turno;
-
         $turno = $turno->createTurnoModel($request);
         
+        if ($this->isJsonResponse($turno)) {
+            return $turno;
+        }
         $data = [
             'status' => true,
             'turno' => $turno,

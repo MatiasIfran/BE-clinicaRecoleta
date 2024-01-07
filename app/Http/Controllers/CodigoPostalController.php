@@ -68,6 +68,9 @@ class CodigoPostalController extends Controller
         $codigoPostal = new CodigoPostal;
         $codigoPostal = $codigoPostal->createCodigoPostalModel($request);
 
+        if ($this->isJsonResponse($codigoPostal)) {
+            return $codigoPostal;
+        }
         $data = [
             'status'    => true,
             'codigoPostal'  => new UserResource($codigoPostal),

@@ -68,6 +68,9 @@ class PacienteController extends Controller
         $paciente = new Paciente;
         $paciente = $paciente->createPacienteModel($request);
 
+        if ($this->isJsonResponse($paciente)) {
+            return $paciente;
+        }
         $data = [
             'status'    => true,
             'paciente'  => new UserResource($paciente),

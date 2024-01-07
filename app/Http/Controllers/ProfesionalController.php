@@ -68,6 +68,9 @@ class ProfesionalController extends Controller
         $profesional = new Profesional;
         $profesional = $profesional->createProfesionalModel($request);
 
+        if ($this->isJsonResponse($profesional)) {
+            return $profesional;
+        }
         $data = [
             'status'   =>  true,
             'profesional'  => new UserResource($profesional),
