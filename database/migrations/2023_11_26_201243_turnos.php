@@ -15,7 +15,6 @@ class Turnos extends Migration
     {
         Schema::create('turnos', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha');
             $table->unsignedBigInteger('horario_id');
             $table->unsignedBigInteger('paciente_id');
             $table->timestamp('updated_at')->useCurrent();
