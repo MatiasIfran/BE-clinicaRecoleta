@@ -39,6 +39,15 @@ class Horario extends Model
 
         $data = $request->validated();
 
+        $fecha = $data['dia'];
+        $fechaActual = Carbon::now()->format('Y-m-d');
+        if ($fecha < $fechaActual) {
+            $data = [
+                'status' => false,
+                'error' => 'La fecha debe ser igual o mayor a la fecha actual',
+            ];
+            return response()->json($data, 400);
+        }
         // Convierte las horas desde y hasta en objetos Carbon para operar con el tiempo
         $desde = Carbon::createFromFormat('H:i', $data['desde']);
         $hasta = Carbon::createFromFormat('H:i', $data['hasta']);
