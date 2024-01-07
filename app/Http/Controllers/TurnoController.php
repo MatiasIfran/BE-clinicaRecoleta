@@ -61,7 +61,7 @@ class TurnoController extends Controller
         if ($turnos->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron turnos para la fecha especificada',
+                'error' => 'No se encontraron turnos para la fecha '.$fecha,
             ];
             return response()->json($data, 404);
         }

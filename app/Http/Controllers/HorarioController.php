@@ -63,7 +63,7 @@ class HorarioController extends Controller
         if ($horarios->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron horarios para la fecha especificada',
+                'error' => 'No se encontraron horarios para la fecha '.$fecha
             ];
             return response()->json($data, 404);
         }
