@@ -996,7 +996,7 @@
             ]
           }
       },
-      "/api/turno/id/{turnoId}": {
+      "/api/turno/{turnoId}": {
           "get": {
               "tags": [
                   "Turno"
@@ -1202,6 +1202,304 @@
               ]
           }
       },
+      "/api/horario/all": {
+        "get": {
+            "tags": [
+                "Horario"
+            ],
+            "summary": "Obtener todos los Horarios",
+            "description": "Retorna todos los Horarios disponibles",
+            "operationId": "getAllHorarios",
+            "responses": {
+                "200": {
+                    "description": "Operación exitosa",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "profesional_id": {
+                                            "type": "number"
+                                        },
+                                        "dia": {
+                                            "type": "string"
+                                        },
+                                        "desde": {
+                                            "type": "string"
+                                        },
+                                        "hasta": {
+                                            "type": "string"
+                                        },
+                                        "tiempo": {
+                                            "type": "string"
+                                        },
+                                        "usuario": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "security": [
+                {
+                    "apiAuth": []
+                }
+            ]
+        }
+    },
+    "/api/horario/{horarioId}": {
+      "get": {
+          "tags": [
+              "Horario"
+          ],
+          "summary": "Obtener Horario por ID",
+          "description": "Retorna la información de un Horario por su ID",
+          "operationId": "getHorarioById",
+          "parameters": [
+              {
+                  "name": "horarioId",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                      "type": "string"
+                  }
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "Operación exitosa",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "properties": {
+                                  "profesional_id": {
+                                      "type": "number"
+                                  },
+                                  "dia": {
+                                      "type": "string"
+                                  },
+                                  "desde": {
+                                      "type": "string"
+                                  },
+                                  "hasta": {
+                                      "type": "string"
+                                  },
+                                  "tiempo": {
+                                      "type": "string"
+                                  },
+                                  "usuario": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              },
+              "404": {
+                  "description": "Horario no encontrado"
+              }
+          },
+          "security": [
+              {
+                  "apiAuth": []
+              }
+          ]
+      }
+  },
+  "/api/horario/date": {
+    "get": {
+        "tags": [
+            "Horario"
+        ],
+        "summary": "Obtener Horario por Fecha",
+        "description": "Retorna los Horarios para una fecha específica",
+        "operationId": "getHorarioByDate",
+        "parameters": [
+            {
+                "name": "fecha",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Operación exitosa",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "profesional_id": {
+                                        "type": "number"
+                                    },
+                                    "dia": {
+                                        "type": "string"
+                                    },
+                                    "desde": {
+                                        "type": "string"
+                                    },
+                                    "hasta": {
+                                        "type": "string"
+                                    },
+                                    "tiempo": {
+                                        "type": "string"
+                                    },
+                                    "usuario": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "No se encontraron Horarios para la fecha especificada"
+            }
+        },
+        "security": [
+            {
+                "apiAuth": []
+            }
+        ]
+    }
+},
+"/api/horario/dateprofesional/{idProfesional}": {
+  "get": {
+      "tags": [
+          "Horario"
+      ],
+      "summary": "Obtener Horario por ID de Profesional",
+      "description": "Retorna los Horarios para un Profesional específico",
+      "operationId": "getHorarioByProfesionalId",
+      "parameters": [
+          {
+              "name": "idProfesional",
+              "in": "path",
+              "required": true,
+              "schema": {
+                  "type": "string"
+              }
+          }
+      ],
+      "responses": {
+          "200": {
+              "description": "Operación exitosa",
+              "content": {
+                  "application/json": {
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "type": "object",
+                              "properties": {
+                                  "profesional_id": {
+                                      "type": "number"
+                                  },
+                                  "dia": {
+                                      "type": "string"
+                                  },
+                                  "desde": {
+                                      "type": "string"
+                                  },
+                                  "hasta": {
+                                      "type": "string"
+                                  },
+                                  "tiempo": {
+                                      "type": "string"
+                                  },
+                                  "usuario": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "404": {
+              "description": "No se encontraron Horarios para el Profesional especificado"
+          }
+      },
+      "security": [
+          {
+              "apiAuth": []
+          }
+      ]
+  }
+},
+"/api/horario/createHorario": {
+  "post": {
+      "tags": [
+          "Horario"
+      ],
+      "summary": "Crear Horario",
+      "description": "Crea un nuevo Horario",
+      "operationId": "createHorario",
+      "requestBody": {
+          "required": true,
+          "content": {
+              "application/json": {
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "profesional_id": {
+                              "type": "number"
+                          },
+                          "dia": {
+                              "type": "string"
+                          },
+                          "desde": {
+                              "type": "string"
+                          },
+                          "hasta": {
+                              "type": "string"
+                          },
+                          "tiempo": {
+                              "type": "string"
+                          },
+                          "usuario": {
+                              "type": "string"
+                          }
+                      },
+                      "required": [
+                          "profesional_id",
+                          "dia",
+                          "desde",
+                          "hasta",
+                          "tiempo",
+                          "usuario"
+                      ]
+                  }
+              }
+          }
+      },
+      "responses": {
+          "201": {
+              "description": "Horario creado exitosamente"
+          },
+          "400": {
+              "description": "Solicitud inválida, faltan datos o son incorrectos"
+          }
+      },
+      "security": [
+          {
+              "apiAuth": []
+          }
+      ]
+  }
+},
       "/api/obrasocial/all": {
         "get": {
             "tags": [
