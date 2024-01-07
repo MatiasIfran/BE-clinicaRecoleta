@@ -892,6 +892,55 @@
                 ]
             }
         },
+        "/api/cp/createCodigoPostal": {
+          "post": {
+              "tags": [
+                  "Codigo Postal"
+              ],
+              "summary": "Crear Código Postal",
+              "description": "Crea un nuevo Código Postal",
+              "operationId": "createCodigoPostal",
+              "requestBody": {
+                  "required": true,
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "properties": {
+                                  "codigo": {
+                                      "type": "string"
+                                  },
+                                  "descripcion": {
+                                      "type": "string"
+                                  },
+                                  "usuario": {
+                                      "type": "string"
+                                  }
+                              },
+                              "required": [
+                                  "codigo",
+                                  "descripcion",
+                                  "usuario"
+                              ]
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "201": {
+                      "description": "Código Postal creado exitosamente"
+                  },
+                  "400": {
+                      "description": "Solicitud inválida, faltan datos o son incorrectos"
+                  }
+              },
+              "security": [
+                  {
+                      "apiAuth": []
+                  }
+              ]
+          }
+      },      
         "/api/turno/all": {
           "get": {
               "tags": [
