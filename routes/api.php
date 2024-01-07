@@ -52,16 +52,16 @@ Route::prefix('cp')->group(function () {
 
 Route::prefix('turno')->group(function () {
     Route::get('/all', 'TurnoController@allTurnos')->name('allTurnos');
-    Route::get('/id/{turnoId}', 'TurnoController@getTurnoById')->name('getTurnoById');
     Route::get('/date', 'TurnoController@getTurnoByDate')->name('getTurnoByDate');
+    Route::get('/{turnoId}', 'TurnoController@getTurnoById')->name('getTurnoById');
     Route::get('/datePaciente/{idPaciente}', 'TurnoController@getTurnoByPacienteId')->name('getTurnoByPaciente');
     Route::post('/createTurno', 'TurnoController@createTurno')->name('createTurno');
 });
 
 Route::prefix('horario')->group(function () {
     Route::get('/all', 'horarioController@allHorarios')->name('allHorarios');
-    Route::get('/{horarioId}', 'horarioController@getHorarioById')->name('getHorarioById');
     Route::get('/date', 'horarioController@getHorarioByDate')->name('getHorarioByDate');
+    Route::get('/{horarioId}', 'horarioController@getHorarioById')->name('getHorarioById');
     Route::get('/dateprofesional/{idProfesional}', 'horarioController@getHorarioByProfesionalId')->name('getHorarioByProfesionalId');
     Route::post('/createHorario', 'horarioController@createHorario')->name('createHorario');
 });
