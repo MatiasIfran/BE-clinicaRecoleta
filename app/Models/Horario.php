@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\Horario\HorarioRequest;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class Horario extends Model
 {
@@ -38,9 +39,29 @@ class Horario extends Model
 
         $data = $request->validated();
 
-        $horario = $this->create($data);
+        // Convierte las horas desde y hasta en objetos Carbon para operar con el tiempo
+        $desde = Carbon::createFromFormat('H:i', $data['desde']);
+        $hasta = Carbon::createFromFormat('H:i', $data['hasta']);
 
-        return $horario;
+        $intervaloMinutos = $data['tiempo'];
+        $horarios = [];
+
+        while ($desde < $hasta) {
+            $nuevoHorario = [
+                'profesional_id' => $data['profesional_id'],
+                'dia' => $data['dia'],
+                'desde' => $desde->format('H:i'),
+                'hasta' => $desde->addMinutes($intervaloMinutos)->format('H:i'),
+                'tiempo' => $intervaloMinutos,
+                'usuario' => $data['usuario'],
+            ];
+    
+            $horarios[] = $nuevoHorario;
+        }
+    
+        $horarios = Horario::insert($horarios);
+
+        return $horarios;
     }
 
 }
