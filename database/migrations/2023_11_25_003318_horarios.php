@@ -13,18 +13,20 @@ class Horarios extends Migration
      */
     public function up()
     {
-        Schema::create('horarios', function (Blueprint $table) {
-            $table->id();
-            $table->string('profesional_id');
-            $table->date('dia');
-            $table->string('desde', 5)->default('');
-            $table->string('hasta', 5)->default('');
-            $table->unsignedTinyInteger('tiempo')->default(0);
-            $table->timestamp('updated_at')->useCurrent();
-            $table->timestamp('created_at')->default(now());            
-            $table->string('usuario', 50)->nullable(false);
-            $table->foreign('profesional_id')->references('id')->on('profesionales')->onDelete('cascade');
-        });
+        if (!Schema::hasTable('horarios')) {
+            Schema::create('horarios', function (Blueprint $table) {
+                $table->id();
+                $table->string('profesional_id')->nullable(false);
+                $table->date('dia')->nullable(false);
+                $table->string('desde', 5)->default('');
+                $table->string('hasta', 5)->default('');
+                $table->unsignedTinyInteger('tiempo')->default(0);
+                $table->timestamp('updated_at')->useCurrent();
+                $table->timestamp('created_at')->default(now());            
+                $table->string('usuario', 50)->nullable(false);
+                $table->foreign('profesional_id')->references('id')->on('profesionales')->onDelete('cascade');
+            });
+        }
     }
 
     /**
