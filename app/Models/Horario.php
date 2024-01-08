@@ -68,7 +68,24 @@ class Horario extends Model
             $horarios[] = $nuevoHorario;
         }
     
-        $horarios = $this->insert($horarios);
+        try {
+            $horarios = $this->insert($horarios);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
+                $data = [
+                    'status' => false,
+                    'error' => 'El horario para este profesional, dia y hora ya existe',
+                ];
+                return response()->json($data, 400);
+            } else {
+                // Otro manejo de errores si es necesario
+                $data = [
+                    'status' => false,
+                    'error' => 'Error al crear el turno: ' . $ex->getMessage(),
+                ];
+                return response()->json($data, 400);
+            }
+        }
 
         return $horarios;
     }
