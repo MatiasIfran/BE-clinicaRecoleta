@@ -21,6 +21,7 @@ class Turnos extends Migration
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);
+            $table->unique(['horario_id', 'paciente_id']);
             $table->foreign('horario_id')->references('id')->on('horarios')->onDelete('cascade');
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
         });

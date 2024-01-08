@@ -26,8 +26,8 @@ class TurnoRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'horario_id' => 'required|integer',
-            'paciente_id' => 'required|integer',
+            'horario_id' => 'required|integer|exists:horarios,id',
+            'paciente_id' => 'required|integer|exists:pacientes,id',
             'usuario' => 'required|max:50',
         ];
     }
@@ -35,8 +35,10 @@ class TurnoRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'profesional_id.required' => 'El id del profesional es obligatorio.',
+            'horario_id.required' => 'El id del horario es obligatorio.',
+            'horario_id.exists' => 'El horario seleccionado no existe.',
             'paciente_id.required' => 'El id del paciente es obligatorio.',
+            'paciente_id.exists' => 'El paciente seleccionado no existe.',
             'usuario.required' => 'El nombre de usuario es obligatorio.',
             'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
         ];

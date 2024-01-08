@@ -92,7 +92,6 @@ class TurnoController extends Controller
         return response()->json($data, 200);
     }
 
-
     public function createTurno(TurnoRequest $request)
     {
         $turno = new Turno;
@@ -107,5 +106,12 @@ class TurnoController extends Controller
         ];
 
         return response()->json($data, 201);
+    }
+
+    public function deleteTurno($turnoId)
+    {
+        $turno = new Turno;
+        $turno = $turno->deleteTurnoModel($turnoId);
+        return $turno;
     }
 }

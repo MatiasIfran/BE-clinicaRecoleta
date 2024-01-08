@@ -35,9 +35,53 @@ class Turno extends Model
 
         $data = $request->validated();
 
-        $turno = $this->create($data);
+        try {
+            $turno = $this->create($data);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
+                $data = [
+                    'status' => false,
+                    'error' => 'El turno para este horario y paciente ya existe',
+                ];
+                return response()->json($data, 400);
+            } else {
+                // Otro manejo de errores si es necesario
+                $data = [
+                    'status' => false,
+                    'error' => 'Error al crear el turno: ' . $ex->getMessage(),
+                ];
+                return response()->json($data, 400);
+            }
+        }
 
         return $turno;
+    }
+
+    public function deleteTurnoModel($turnoId)
+    {
+        $turno = Turno::find($turnoId);
+
+        if (!$turno) {
+            $data = [
+                'status' => false,
+                'error' => 'El turno no existe',
+            ];
+            return response()->json($data, 404);
+        }
+
+        if ($turno->delete()) {
+            $data = [
+                'status' => true,
+                'message' => 'Turno eliminado correctamente',
+            ];
+            return response()->json($data, 200);
+        }
+
+        $data = [
+            'status' => false,
+            'error' => 'No se pudo eliminar el turno',
+        ];
+        return response()->json($data, 400);
     }
 
 }
