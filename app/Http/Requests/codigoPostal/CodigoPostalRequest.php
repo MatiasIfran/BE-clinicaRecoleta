@@ -28,7 +28,8 @@ class CodigoPostalRequest extends BaseFormRequest
     {
         return [
             'codigo' => 'required|string|max:50',
-            'descripcion' => 'required|string|max:50',
+            'ciudad' => 'required|string|max:50',
+            'provincia' => 'required|string|max:50',
             'usuario' => 'required|string|max:50',
         ];
     }
@@ -38,8 +39,10 @@ class CodigoPostalRequest extends BaseFormRequest
         return [
             'codigo.required' => 'El campo codigo es obligatorio.',
             'codigo.string' => 'El campo codigo debe ser una cadena de texto.',
-            'descripcion.required' => 'El campo descripcion es obligatorio.',
-            'descripcion.string' => 'El campo descripcion debe ser una cadena de texto.',
+            'ciudad.required' => 'El campo ciudad es obligatorio.',
+            'ciudad.string' => 'El campo ciudad debe ser una cadena de texto.',
+            'provincia.required' => 'El campo provincia es obligatorio.',
+            'provincia.string' => 'El campo provincia debe ser una cadena de texto.',
             'usuario.required' => 'El campo Nombre es obligatorio.',
         ];
     }

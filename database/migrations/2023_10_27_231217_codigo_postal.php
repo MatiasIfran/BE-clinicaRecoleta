@@ -17,7 +17,8 @@ class CodigoPostal extends Migration
             Schema::create('codpos', function (Blueprint $table) {
                 $table->id();
                 $table->string('codigo', 5)->nullable(false)->unique();
-                $table->string('descripcion', 50)->nullable();
+                $table->string('ciudad', 50)->nullable();
+                $table->string('provincia', 50)->nullable();
                 $table->timestamp('updated_at')->useCurrent();
                 $table->timestamp('created_at')->default(now());            
                 $table->string('usuario', 50)->nullable(false);

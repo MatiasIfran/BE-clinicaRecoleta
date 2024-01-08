@@ -14,7 +14,8 @@ class CodigoPostal extends Model
 
     protected $fillable = [
         'codigo',
-        'descripcion',
+        'ciudad',
+        'provincia',
         'usuario',
     ];
 
