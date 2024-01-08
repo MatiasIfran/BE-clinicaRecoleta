@@ -1202,6 +1202,39 @@
         ]
       }
     },
+    "/api/turno/deleteTurno/{turnoId}": {
+      "delete": {
+        "tags": [
+          "Turno"
+        ],
+        "summary": "Eliminar Turno por ID",
+        "description": "Elimina un Turno por su ID",
+        "operationId": "deleteTurno",
+        "parameters": [
+          {
+            "name": "turnoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Turno eliminado exitosamente"
+          },
+          "404": {
+            "description": "Turno no encontrado"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
     "/api/horario/all": {
       "get": {
         "tags": [
