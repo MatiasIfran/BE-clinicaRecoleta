@@ -64,6 +64,7 @@ Route::prefix('horario')->group(function () {
     Route::get('/{horarioId}', 'horarioController@getHorarioById')->name('getHorarioById');
     Route::get('/dateprofesional/{idProfesional}', 'horarioController@getHorarioByProfesionalId')->name('getHorarioByProfesionalId');
     Route::post('/createHorario', 'horarioController@createHorario')->name('createHorario');
+    Route::delete('/deleteHorario/{horarioId}', 'HorarioController@deleteHorario')->name('deleteHorario');
 });
 
 Route::prefix('obrasocial')->group(function () {

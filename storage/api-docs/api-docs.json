@@ -1,275 +1,129 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Api's Clinica Recoleta",
-        "version": "1.0"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api's Clinica Recoleta",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://endpoint.centrooftalmorecoleta.net"
     },
-    "servers": [
-        {
-            "url": "https://endpoint.centrooftalmorecoleta.net"
-        },
-        {
-            "url": "http://localhost:8000"
-        }
-    ],
-    "paths": {
-        "/api/paciente/all": {
-            "get": {
-            "tags": [
-                "Paciente"
-            ],
-            "summary": "Obtener todos los pacientes",
-            "description": "Retorna una lista de todos los pacientes disponibles",
-            "operationId": "AllPacientes",
-            "responses": {
-                "200": {
-                "description": "Operación exitosa",
-                "content": {
-                    "application/json": {
-                    "schema": {
-                        "properties": {
-                        "status": {
-                            "type": "boolean"
-                        },
-                        "pacientes": {
-                            "type": "array",
-                            "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                "type": "number"
-                                },
-                                "Nombre": {
-                                "type": "string"
-                                },
-                                "Apellido": {
-                                "type": "string"
-                                },
-                                "FechaNacimiento": {
-                                "type": "string"
-                                },
-                                "Genero": {
-                                "type": "string"
-                                },
-                                "Direccion": {
-                                "type": "string"
-                                },
-                                "Telefono": {
-                                "type": "string"
-                                },
-                                "Mail": {
-                                "type": "string"
-                                },
-                                "tipoDocumento": {
-                                "type": "number"
-                                },
-                                "NumDocumento": {
-                                "type": "number"
-                                },
-                                "Cuit": {
-                                "type": "number"
-                                },
-                                "usuario": {
-                                "type": "string"
-                                }
-                            }
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
-                }
-            },
-            "security": [
-                {
-                "apiAuth": []
-                }
-            ]
-            }
-        },
-        "/api/paciente/{id}": {
-            "get": {
-            "tags": [
-                "Paciente"
-            ],
-            "summary": "Obtener paciente por ID",
-            "description": "Retorna un paciente específico por su ID",
-            "operationId": "getPacienteById",
-            "parameters": [
-                {
-                "name": "id",
-                "in": "path",
-                "required": true,
+    {
+      "url": "http://localhost:8000"
+    }
+  ],
+  "paths": {
+    "/api/paciente/all": {
+      "get": {
+        "tags": [
+          "Paciente"
+        ],
+        "summary": "Obtener todos los pacientes",
+        "description": "Retorna una lista de todos los pacientes disponibles",
+        "operationId": "AllPacientes",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
                 "schema": {
-                    "type": "integer"
-                },
-                "description": "ID del paciente a obtener"
-                }
-            ],
-            "responses": {
-                "200": {
-                "description": "Operación exitosa",
-                "content": {
-                    "application/json": {
-                    "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "pacientes": {
+                      "type": "array",
+                      "items": {
                         "type": "object",
                         "properties": {
-                        "status": {
-                            "type": "boolean"
-                        },
-                        "paciente": {
-                            "type": "object",
-                            "properties": {
-                            "id": {
-                                "type": "number"
-                            },
-                            "Nombre": {
-                                "type": "string"
-                            },
-                            "Apellido": {
-                                "type": "string"
-                            },
-                            "FechaNacimiento": {
-                                "type": "string"
-                            },
-                            "Genero": {
-                                "type": "string"
-                            },
-                            "Direccion": {
-                                "type": "string"
-                            },
-                            "Telefono": {
-                                "type": "string"
-                            },
-                            "Mail": {
-                                "type": "string"
-                            },
-                            "tipoDocumento": {
-                                "type": "number"
-                            },
-                            "NumDocumento": {
-                                "type": "number"
-                            },
-                            "Cuit": {
-                                "type": "number"
-                            },
-                            "usuario": {
-                                "type": "string"
-                            }
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
-                }
-            },
-            "security": [
-                {
-                "apiAuth": []
-                }
-            ]
-            }
-        },
-        "/api/paciente/dni/{pacienteDni}": {
-            "get": {
-              "tags": [
-                "Paciente"
-              ],
-              "summary": "Obtener paciente por DNI",
-              "description": "Retorna un paciente específico por su número de documento",
-              "operationId": "getPacienteByDni",
-              "parameters": [
-                {
-                  "name": "pacienteDni",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "integer"
-                  },
-                  "description": "Número de documento del paciente a obtener"
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Operación exitosa",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "status": {
-                            "type": "boolean"
+                          "id": {
+                            "type": "number"
                           },
-                          "paciente": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "Nombre": {
-                                "type": "string"
-                              },
-                              "Apellido": {
-                                "type": "string"
-                              },
-                              "FechaNacimiento": {
-                                "type": "string"
-                              },
-                              "Genero": {
-                                "type": "string"
-                              },
-                              "Direccion": {
-                                "type": "string"
-                              },
-                              "Telefono": {
-                                "type": "string"
-                              },
-                              "Mail": {
-                                "type": "string"
-                              },
-                              "tipoDocumento": {
-                                "type": "number"
-                              },
-                              "NumDocumento": {
-                                "type": "number"
-                              },
-                              "Cuit": {
-                                "type": "number"
-                              },
-                              "usuario": {
-                                "type": "string"
-                              }
-                            }
+                          "Nombre": {
+                            "type": "string"
+                          },
+                          "Apellido": {
+                            "type": "string"
+                          },
+                          "FechaNacimiento": {
+                            "type": "string"
+                          },
+                          "Genero": {
+                            "type": "string"
+                          },
+                          "Direccion": {
+                            "type": "string"
+                          },
+                          "Telefono": {
+                            "type": "string"
+                          },
+                          "Mail": {
+                            "type": "string"
+                          },
+                          "tipoDocumento": {
+                            "type": "number"
+                          },
+                          "NumDocumento": {
+                            "type": "number"
+                          },
+                          "Cuit": {
+                            "type": "number"
+                          },
+                          "usuario": {
+                            "type": "string"
                           }
                         }
                       }
                     }
                   }
                 }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
+              }
             }
+          }
         },
-        "/api/paciente/createPaciente": {
-            "post": {
-              "tags": [
-                "Paciente"
-              ],
-              "summary": "Crear un nuevo paciente",
-              "description": "Crea un nuevo registro de paciente",
-              "operationId": "createPaciente",
-              "requestBody": {
-                "content": {
-                  "application/json": {
-                    "schema": {
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/paciente/{id}": {
+      "get": {
+        "tags": [
+          "Paciente"
+        ],
+        "summary": "Obtener paciente por ID",
+        "description": "Retorna un paciente específico por su ID",
+        "operationId": "getPacienteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID del paciente a obtener"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "paciente": {
                       "type": "object",
                       "properties": {
+                        "id": {
+                          "type": "number"
+                        },
                         "Nombre": {
                           "type": "string"
                         },
@@ -277,13 +131,9 @@
                           "type": "string"
                         },
                         "FechaNacimiento": {
-                          "type": "string",
-                          "format": "date"
-                        },
-                        "Genero": {
                           "type": "string"
                         },
-                        "CodPos": {
+                        "Genero": {
                           "type": "string"
                         },
                         "Direccion": {
@@ -293,8 +143,7 @@
                           "type": "string"
                         },
                         "Mail": {
-                          "type": "string",
-                          "format": "email"
+                          "type": "string"
                         },
                         "tipoDocumento": {
                           "type": "number"
@@ -303,346 +152,62 @@
                           "type": "number"
                         },
                         "Cuit": {
-                          "type": "string"
-                        },
-                        "NumAfiliado": {
-                          "type": "string"
-                        },
-                        "Empres": {
-                          "type": "string"
-                        },
-                        "DetaPlan": {
-                          "type": "string"
-                        },
-                        "Plan": {
-                          "type": "string"
-                        },
-                        "Antecedentes": {
-                          "type": "string"
+                          "type": "number"
                         },
                         "usuario": {
                           "type": "string"
                         }
-                      },
-                      "required": [
-                        "Nombre",
-                        "Apellido",
-                        "FechaNacimiento",
-                        "Genero",
-                        "NumDocumento",
-                        "tipoDocumento",
-                        "usuario"
-                      ]
-                    }
-                  }
-                }
-              },
-              "responses": {
-                "200": {
-                  "description": "Operación exitosa"
-                }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
-            }
-        },          
-        "/api/profesional/all": {
-            "get": {
-              "tags": [
-                "Profesional"
-              ],
-              "summary": "Obtener todos los profesionales",
-              "description": "Retorna una lista de todos los profesionales disponibles",
-              "operationId": "allProfesional",
-              "responses": {
-                "200": {
-                  "description": "Operación exitosa",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "status": {
-                            "type": "boolean"
-                          },
-                          "profesionales": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "number"
-                                },
-                                "Nombre": {
-                                  "type": "string"
-                                },
-                                "Apellido": {
-                                  "type": "string"
-                                },
-                                "FechaNacimiento": {
-                                  "type": "string"
-                                },
-                                "Genero": {
-                                  "type": "string"
-                                },
-                                "Direccion": {
-                                  "type": "string"
-                                },
-                                "Telefono": {
-                                  "type": "string"
-                                },
-                                "Mail": {
-                                  "type": "string"
-                                },
-                                "tipoDocumento": {
-                                  "type": "number"
-                                },
-                                "NumDocumento": {
-                                  "type": "number"
-                                },
-                                "Matricula": {
-                                  "type": "number"
-                                },
-                                "Categoria": {
-                                  "type": "number"
-                                },
-                                "Cuit": {
-                                  "type": "number"
-                                },
-                                "Codigo": {
-                                  "type": "number"
-                                },
-                                "ProfesionalTurno": {
-                                  "type": "number"
-                                },
-                                "usuario": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
                       }
                     }
                   }
                 }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
+              }
             }
+          }
         },
-        "/api/profesional/{profesionalId}": {
-            "get": {
-              "tags": [
-                "Profesional"
-              ],
-              "summary": "Obtener un profesional por ID",
-              "description": "Retorna un profesional según su ID",
-              "operationId": "getProfesionalById",
-              "parameters": [
-                {
-                  "name": "profesionalId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "number"
-                  },
-                  "description": "ID del profesional"
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Operación exitosa",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "status": {
-                            "type": "boolean"
-                          },
-                          "profesional": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "Nombre": {
-                                "type": "string"
-                              },
-                              "Apellido": {
-                                "type": "string"
-                              },
-                              "FechaNacimiento": {
-                                "type": "string"
-                              },
-                              "Genero": {
-                                "type": "string"
-                              },
-                              "Direccion": {
-                                "type": "string"
-                              },
-                              "Telefono": {
-                                "type": "string"
-                              },
-                              "Mail": {
-                                "type": "string"
-                              },
-                              "tipoDocumento": {
-                                "type": "number"
-                              },
-                              "NumDocumento": {
-                                "type": "number"
-                              },
-                              "Matricula": {
-                                "type": "number"
-                              },
-                              "Categoria": {
-                                "type": "number"
-                              },
-                              "Cuit": {
-                                "type": "number"
-                              },
-                              "Codigo": {
-                                "type": "number"
-                              },
-                              "ProfesionalTurno": {
-                                "type": "number"
-                              },
-                              "usuario": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
-            }
-        },     
-        "/api/profesional/dni/{profesionalDni}": {
-            "get": {
-              "tags": [
-                "Profesional"
-              ],
-              "summary": "Obtener un profesional por DNI",
-              "description": "Retorna un profesional según su número de documento",
-              "operationId": "getProfesionalByDni",
-              "parameters": [
-                {
-                  "name": "profesionalDni",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                    "type": "number"
-                  },
-                  "description": "Número de documento del profesional"
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Operación exitosa",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "status": {
-                            "type": "boolean"
-                          },
-                          "profesional": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "Nombre": {
-                                "type": "string"
-                              },
-                              "Apellido": {
-                                "type": "string"
-                              },
-                              "FechaNacimiento": {
-                                "type": "string"
-                              },
-                              "Genero": {
-                                "type": "string"
-                              },
-                              "Direccion": {
-                                "type": "string"
-                              },
-                              "Telefono": {
-                                "type": "string"
-                              },
-                              "Mail": {
-                                "type": "string"
-                              },
-                              "tipoDocumento": {
-                                "type": "number"
-                              },
-                              "NumDocumento": {
-                                "type": "number"
-                              },
-                              "Matricula": {
-                                "type": "number"
-                              },
-                              "Categoria": {
-                                "type": "number"
-                              },
-                              "Cuit": {
-                                "type": "number"
-                              },
-                              "Codigo": {
-                                "type": "number"
-                              },
-                              "ProfesionalTurno": {
-                                "type": "number"
-                              },
-                              "usuario": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
-            }
-        },
-        "/api/profesional/createProfesional": {
-            "post": {
-              "tags": [
-                "Profesional"
-              ],
-              "summary": "Crear un nuevo profesional",
-              "description": "Crea un nuevo registro de profesional",
-              "operationId": "createProfesional",
-              "requestBody": {
-                "content": {
-                  "application/json": {
-                    "schema": {
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/paciente/dni/{pacienteDni}": {
+      "get": {
+        "tags": [
+          "Paciente"
+        ],
+        "summary": "Obtener paciente por DNI",
+        "description": "Retorna un paciente específico por su número de documento",
+        "operationId": "getPacienteByDni",
+        "parameters": [
+          {
+            "name": "pacienteDni",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Número de documento del paciente a obtener"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "paciente": {
                       "type": "object",
                       "properties": {
+                        "id": {
+                          "type": "number"
+                        },
                         "Nombre": {
                           "type": "string"
                         },
@@ -650,8 +215,7 @@
                           "type": "string"
                         },
                         "FechaNacimiento": {
-                          "type": "string",
-                          "format": "date"
+                          "type": "string"
                         },
                         "Genero": {
                           "type": "string"
@@ -663,8 +227,272 @@
                           "type": "string"
                         },
                         "Mail": {
-                          "type": "string",
-                          "format": "email"
+                          "type": "string"
+                        },
+                        "tipoDocumento": {
+                          "type": "number"
+                        },
+                        "NumDocumento": {
+                          "type": "number"
+                        },
+                        "Cuit": {
+                          "type": "number"
+                        },
+                        "usuario": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/paciente/createPaciente": {
+      "post": {
+        "tags": [
+          "Paciente"
+        ],
+        "summary": "Crear un nuevo paciente",
+        "description": "Crea un nuevo registro de paciente",
+        "operationId": "createPaciente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": {
+                    "type": "string"
+                  },
+                  "Apellido": {
+                    "type": "string"
+                  },
+                  "FechaNacimiento": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "Genero": {
+                    "type": "string"
+                  },
+                  "CodPos": {
+                    "type": "string"
+                  },
+                  "Direccion": {
+                    "type": "string"
+                  },
+                  "Telefono": {
+                    "type": "string"
+                  },
+                  "Mail": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "tipoDocumento": {
+                    "type": "number"
+                  },
+                  "NumDocumento": {
+                    "type": "number"
+                  },
+                  "Cuit": {
+                    "type": "string"
+                  },
+                  "NumAfiliado": {
+                    "type": "string"
+                  },
+                  "Empres": {
+                    "type": "string"
+                  },
+                  "DetaPlan": {
+                    "type": "string"
+                  },
+                  "Plan": {
+                    "type": "string"
+                  },
+                  "Antecedentes": {
+                    "type": "string"
+                  },
+                  "usuario": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "Nombre",
+                  "Apellido",
+                  "FechaNacimiento",
+                  "Genero",
+                  "NumDocumento",
+                  "tipoDocumento",
+                  "usuario"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación exitosa"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/profesional/all": {
+      "get": {
+        "tags": [
+          "Profesional"
+        ],
+        "summary": "Obtener todos los profesionales",
+        "description": "Retorna una lista de todos los profesionales disponibles",
+        "operationId": "allProfesional",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "profesionales": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "Nombre": {
+                            "type": "string"
+                          },
+                          "Apellido": {
+                            "type": "string"
+                          },
+                          "FechaNacimiento": {
+                            "type": "string"
+                          },
+                          "Genero": {
+                            "type": "string"
+                          },
+                          "Direccion": {
+                            "type": "string"
+                          },
+                          "Telefono": {
+                            "type": "string"
+                          },
+                          "Mail": {
+                            "type": "string"
+                          },
+                          "tipoDocumento": {
+                            "type": "number"
+                          },
+                          "NumDocumento": {
+                            "type": "number"
+                          },
+                          "Matricula": {
+                            "type": "number"
+                          },
+                          "Categoria": {
+                            "type": "number"
+                          },
+                          "Cuit": {
+                            "type": "number"
+                          },
+                          "Codigo": {
+                            "type": "number"
+                          },
+                          "ProfesionalTurno": {
+                            "type": "number"
+                          },
+                          "usuario": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/profesional/{profesionalId}": {
+      "get": {
+        "tags": [
+          "Profesional"
+        ],
+        "summary": "Obtener un profesional por ID",
+        "description": "Retorna un profesional según su ID",
+        "operationId": "getProfesionalById",
+        "parameters": [
+          {
+            "name": "profesionalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "ID del profesional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "profesional": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "Nombre": {
+                          "type": "string"
+                        },
+                        "Apellido": {
+                          "type": "string"
+                        },
+                        "FechaNacimiento": {
+                          "type": "string"
+                        },
+                        "Genero": {
+                          "type": "string"
+                        },
+                        "Direccion": {
+                          "type": "string"
+                        },
+                        "Telefono": {
+                          "type": "string"
+                        },
+                        "Mail": {
+                          "type": "string"
                         },
                         "tipoDocumento": {
                           "type": "number"
@@ -690,1026 +518,1229 @@
                         "usuario": {
                           "type": "string"
                         }
-                      },
-                      "required": [
-                        "Nombre",
-                        "Apellido",
-                        "FechaNacimiento",
-                        "Genero",
-                        "NumDocumento",
-                        "tipoDocumento",
-                        "usuario"
-                      ]
-                    }
-                  }
-                }
-              },
-              "responses": {
-                "200": {
-                  "description": "Operación exitosa"
-                }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
-            }
-        },                               
-        "/api/cp/all": {
-            "get": {
-                "tags": [
-                    "Codigo Postal"
-                ],
-                "summary": "Obtener todos los códigos postales",
-                "description": "Retorna una lista de todos los códigos postales disponibles",
-                "operationId": "allCodigoPostal",
-                "responses": {
-                    "200": {
-                        "description": "Operación exitosa",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "boolean"
-                                        },
-                                        "codigos_postales": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "number"
-                                                    },
-                                                    "codigo": {
-                                                        "type": "string"
-                                                    },
-                                                    "descripcion": {
-                                                        "type": "string"
-                                                    },
-                                                    "usuario": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/cp/{codigoPostalId}": {
-            "get": {
-                "tags": [
-                    "Codigo Postal"
-                ],
-                "summary": "Obtener codigo postal por Id",
-                "description": "Retorna un array del codigo postal disponible",
-                "operationId": "getCodPostById",
-                "parameters": [
-                    {
-                        "name": "codigoPostalId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operación exitosa",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "boolean"
-                                        },
-                                        "codigos_postales": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "number"
-                                                    },
-                                                    "codigo": {
-                                                        "type": "string"
-                                                    },
-                                                    "descripcion": {
-                                                        "type": "string"
-                                                    },
-                                                    "usuario": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/cp/codigo/{codigoPostalNumber}": {
-            "get": {
-                "tags": [
-                    "Codigo Postal"
-                ],
-                "summary": "Obtener codigo postal por numero",
-                "description": "Retorna un array del codigo postal disponible",
-                "operationId": "getCodPostByCodigo",
-                "parameters": [
-                    {
-                        "name": "codigoPostalNumber",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operación exitosa",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "boolean"
-                                        },
-                                        "codigos_postales": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "number"
-                                                    },
-                                                    "codigo": {
-                                                        "type": "string"
-                                                    },
-                                                    "descripcion": {
-                                                        "type": "string"
-                                                    },
-                                                    "usuario": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/cp/createCodigoPostal": {
-          "post": {
-              "tags": [
-                  "Codigo Postal"
-              ],
-              "summary": "Crear Código Postal",
-              "description": "Crea un nuevo Código Postal",
-              "operationId": "createCodigoPostal",
-              "requestBody": {
-                  "required": true,
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "type": "object",
-                              "properties": {
-                                  "codigo": {
-                                      "type": "string"
-                                  },
-                                  "descripcion": {
-                                      "type": "string"
-                                  },
-                                  "usuario": {
-                                      "type": "string"
-                                  }
-                              },
-                              "required": [
-                                  "codigo",
-                                  "descripcion",
-                                  "usuario"
-                              ]
-                          }
                       }
+                    }
                   }
-              },
-              "responses": {
-                  "201": {
-                      "description": "Código Postal creado exitosamente"
-                  },
-                  "400": {
-                      "description": "Solicitud inválida, faltan datos o son incorrectos"
-                  }
-              },
-              "security": [
-                  {
-                      "apiAuth": []
-                  }
-              ]
-          }
-      },      
-        "/api/turno/all": {
-          "get": {
-              "tags": [
-                  "Turno"
-              ],
-              "summary": "Obtener todos los turnos",
-              "description": "Retorna un array de todos los turnos disponibles",
-              "operationId": "getAllTurnos",
-              "responses": {
-                  "200": {
-                      "description": "Operación exitosa",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "object",
-                                  "properties": {
-                                      "status": {
-                                          "type": "boolean"
-                                      },
-                                      "turnos": {
-                                          "type": "array",
-                                          "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                  "id": {
-                                                      "type": "number"
-                                                  },
-                                                  "fecha": {
-                                                      "type": "string"
-                                                  },
-                                                  "profesional_id": {
-                                                    "type": "integer"
-                                                  },
-                                                  "paciente_id": {
-                                                    "type": "integer"
-                                                  },
-                                                  "usuario": {
-                                                      "type": "string"
-                                                  }
-                                              }
-                                          }
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              },
-              "security": [
-                {
-                    "apiAuth": []
                 }
-            ]
-          }
-      },
-      "/api/turno/{turnoId}": {
-          "get": {
-              "tags": [
-                  "Turno"
-              ],
-              "summary": "Obtener turno por ID",
-              "description": "Retorna un turno específico por su ID",
-              "operationId": "getTurnoById",
-              "parameters": [
-                  {
-                      "name": "turnoId",
-                      "in": "path",
-                      "required": true,
-                      "schema": {
-                          "type": "integer"
-                      }
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Operación exitosa",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "object",
-                                  "properties": {
-                                      "status": {
-                                          "type": "boolean"
-                                      },
-                                      "turno": {
-                                          "type": "object",
-                                          "properties": {
-                                              "id": {
-                                                  "type": "number"
-                                              },
-                                              "fecha": {
-                                                  "type": "string"
-                                              },
-                                              "profesional_id": {
-                                                "type": "integer"
-                                              },
-                                              "paciente_id": {
-                                                "type": "integer"
-                                              },
-                                              "usuario": {
-                                                  "type": "string"
-                                              }
-                                          }
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
-          }
-      },
-      "/api/turno/date": {
-        "get": {
-            "tags": [
-                "Turno"
-            ],
-            "summary": "Obtener turnos por fecha",
-            "description": "Retorna turnos para una fecha específica",
-            "operationId": "getTurnoByDate",
-            "parameters": [
-              {
-                  "name": "fecha",
-                  "in": "query",
-                  "required": true,
-                  "schema": {
-                      "type": "string",
-                      "format": "date"
-                  }
               }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Operación exitosa",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "status": {
-                                        "type": "boolean"
-                                    },
-                                    "turnos": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "number"
-                                                },
-                                                "fecha": {
-                                                    "example": "aaaa/mm/dd",
-                                                    "type": "string"
-                                                },
-                                                "profesional_id": {
-                                                  "type": "integer"
-                                                },
-                                                "paciente_id": {
-                                                  "type": "integer"
-                                                },
-                                                "usuario": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "security": [
-                {
-                    "apiAuth": []
-                }
-            ]
-        }
-      },    
-      "/api/turno/createTurno": {
-          "post": {
-              "tags": [
-                  "Turno"
-              ],
-              "summary": "Crear un nuevo turno",
-              "description": "Crea un nuevo turno",
-              "operationId": "createTurno",
-              "requestBody": {
-                  "required": true,
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "type": "object",
-                              "properties": {
-                                  "fecha": {
-                                      "type": "string",
-                                      "format": "date-time"
-                                  },
-                                  "profesional_id": {
-                                    "type": "integer"
-                                  },
-                                  "paciente_id": {
-                                    "type": "integer"
-                                  },
-                                  "usuario": {
-                                      "type": "string"
-                                  }
-                              }
-                          }
-                      }
-                  }
-              },
-              "responses": {
-                  "200": {
-                      "description": "Operación exitosa",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "object",
-                                  "properties": {
-                                      "status": {
-                                          "type": "boolean"
-                                      },
-                                      "turno_creado": {
-                                          "type": "object",
-                                          "properties": {
-                                              "id": {
-                                                  "type": "number"
-                                              },
-                                              "fecha": {
-                                                  "type": "string"
-                                              },
-                                              "profesional_id": {
-                                                "type": "integer"
-                                              },
-                                              "paciente_id": {
-                                                "type": "integer"
-                                              },
-                                              "usuario": {
-                                                  "type": "string"
-                                              }
-                                          }
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              },
-              "security": [
-                {
-                  "apiAuth": []
-                }
-              ]
+            }
           }
-      },
-      "/api/horario/all": {
-        "get": {
-            "tags": [
-                "Horario"
-            ],
-            "summary": "Obtener todos los Horarios",
-            "description": "Retorna todos los Horarios disponibles",
-            "operationId": "getAllHorarios",
-            "responses": {
-                "200": {
-                    "description": "Operación exitosa",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "profesional_id": {
-                                            "type": "number"
-                                        },
-                                        "dia": {
-                                            "type": "string"
-                                        },
-                                        "desde": {
-                                            "type": "string"
-                                        },
-                                        "hasta": {
-                                            "type": "string"
-                                        },
-                                        "tiempo": {
-                                            "type": "string"
-                                        },
-                                        "usuario": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/profesional/dni/{profesionalDni}": {
+      "get": {
+        "tags": [
+          "Profesional"
+        ],
+        "summary": "Obtener un profesional por DNI",
+        "description": "Retorna un profesional según su número de documento",
+        "operationId": "getProfesionalByDni",
+        "parameters": [
+          {
+            "name": "profesionalDni",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
             },
-            "security": [
-                {
-                    "apiAuth": []
+            "description": "Número de documento del profesional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "profesional": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "Nombre": {
+                          "type": "string"
+                        },
+                        "Apellido": {
+                          "type": "string"
+                        },
+                        "FechaNacimiento": {
+                          "type": "string"
+                        },
+                        "Genero": {
+                          "type": "string"
+                        },
+                        "Direccion": {
+                          "type": "string"
+                        },
+                        "Telefono": {
+                          "type": "string"
+                        },
+                        "Mail": {
+                          "type": "string"
+                        },
+                        "tipoDocumento": {
+                          "type": "number"
+                        },
+                        "NumDocumento": {
+                          "type": "number"
+                        },
+                        "Matricula": {
+                          "type": "number"
+                        },
+                        "Categoria": {
+                          "type": "number"
+                        },
+                        "Cuit": {
+                          "type": "number"
+                        },
+                        "Codigo": {
+                          "type": "number"
+                        },
+                        "ProfesionalTurno": {
+                          "type": "number"
+                        },
+                        "usuario": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
-            ]
-        }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/profesional/createProfesional": {
+      "post": {
+        "tags": [
+          "Profesional"
+        ],
+        "summary": "Crear un nuevo profesional",
+        "description": "Crea un nuevo registro de profesional",
+        "operationId": "createProfesional",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": {
+                    "type": "string"
+                  },
+                  "Apellido": {
+                    "type": "string"
+                  },
+                  "FechaNacimiento": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "Genero": {
+                    "type": "string"
+                  },
+                  "Direccion": {
+                    "type": "string"
+                  },
+                  "Telefono": {
+                    "type": "string"
+                  },
+                  "Mail": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "tipoDocumento": {
+                    "type": "number"
+                  },
+                  "NumDocumento": {
+                    "type": "number"
+                  },
+                  "Matricula": {
+                    "type": "number"
+                  },
+                  "Categoria": {
+                    "type": "number"
+                  },
+                  "Cuit": {
+                    "type": "number"
+                  },
+                  "Codigo": {
+                    "type": "number"
+                  },
+                  "ProfesionalTurno": {
+                    "type": "number"
+                  },
+                  "usuario": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "Nombre",
+                  "Apellido",
+                  "FechaNacimiento",
+                  "Genero",
+                  "NumDocumento",
+                  "tipoDocumento",
+                  "usuario"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación exitosa"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/cp/all": {
+      "get": {
+        "tags": [
+          "Codigo Postal"
+        ],
+        "summary": "Obtener todos los códigos postales",
+        "description": "Retorna una lista de todos los códigos postales disponibles",
+        "operationId": "allCodigoPostal",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "codigos_postales": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "codigo": {
+                            "type": "string"
+                          },
+                          "descripcion": {
+                            "type": "string"
+                          },
+                          "usuario": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/cp/{codigoPostalId}": {
+      "get": {
+        "tags": [
+          "Codigo Postal"
+        ],
+        "summary": "Obtener codigo postal por Id",
+        "description": "Retorna un array del codigo postal disponible",
+        "operationId": "getCodPostById",
+        "parameters": [
+          {
+            "name": "codigoPostalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "codigos_postales": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "codigo": {
+                            "type": "string"
+                          },
+                          "descripcion": {
+                            "type": "string"
+                          },
+                          "usuario": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/cp/codigo/{codigoPostalNumber}": {
+      "get": {
+        "tags": [
+          "Codigo Postal"
+        ],
+        "summary": "Obtener codigo postal por numero",
+        "description": "Retorna un array del codigo postal disponible",
+        "operationId": "getCodPostByCodigo",
+        "parameters": [
+          {
+            "name": "codigoPostalNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "codigos_postales": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "codigo": {
+                            "type": "string"
+                          },
+                          "descripcion": {
+                            "type": "string"
+                          },
+                          "usuario": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/cp/createCodigoPostal": {
+      "post": {
+        "tags": [
+          "Codigo Postal"
+        ],
+        "summary": "Crear Código Postal",
+        "description": "Crea un nuevo Código Postal",
+        "operationId": "createCodigoPostal",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "descripcion": {
+                    "type": "string"
+                  },
+                  "usuario": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "codigo",
+                  "descripcion",
+                  "usuario"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Código Postal creado exitosamente"
+          },
+          "400": {
+            "description": "Solicitud inválida, faltan datos o son incorrectos"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/turno/all": {
+      "get": {
+        "tags": [
+          "Turno"
+        ],
+        "summary": "Obtener todos los turnos",
+        "description": "Retorna un array de todos los turnos disponibles",
+        "operationId": "getAllTurnos",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "turnos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "fecha": {
+                            "type": "string"
+                          },
+                          "profesional_id": {
+                            "type": "integer"
+                          },
+                          "paciente_id": {
+                            "type": "integer"
+                          },
+                          "usuario": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/turno/{turnoId}": {
+      "get": {
+        "tags": [
+          "Turno"
+        ],
+        "summary": "Obtener turno por ID",
+        "description": "Retorna un turno específico por su ID",
+        "operationId": "getTurnoById",
+        "parameters": [
+          {
+            "name": "turnoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "turno": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "fecha": {
+                          "type": "string"
+                        },
+                        "profesional_id": {
+                          "type": "integer"
+                        },
+                        "paciente_id": {
+                          "type": "integer"
+                        },
+                        "usuario": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/turno/date": {
+      "get": {
+        "tags": [
+          "Turno"
+        ],
+        "summary": "Obtener turnos por fecha",
+        "description": "Retorna turnos para una fecha específica",
+        "operationId": "getTurnoByDate",
+        "parameters": [
+          {
+            "name": "fecha",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "turnos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "fecha": {
+                            "example": "aaaa/mm/dd",
+                            "type": "string"
+                          },
+                          "profesional_id": {
+                            "type": "integer"
+                          },
+                          "paciente_id": {
+                            "type": "integer"
+                          },
+                          "usuario": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/turno/createTurno": {
+      "post": {
+        "tags": [
+          "Turno"
+        ],
+        "summary": "Crear un nuevo turno",
+        "description": "Crea un nuevo turno",
+        "operationId": "createTurno",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fecha": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "profesional_id": {
+                    "type": "integer"
+                  },
+                  "paciente_id": {
+                    "type": "integer"
+                  },
+                  "usuario": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "turno_creado": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "fecha": {
+                          "type": "string"
+                        },
+                        "profesional_id": {
+                          "type": "integer"
+                        },
+                        "paciente_id": {
+                          "type": "integer"
+                        },
+                        "usuario": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/horario/all": {
+      "get": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "Obtener todos los Horarios",
+        "description": "Retorna todos los Horarios disponibles",
+        "operationId": "getAllHorarios",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "profesional_id": {
+                        "type": "number"
+                      },
+                      "dia": {
+                        "type": "string"
+                      },
+                      "desde": {
+                        "type": "string"
+                      },
+                      "hasta": {
+                        "type": "string"
+                      },
+                      "tiempo": {
+                        "type": "string"
+                      },
+                      "usuario": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
     },
     "/api/horario/{horarioId}": {
       "get": {
-          "tags": [
-              "Horario"
-          ],
-          "summary": "Obtener Horario por ID",
-          "description": "Retorna la información de un Horario por su ID",
-          "operationId": "getHorarioById",
-          "parameters": [
-              {
-                  "name": "horarioId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                      "type": "string"
-                  }
-              }
-          ],
-          "responses": {
-              "200": {
-                  "description": "Operación exitosa",
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "type": "object",
-                              "properties": {
-                                  "profesional_id": {
-                                      "type": "number"
-                                  },
-                                  "dia": {
-                                      "type": "string"
-                                  },
-                                  "desde": {
-                                      "type": "string"
-                                  },
-                                  "hasta": {
-                                      "type": "string"
-                                  },
-                                  "tiempo": {
-                                      "type": "string"
-                                  },
-                                  "usuario": {
-                                      "type": "string"
-                                  }
-                              }
-                          }
-                      }
-                  }
-              },
-              "404": {
-                  "description": "Horario no encontrado"
-              }
-          },
-          "security": [
-              {
-                  "apiAuth": []
-              }
-          ]
-      }
-  },
-  "/api/horario/date": {
-    "get": {
         "tags": [
-            "Horario"
+          "Horario"
+        ],
+        "summary": "Obtener Horario por ID",
+        "description": "Retorna la información de un Horario por su ID",
+        "operationId": "getHorarioById",
+        "parameters": [
+          {
+            "name": "horarioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "profesional_id": {
+                      "type": "number"
+                    },
+                    "dia": {
+                      "type": "string"
+                    },
+                    "desde": {
+                      "type": "string"
+                    },
+                    "hasta": {
+                      "type": "string"
+                    },
+                    "tiempo": {
+                      "type": "string"
+                    },
+                    "usuario": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Horario no encontrado"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/horario/date": {
+      "get": {
+        "tags": [
+          "Horario"
         ],
         "summary": "Obtener Horario por Fecha",
         "description": "Retorna los Horarios para una fecha específica",
         "operationId": "getHorarioByDate",
         "parameters": [
-            {
-                "name": "fecha",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string",
-                    "format": "date"
-                }
+          {
+            "name": "fecha",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
             }
+          }
         ],
         "responses": {
-            "200": {
-                "description": "Operación exitosa",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "profesional_id": {
-                                        "type": "number"
-                                    },
-                                    "dia": {
-                                        "type": "string"
-                                    },
-                                    "desde": {
-                                        "type": "string"
-                                    },
-                                    "hasta": {
-                                        "type": "string"
-                                    },
-                                    "tiempo": {
-                                        "type": "string"
-                                    },
-                                    "usuario": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "404": {
-                "description": "No se encontraron Horarios para la fecha especificada"
-            }
-        },
-        "security": [
-            {
-                "apiAuth": []
-            }
-        ]
-    }
-},
-"/api/horario/dateprofesional/{idProfesional}": {
-  "get": {
-      "tags": [
-          "Horario"
-      ],
-      "summary": "Obtener Horario por ID de Profesional",
-      "description": "Retorna los Horarios para un Profesional específico",
-      "operationId": "getHorarioByProfesionalId",
-      "parameters": [
-          {
-              "name": "idProfesional",
-              "in": "path",
-              "required": true,
-              "schema": {
-                  "type": "string"
-              }
-          }
-      ],
-      "responses": {
           "200": {
-              "description": "Operación exitosa",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "type": "array",
-                          "items": {
-                              "type": "object",
-                              "properties": {
-                                  "profesional_id": {
-                                      "type": "number"
-                                  },
-                                  "dia": {
-                                      "type": "string"
-                                  },
-                                  "desde": {
-                                      "type": "string"
-                                  },
-                                  "hasta": {
-                                      "type": "string"
-                                  },
-                                  "tiempo": {
-                                      "type": "string"
-                                  },
-                                  "usuario": {
-                                      "type": "string"
-                                  }
-                              }
-                          }
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "profesional_id": {
+                        "type": "number"
+                      },
+                      "dia": {
+                        "type": "string"
+                      },
+                      "desde": {
+                        "type": "string"
+                      },
+                      "hasta": {
+                        "type": "string"
+                      },
+                      "tiempo": {
+                        "type": "string"
+                      },
+                      "usuario": {
+                        "type": "string"
                       }
+                    }
                   }
+                }
               }
+            }
           },
           "404": {
-              "description": "No se encontraron Horarios para el Profesional especificado"
+            "description": "No se encontraron Horarios para la fecha especificada"
           }
-      },
-      "security": [
+        },
+        "security": [
           {
-              "apiAuth": []
+            "apiAuth": []
           }
-      ]
-  }
-},
-"/api/horario/createHorario": {
-  "post": {
-      "tags": [
+        ]
+      }
+    },
+    "/api/horario/dateprofesional/{idProfesional}": {
+      "get": {
+        "tags": [
           "Horario"
-      ],
-      "summary": "Crear Horario",
-      "description": "Crea un nuevo Horario",
-      "operationId": "createHorario",
-      "requestBody": {
+        ],
+        "summary": "Obtener Horario por ID de Profesional",
+        "description": "Retorna los Horarios para un Profesional específico",
+        "operationId": "getHorarioByProfesionalId",
+        "parameters": [
+          {
+            "name": "idProfesional",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "profesional_id": {
+                        "type": "number"
+                      },
+                      "dia": {
+                        "type": "string"
+                      },
+                      "desde": {
+                        "type": "string"
+                      },
+                      "hasta": {
+                        "type": "string"
+                      },
+                      "tiempo": {
+                        "type": "string"
+                      },
+                      "usuario": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontraron Horarios para el Profesional especificado"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/horario/createHorario": {
+      "post": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "Crear Horario",
+        "description": "Crea un nuevo Horario",
+        "operationId": "createHorario",
+        "requestBody": {
           "required": true,
           "content": {
-              "application/json": {
-                  "schema": {
-                      "type": "object",
-                      "properties": {
-                          "profesional_id": {
-                              "type": "number"
-                          },
-                          "dia": {
-                              "type": "string"
-                          },
-                          "desde": {
-                              "type": "string"
-                          },
-                          "hasta": {
-                              "type": "string"
-                          },
-                          "tiempo": {
-                              "type": "string"
-                          },
-                          "usuario": {
-                              "type": "string"
-                          }
-                      },
-                      "required": [
-                          "profesional_id",
-                          "dia",
-                          "desde",
-                          "hasta",
-                          "tiempo",
-                          "usuario"
-                      ]
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "profesional_id": {
+                    "type": "number"
+                  },
+                  "dia": {
+                    "type": "string"
+                  },
+                  "desde": {
+                    "type": "string"
+                  },
+                  "hasta": {
+                    "type": "string"
+                  },
+                  "tiempo": {
+                    "type": "string"
+                  },
+                  "usuario": {
+                    "type": "string"
                   }
+                },
+                "required": [
+                  "profesional_id",
+                  "dia",
+                  "desde",
+                  "hasta",
+                  "tiempo",
+                  "usuario"
+                ]
               }
+            }
           }
-      },
-      "responses": {
+        },
+        "responses": {
           "201": {
-              "description": "Horario creado exitosamente"
+            "description": "Horario creado exitosamente"
           },
           "400": {
-              "description": "Solicitud inválida, faltan datos o son incorrectos"
+            "description": "Solicitud inválida, faltan datos o son incorrectos"
           }
-      },
-      "security": [
+        },
+        "security": [
           {
-              "apiAuth": []
+            "apiAuth": []
           }
-      ]
-  }
-},
-      "/api/obrasocial/all": {
-        "get": {
-            "tags": [
-                "Obra Social"
-            ],
-            "summary": "Obtener todas las Obras Sociales",
-            "description": "Retorna todas las Obras Sociales disponibles",
-            "operationId": "getAllObrasSociales",
-            "responses": {
-                "200": {
-                    "description": "Operación exitosa",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "codigo": {
-                                            "type": "string"
-                                        },
-                                        "descripcion": {
-                                            "type": "string"
-                                        },
-                                        "codArancel": {
-                                            "type": "string"
-                                        },
-                                        "activa": {
-                                            "type": "boolean"
-                                        },
-                                        "valor": {
-                                            "type": "number"
-                                        },
-                                        "maxAnual": {
-                                            "type": "number"
-                                        },
-                                        "maxMensual": {
-                                            "type": "number"
-                                        },
-                                        "obraSocial": {
-                                            "type": "string"
-                                        },
-                                        "usuario": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+        ]
+      }
+    },
+    "/api/horario/deleteHorario/{horarioId}": {
+      "delete": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "Eliminar Horario por ID",
+        "description": "Elimina un Horario por su ID",
+        "operationId": "deleteHorario",
+        "parameters": [
+          {
+            "name": "horarioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Horario eliminado exitosamente"
+          },
+          "404": {
+            "description": "Horario no encontrado"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/obrasocial/all": {
+      "get": {
+        "tags": [
+          "Obra Social"
+        ],
+        "summary": "Obtener todas las Obras Sociales",
+        "description": "Retorna todas las Obras Sociales disponibles",
+        "operationId": "getAllObrasSociales",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "type": "string"
+                      },
+                      "descripcion": {
+                        "type": "string"
+                      },
+                      "codArancel": {
+                        "type": "string"
+                      },
+                      "activa": {
+                        "type": "boolean"
+                      },
+                      "valor": {
+                        "type": "number"
+                      },
+                      "maxAnual": {
+                        "type": "number"
+                      },
+                      "maxMensual": {
+                        "type": "number"
+                      },
+                      "obraSocial": {
+                        "type": "string"
+                      },
+                      "usuario": {
+                        "type": "string"
+                      }
                     }
+                  }
                 }
-            },
-            "security": [
-                {
-                    "apiAuth": []
-                }
-            ]
-        }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
     },
     "/api/obrasocial/{obraSocialId}": {
       "get": {
-          "tags": [
-              "Obra Social"
-          ],
-          "summary": "Obtener Obra Social por ID",
-          "description": "Retorna la información de una Obra Social por su ID",
-          "operationId": "getObraSocialById",
-          "parameters": [
-              {
-                  "name": "obraSocialId",
-                  "in": "path",
-                  "required": true,
-                  "schema": {
-                      "type": "string"
-                  }
-              }
-          ],
-          "responses": {
-              "200": {
-                  "description": "Operación exitosa",
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "type": "object",
-                              "properties": {
-                                  "codigo": {
-                                      "type": "string"
-                                  },
-                                  "descripcion": {
-                                      "type": "string"
-                                  },
-                                  "codArancel": {
-                                      "type": "string"
-                                  },
-                                  "activa": {
-                                      "type": "boolean"
-                                  },
-                                  "valor": {
-                                      "type": "number"
-                                  },
-                                  "maxAnual": {
-                                      "type": "number"
-                                  },
-                                  "maxMensual": {
-                                      "type": "number"
-                                  },
-                                  "obraSocial": {
-                                      "type": "string"
-                                  },
-                                  "usuario": {
-                                      "type": "string"
-                                  }
-                              }
-                          }
-                      }
-                  }
-              },
-              "404": {
-                  "description": "Obra Social no encontrada"
-              }
-          },
-          "security": [
-              {
-                  "apiAuth": []
-              }
-          ]
-      }
-  },
-  "/api/obrasocial/codigo/{obraSocialCodigo}": {
-    "get": {
         "tags": [
-            "Obra Social"
+          "Obra Social"
+        ],
+        "summary": "Obtener Obra Social por ID",
+        "description": "Retorna la información de una Obra Social por su ID",
+        "operationId": "getObraSocialById",
+        "parameters": [
+          {
+            "name": "obraSocialId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "codigo": {
+                      "type": "string"
+                    },
+                    "descripcion": {
+                      "type": "string"
+                    },
+                    "codArancel": {
+                      "type": "string"
+                    },
+                    "activa": {
+                      "type": "boolean"
+                    },
+                    "valor": {
+                      "type": "number"
+                    },
+                    "maxAnual": {
+                      "type": "number"
+                    },
+                    "maxMensual": {
+                      "type": "number"
+                    },
+                    "obraSocial": {
+                      "type": "string"
+                    },
+                    "usuario": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Obra Social no encontrada"
+          }
+        },
+        "security": [
+          {
+            "apiAuth": []
+          }
+        ]
+      }
+    },
+    "/api/obrasocial/codigo/{obraSocialCodigo}": {
+      "get": {
+        "tags": [
+          "Obra Social"
         ],
         "summary": "Obtener Obra Social por Código",
         "description": "Retorna la información de una Obra Social por su código",
         "operationId": "getObraSocialByCodigo",
         "parameters": [
-            {
-                "name": "obraSocialCodigo",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
+          {
+            "name": "obraSocialCodigo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
+          }
         ],
         "responses": {
-            "200": {
-                "description": "Operación exitosa",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "codigo": {
-                                    "type": "string"
-                                },
-                                "descripcion": {
-                                    "type": "string"
-                                },
-                                "codArancel": {
-                                    "type": "string"
-                                },
-                                "activa": {
-                                    "type": "boolean"
-                                },
-                                "valor": {
-                                    "type": "number"
-                                },
-                                "maxAnual": {
-                                    "type": "number"
-                                },
-                                "maxMensual": {
-                                    "type": "number"
-                                },
-                                "obraSocial": {
-                                    "type": "string"
-                                },
-                                "usuario": {
-                                    "type": "string"
-                                }
-                            }
-                        }
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "codigo": {
+                      "type": "string"
+                    },
+                    "descripcion": {
+                      "type": "string"
+                    },
+                    "codArancel": {
+                      "type": "string"
+                    },
+                    "activa": {
+                      "type": "boolean"
+                    },
+                    "valor": {
+                      "type": "number"
+                    },
+                    "maxAnual": {
+                      "type": "number"
+                    },
+                    "maxMensual": {
+                      "type": "number"
+                    },
+                    "obraSocial": {
+                      "type": "string"
+                    },
+                    "usuario": {
+                      "type": "string"
                     }
+                  }
                 }
-            },
-            "404": {
-                "description": "Obra Social no encontrada"
+              }
             }
+          },
+          "404": {
+            "description": "Obra Social no encontrada"
+          }
         },
         "security": [
-            {
-                "apiAuth": []
-            }
+          {
+            "apiAuth": []
+          }
         ]
+      }
     }
-}
-
-  
-    },
-    "components": {
-        "securitySchemes": {
-            "apiAuth": {
-                "type": "http",
-                "description": "Login with email and password to get the authentication token",
-                "name": "Token based Based",
-                "in": "header",
-                "bearerFormat": "JWT",
-                "scheme": "bearer"
-            }
-        }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiAuth": {
+        "type": "http",
+        "description": "Login with email and password to get the authentication token",
+        "name": "Token based Based",
+        "in": "header",
+        "bearerFormat": "JWT",
+        "scheme": "bearer"
+      }
     }
+  }
 }

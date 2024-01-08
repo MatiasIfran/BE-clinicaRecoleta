@@ -68,9 +68,36 @@ class Horario extends Model
             $horarios[] = $nuevoHorario;
         }
     
-        $horarios = Horario::insert($horarios);
+        $horarios = $this->insert($horarios);
 
         return $horarios;
+    }
+
+    public function deleteHorarioModel($horarioId)
+    {
+        $horario = $this->find($horarioId);
+
+        if (!$horario) {
+            $data = [
+                'status' => false,
+                'error' => 'El horario no existe',
+            ];
+            return response()->json($data, 404);
+        }
+
+        if ($horario->delete()) {
+            $data = [
+                'status' => true,
+                'message' => 'Horario eliminado correctamente',
+            ];
+            return response()->json($data, 200);
+        }
+    
+        $data = [
+            'status' => false,
+            'error' => 'No se pudo eliminar el horario',
+        ];
+        return response()->json($data, 400);
     }
 
 }

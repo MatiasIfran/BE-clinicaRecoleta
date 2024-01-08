@@ -109,5 +109,12 @@ class HorarioController extends Controller
 
         return response()->json($data, 201);
     }
+
+    public function deleteHorario($horarioId)
+    {
+        $horario = new Horario;
+        $horario = $horario->deleteHorarioModel($horarioId);
+        return $horario;
+    }
     
 }
