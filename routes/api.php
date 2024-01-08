@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 });
 */
 
-//Rutas disponibles
+//Rutas no definidas
+Route::any('/{any}', function () {
+    return response()->json(['message' => 'Ruta no encontrada'], 404);
+})->where('any', '.*');
 
 //  Post
 Route::post('login', 'LoginController@authenticate');
