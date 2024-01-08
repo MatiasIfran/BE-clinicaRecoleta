@@ -40,7 +40,7 @@ class Horario extends Model
         $data = $request->validated();
 
         $fecha = $data['dia'];
-        $fechaActual = Carbon::now()->format('Y-m-d');
+        $fechaActual = Carbon::now()->setTimezone('GMT-3')->format('Y-m-d');
         if ($fecha < $fechaActual) {
             $data = [
                 'status' => false,
