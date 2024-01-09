@@ -21,11 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 //  Post
 Route::post('login', 'LoginController@authenticate');
-Route::post('user/createUser', 'UserController@createUser')->name("createUser");
-Route::post('persona/createPersona', 'PersonaController@createPersona')->name('createPersona');
 
-Route::get('user/all', 'UserController@allUsers')->name('allUser');
-Route::get('user/{userId}', 'UserController@getUserById')->name('user.getById');
+Route::prefix('user')->group(function () {
+    Route::get('/all', 'UserController@allUsers')->name('allUser');
+    Route::get('/{userId}', 'UserController@getUserById')->name('user.getById');
+    Route::post('/createUser', 'UserController@createUser')->name("createUser");
+});
 
 Route::prefix('paciente')->group(function () {
     Route::get('/all', 'PacienteController@allPacientes')->name('allPacientes');
@@ -58,11 +59,11 @@ Route::prefix('turno')->group(function () {
 });
 
 Route::prefix('horario')->group(function () {
-    Route::get('/all', 'horarioController@allHorarios')->name('allHorarios');
-    Route::get('/date', 'horarioController@getHorarioByDate')->name('getHorarioByDate');
-    Route::get('/{horarioId}', 'horarioController@getHorarioById')->name('getHorarioById');
-    Route::get('/dateprofesional/{idProfesional}', 'horarioController@getHorarioByProfesionalId')->name('getHorarioByProfesionalId');
-    Route::post('/createHorario', 'horarioController@createHorario')->name('createHorario');
+    Route::get('/all', 'HorarioController@allHorarios')->name('allHorarios');
+    Route::get('/date', 'HorarioController@getHorarioByDate')->name('getHorarioByDate');
+    Route::get('/{horarioId}', 'HorarioController@getHorarioById')->name('getHorarioById');
+    Route::get('/dateprofesional/{idProfesional}', 'HorarioController@getHorarioByProfesionalId')->name('getHorarioByProfesionalId');
+    Route::post('/createHorario', 'HorarioController@createHorario')->name('createHorario');
     Route::delete('/deleteHorario/{horarioId}', 'HorarioController@deleteHorario')->name('deleteHorario');
 });
 
