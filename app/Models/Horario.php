@@ -117,4 +117,8 @@ class Horario extends Model
         return response()->json($data, 400);
     }
 
+    public function turnos()
+    {
+        return $this->hasMany(Turno::class);
+    }
 }
