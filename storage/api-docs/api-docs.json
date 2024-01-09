@@ -968,14 +968,14 @@
                           "id": {
                             "type": "number"
                           },
-                          "fecha": {
-                            "type": "string"
-                          },
-                          "profesional_id": {
+                          "horario_id": {
                             "type": "integer"
                           },
                           "paciente_id": {
                             "type": "integer"
+                          },
+                          "observ": {
+                            "type": "string"
                           },
                           "usuario": {
                             "type": "string"
@@ -1031,14 +1031,14 @@
                         "id": {
                           "type": "number"
                         },
-                        "fecha": {
-                          "type": "string"
-                        },
-                        "profesional_id": {
+                        "horario_id": {
                           "type": "integer"
                         },
                         "paciente_id": {
                           "type": "integer"
+                        },
+                        "observ": {
+                          "type": "string"
                         },
                         "usuario": {
                           "type": "string"
@@ -1096,15 +1096,14 @@
                           "id": {
                             "type": "number"
                           },
-                          "fecha": {
-                            "example": "aaaa/mm/dd",
-                            "type": "string"
-                          },
-                          "profesional_id": {
+                          "horario_id": {
                             "type": "integer"
                           },
                           "paciente_id": {
                             "type": "integer"
+                          },
+                          "observ": {
+                            "type": "string"
                           },
                           "usuario": {
                             "type": "string"
@@ -1140,15 +1139,17 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "fecha": {
-                    "type": "string",
-                    "format": "date-time"
+                  "id": {
+                    "type": "number"
                   },
-                  "profesional_id": {
+                  "horario_id": {
                     "type": "integer"
                   },
                   "paciente_id": {
                     "type": "integer"
+                  },
+                  "observ": {
+                    "type": "string"
                   },
                   "usuario": {
                     "type": "string"
@@ -1175,14 +1176,14 @@
                         "id": {
                           "type": "number"
                         },
-                        "fecha": {
-                          "type": "string"
-                        },
-                        "profesional_id": {
+                        "horario_id": {
                           "type": "integer"
                         },
                         "paciente_id": {
                           "type": "integer"
+                        },
+                        "observ": {
+                          "type": "string"
                         },
                         "usuario": {
                           "type": "string"
