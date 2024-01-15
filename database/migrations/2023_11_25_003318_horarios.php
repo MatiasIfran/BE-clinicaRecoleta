@@ -16,7 +16,7 @@ class Horarios extends Migration
         if (!Schema::hasTable('horarios')) {
             Schema::create('horarios', function (Blueprint $table) {
                 $table->id();
-                $table->string('prof_cod')->nullable(false);
+                $table->unsignedBigInteger('prof_cod')->nullable(false);
                 $table->string('dia')->nullable();
                 $table->string('desde', 5)->default('');
                 $table->string('hasta', 5)->default('');
