@@ -28,7 +28,7 @@ class Profesionales extends Migration
             $table->unsignedBigInteger('Matricula')->nullable();
             $table->unsignedBigInteger('Categoria')->nullable();
             $table->unsignedBigInteger('Cuit')->nullable();
-            $table->integer('Codigo')->nullable(false);
+            $table->integer('Codigo')->nullable(false)->unique();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->default(now());            
             $table->string('usuario', 50)->nullable(false);
