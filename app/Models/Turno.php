@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\Turno\TurnoRequest;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class Turno extends Model
 {
@@ -13,19 +14,22 @@ class Turno extends Model
     protected $table = 'turnos';
 
     protected $fillable = [
-        'horario_id',
+        'prof_cod',
         'paciente_id',
+        'fecha',
+        'hora',
+        'observ',
+        'atendido',
+        'presente',
+        'primeraVisita',
+        'obra_social',
         'usuario'
     ];
 
     public function createTurnoModel(TurnoRequest $request)
     {
         $validator = Validator::make($request->all(), $request->rules());
-
         if ($validator->fails()) {
-            // Maneja el error según tus necesidades, puede lanzar una excepción o devolver un mensaje de error
-            // Puedes personalizar esta lógica según tus necesidades
-            // Por ejemplo, puedes lanzar una excepción BadRequestHttpException con el mensaje de error
             $data = [
                 'status' => false,
                 'error'  => $validator->errors()->first(),
@@ -33,28 +37,98 @@ class Turno extends Model
             return response()->json($data, 400);
         }
 
-        $data = $request->validated();
+        $profesionalCodigo = $request->input('prof_cod');
+        $pacienteId = $request->input('paciente_id');
+        $fechaInicio = $request->input('fechaInicio');
+        $fechaFin = $request->input('fechaFin');
 
-        try {
-            $turno = $this->create($data);
-        } catch (\Illuminate\Database\QueryException $ex) {
-            if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
+        if ($fechaFin < $fechaInicio) {
+            $data = [
+                'status' => false,
+                'error' => 'La fecha fin debe ser igual o mayor a la fecha actual',
+            ];
+            return response()->json($data, 400);
+        }
+
+        $horariosDisponibles = Horario::where('prof_cod', $profesionalCodigo)
+        ->whereIn('dia', ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES'])
+        ->get();
+
+        foreach ($horariosDisponibles as $horario) {
+            $fechaHorario = $this->calculateFechaHorario($fechaInicio, $fechaFin, $horario->dia);
+            $horaActual = $horario->desde;
+            info($fechaHorario);
+  
+            if($fechaHorario != null) {
+                foreach ($fechaHorario as $fecha) {
+                    while($horaActual < $horario->hasta) {
+                        $turno = new Turno([
+                            'prof_cod' => $profesionalCodigo,
+                            'paciente_id' => $pacienteId,
+                            'fecha' => $fecha,
+                            'hora' => $horaActual,
+                            'observ' => $request->input('observ'),
+                            'atendido' => $request->input('atendido'),
+                            'presente' => $request->input('presente'),
+                            'primeraVisita' => $request->input('primeraVisita'),
+                            'obra_social' => $request->input('obra_social'),
+                            'usuario' => $request->input('usuario'),
+                        ]);
+                        try {
+                            $turno->save();
+                        } catch (\Illuminate\Database\QueryException $ex) {
+                            if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
+                                $data = [
+                                    'status' => false,
+                                    'error' => 'El turno ya existe',
+                                ];
+                                return response()->json($data, 400);
+                            }
+                        }
+                        $horaActual = Carbon::parse($horaActual)->addMinutes($horario->tiempo)->format('H:i');
+                    }
+                }
+            }
+            else {
                 $data = [
                     'status' => false,
-                    'error' => 'El turno para este horario y paciente ya existe',
-                ];
-                return response()->json($data, 400);
-            } else {
-                // Otro manejo de errores si es necesario
-                $data = [
-                    'status' => false,
-                    'error' => 'Error al crear el turno: ' . $ex->getMessage(),
+                    'error' => 'No se encontraron horarios disponibles del profesional para el rango de fecha seleccionado.',
                 ];
                 return response()->json($data, 400);
             }
         }
+        return response()->json(['status' => true, 'message' => 'Turnos creados correctamente']);
+    }
 
-        return $turno;
+    private function calculateFechaHorario($fechaInicio, $fechaFin, $dia)
+    {
+        $carbonFechaInicio = Carbon::parse($fechaInicio);
+        $carbonFechaFin = Carbon::parse($fechaFin);
+    
+        $translatedDay = strtolower($this->translateDayToEnglish($dia));
+        $fechas = [];
+
+        while ($carbonFechaInicio->lessThanOrEqualTo($carbonFechaFin)) {
+            if (strtolower($carbonFechaInicio->translatedFormat('l')) == $translatedDay) {
+                $fechas[] = $carbonFechaInicio->toDateString();
+            }
+    
+            $carbonFechaInicio->addDay();
+        }
+        return $fechas;
+    }
+
+    private function translateDayToEnglish($day)
+    {
+        $translationMap = [
+            'lunes' => 'Monday',
+            'martes' => 'Tuesday',
+            'miércoles' => 'Wednesday',
+            'jueves' => 'Thursday',
+            'viernes' => 'Friday',
+        ];
+        $lowercaseDay = strtolower($day);
+        return array_key_exists($lowercaseDay, $translationMap) ? $translationMap[$lowercaseDay] : $day;
     }
 
     public function deleteTurnoModel($turnoId)
