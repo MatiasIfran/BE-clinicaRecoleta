@@ -25,7 +25,6 @@ class Horarios extends Migration
                 $table->timestamp('created_at')->default(now());            
                 $table->string('usuario', 50)->nullable(false);
                 $table->foreign('prof_cod')->references('Codigo')->on('profesionales');
-                $table->foreign('prof_cod')->references('Codigo')->on('profesionales');
             });
         }
     }
