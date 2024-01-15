@@ -13,25 +13,27 @@ class Turnos extends Migration
      */
     public function up()
     {
-        Schema::create('turnos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('paciente_id')->nullable();
-            $table->unsignedBigInteger('prof_cod')->nullable(false);
-            $table->date("fecha")->nullable(false);
-            $table->string('hora', 5)->nullable(false);
-            $table->string('observ', 50)->nullable();
-            $table->tinyInteger('atendido')->nullable();
-            $table->tinyInteger('presente')->nullable();
-            $table->tinyInteger('primeraVisita')->nullable();
-            $table->unsignedBigInteger('obra_social')->nullable();
-            $table->timestamp('updated_at')->useCurrent();
-            $table->timestamp('created_at')->default(now());            
-            $table->string('usuario', 50)->nullable(false);
-            $table->unique(['fecha', 'hora', 'paciente_id']);
-            $table->unique(['prof_cod', 'fecha', 'hora']);
-            $table->foreign('prof_cod')->references('Codigo')->on('profesionales');
-            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
-        });
+        if (!Schema::hasTable('turnos')) {
+            Schema::create('turnos', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('paciente_id')->nullable();
+                $table->unsignedBigInteger('prof_cod')->nullable(false);
+                $table->date("fecha")->nullable(false);
+                $table->string('hora', 5)->nullable(false);
+                $table->string('observ', 50)->nullable();
+                $table->tinyInteger('atendido')->nullable();
+                $table->tinyInteger('presente')->nullable();
+                $table->tinyInteger('primeraVisita')->nullable();
+                $table->unsignedBigInteger('obra_social')->nullable();
+                $table->timestamp('updated_at')->useCurrent();
+                $table->timestamp('created_at')->default(now());            
+                $table->string('usuario', 50)->nullable(false);
+                $table->unique(['fecha', 'hora', 'paciente_id']);
+                $table->unique(['prof_cod', 'fecha', 'hora']);
+                $table->foreign('prof_cod')->references('Codigo')->on('profesionales');
+                $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
+            });
+        }
     }
 
     /**
