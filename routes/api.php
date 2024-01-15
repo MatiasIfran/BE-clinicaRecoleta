@@ -63,7 +63,7 @@ Route::prefix('horario')->group(function () {
     Route::get('/all', 'HorarioController@allHorarios')->name('allHorarios');
     Route::get('/date', 'HorarioController@getHorarioByDate')->name('getHorarioByDate');
     Route::get('/{horarioId}', 'HorarioController@getHorarioById')->name('getHorarioById');
-    Route::get('/dateprofesional/{idProfesional}', 'HorarioController@getHorarioByProfesionalId')->name('getHorarioByProfesionalId');
+    Route::get('/dateprofesional/{prof_cod}', 'HorarioController@getHorarioByProfesionalCodigo')->name('getHorarioByProfesionalCodigo');
     Route::post('/createHorario', 'HorarioController@createHorario')->name('createHorario');
     Route::delete('/deleteHorario/{horarioId}', 'HorarioController@deleteHorario')->name('deleteHorario');
 });

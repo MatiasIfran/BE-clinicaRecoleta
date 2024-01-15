@@ -75,9 +75,9 @@ class HorarioController extends Controller
         return response()->json($data, 200);
     }
 
-    public function getHorarioByProfesionalId($profesionalId)
+    public function getHorarioByProfesionalCodigo($prof_cod)
     {
-        $horarios = Horario::where('profesional_id', $profesionalId)->get();
+        $horarios = Horario::where('prof_cod', $prof_cod)->get();
 
         if ($horarios->isEmpty()) {
             $data = [
