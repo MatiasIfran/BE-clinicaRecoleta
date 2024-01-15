@@ -238,3 +238,9 @@ VALUES
     ('1111', 'JUEVES', '09:00', '12:00', 15, NOW(), NOW(), 'admin'),
     ('1111', 'JUEVES', '15:30', '20:00', 15, NOW(), NOW(), 'admin'),
     ('1111', 'VIERNES', '10:00', '12:30', 15, NOW(), NOW(), 'admin');
+
+-- Pacientes
+INSERT INTO pacientes (Nombre, Apellido, FechaNacimiento, Genero, Direccion, CodPos, Telefono, Mail, TipoDocumento, NumDocumento, Cuit, NumAfiliado, Empres, DetaPlan, Plan, Antecedentes, updated_at, created_at, usuario)
+VALUES 
+('CARMEN CELIA', 'HADAD', '1900-01-01', '', 'S. DEL ESTERO 2490 2ºP B', '3000', '4534673', '', '1', 1115883, '01', '', '', '', '', '1111', '2022-06-23 09:05:09', '2022-06-23 09:04:59', 'Admin'),
+('VANESA', 'MAAS', '1979-11-22', '', 'PJE AMERICA 986 GALVEZ', '0000', '03404-4209', '', '1', 27733570, '03', '', '', '', '', '1111', '2022-05-11 23:12:55', NULL, 'Admin');
