@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\Turno\TurnoRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
@@ -51,17 +52,17 @@ class Turno extends Model
         }
 
         $horariosDisponibles = Horario::where('prof_cod', $profesionalCodigo)
-        ->whereIn('dia', ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES'])
-        ->get();
+            ->whereIn('dia', ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES'])
+            ->get();
 
         foreach ($horariosDisponibles as $horario) {
             $fechaHorario = $this->calculateFechaHorario($fechaInicio, $fechaFin, $horario->dia);
             $horaActual = $horario->desde;
             info($fechaHorario);
-  
-            if($fechaHorario != null) {
+
+            if ($fechaHorario != null) {
                 foreach ($fechaHorario as $fecha) {
-                    while($horaActual < $horario->hasta) {
+                    while ($horaActual < $horario->hasta) {
                         $turno = new Turno([
                             'prof_cod' => $profesionalCodigo,
                             'paciente_id' => $pacienteId,
@@ -88,8 +89,7 @@ class Turno extends Model
                         $horaActual = Carbon::parse($horaActual)->addMinutes($horario->tiempo)->format('H:i');
                     }
                 }
-            }
-            else {
+            } else {
                 $data = [
                     'status' => false,
                     'error' => 'No se encontraron horarios disponibles del profesional para el rango de fecha seleccionado.',
@@ -100,11 +100,42 @@ class Turno extends Model
         return response()->json(['status' => true, 'message' => 'Turnos creados correctamente']);
     }
 
+    public function obtenerTurnosLibres(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'prof_cod' => 'required|integer',
+            'fecha' => 'required|date_format:Y-m-d',
+        ], [
+            'prof_cod.required' => 'El codigo del profesional es obligatorio. (prof_cod)',
+            'prof_cod.integer' => 'El id del profesional debe ser un número entero.',
+            'fecha.required' => 'La fecha es obligatoria.',
+            'fecha.date_format' => 'El formato de la fecha debe ser YYYY-MM-DD.',
+        ]);
+
+        if ($validator->fails()) {
+            $data = [
+                'status' => false,
+                'error'  => $validator->errors()->first(),
+            ];
+            return response()->json($data, 400);
+        }
+
+        $profesionalCodigo = $request->input('prof_cod');
+        $fecha = $request->input('fecha');
+
+        $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
+            ->where('fecha', $fecha)
+            ->whereNull('paciente_id')
+            ->get();
+
+        return $horariosDisponibles;
+    }
+
     private function calculateFechaHorario($fechaInicio, $fechaFin, $dia)
     {
         $carbonFechaInicio = Carbon::parse($fechaInicio);
         $carbonFechaFin = Carbon::parse($fechaFin);
-    
+
         $translatedDay = strtolower($this->translateDayToEnglish($dia));
         $fechas = [];
 
@@ -112,7 +143,7 @@ class Turno extends Model
             if (strtolower($carbonFechaInicio->translatedFormat('l')) == $translatedDay) {
                 $fechas[] = $carbonFechaInicio->toDateString();
             }
-    
+
             $carbonFechaInicio->addDay();
         }
         return $fechas;
@@ -157,5 +188,4 @@ class Turno extends Model
         ];
         return response()->json($data, 400);
     }
-
 }

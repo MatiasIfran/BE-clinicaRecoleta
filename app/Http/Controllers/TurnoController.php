@@ -6,13 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Turno\TurnoRequest;
 use App\Http\Requests\User\IndexRequest;
 use App\Models\Turno;
-use App\Models\Horario;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\UserResource;
 
 class TurnoController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('auth:sanctum');
     }
@@ -63,7 +60,7 @@ class TurnoController extends Controller
         if ($turnos->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron turnos para la fecha '.$fecha,
+                'error' => 'No se encontraron turnos para la fecha ' . $fecha,
             ];
             return response()->json($data, 404);
         }
@@ -96,48 +93,32 @@ class TurnoController extends Controller
 
     public function getTurnosDisponibles(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'profesional_id' => 'required|integer',
-            'fecha' => 'required|date_format:Y-m-d',
-        ], [
-            'profesional_id.required' => 'El id del profesional es obligatorio.',
-            'profesional_id.integer' => 'El id del profesional debe ser un número entero.',
-            'fecha.required' => 'La fecha es obligatoria.',
-            'fecha.date_format' => 'El formato de la fecha debe ser YYYY-MM-DD.',
-        ]);
+        $turno = new Turno;
+        $turno = $turno->obtenerTurnosLibres($request);
+        info($turno);
 
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return response()->json(['status' => false, 'errors' => $errors], 400);
-        }    
-
-        $profesionalId = $request->input('profesional_id');
-        $fecha = $request->input('fecha');
-
-        $horariosDisponibles = Horario::where('profesional_id', $profesionalId)
-        ->whereDate('dia', $fecha)
-        ->whereDoesntHave('turnos')
-        ->get();
-
-        if ($horariosDisponibles->isEmpty()) {
+        if ($this->isJsonResponse($turno)) {
+            return $turno;
+        } else if ($turno->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron horarios disponibles para el dia '.$fecha,
+                'turno' => 'No se encontraron turnos para la fecha especificada.',
             ];
-            return response()->json($data, 404);
-        }
 
-        return response()->json([
+            return response()->json($data, 400);
+        }
+        $data = [
             'status' => true,
-            'horarios_disponibles' => $horariosDisponibles,
-        ]);
+            'turnos' => $turno,
+        ];
+        return response()->json($data, 201);
     }
 
     public function createTurno(TurnoRequest $request)
     {
         $turno = new Turno;
         $turno = $turno->createTurnoModel($request);
-        
+
         if ($this->isJsonResponse($turno)) {
             return $turno;
         }

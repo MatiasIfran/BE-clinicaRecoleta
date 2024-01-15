@@ -29,6 +29,7 @@ class TurnoRequest extends BaseFormRequest
             'prof_cod' => 'required|integer|exists:profesionales,codigo',
             "fechaInicio" => 'required',
             "fechaFin"  => 'required',
+            "fecha" => 'date_format:Y-m-d',
             'paciente_id' => 'integer|exists:pacientes,id',
             'usuario' => 'required|max:50',
         ];
@@ -41,6 +42,7 @@ class TurnoRequest extends BaseFormRequest
             'prof_cod.exists' => 'El prof_cod seleccionado no existe.',
             'fechaInicio.required' => 'La fecha inicio es requerida',
             'fechaFin.required' => 'La fecha fin es requerida',
+            'fecha.date_format' => 'El formato de la fecha debe ser YYYY-MM-DD.',
             'paciente_id.exists' => 'El paciente seleccionado no existe.',
             'usuario.required' => 'El nombre de usuario es obligatorio.',
             'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
