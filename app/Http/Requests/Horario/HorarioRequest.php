@@ -27,8 +27,8 @@ class HorarioRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'profesional_id' => 'required|integer|exists:profesionales,id',
-            'dia' => 'required|date',
+            'prof_cod' => 'required|integer|exists:profesionales,codigo',
+            'dia' => 'required|string',
             'desde' => 'required|string|max:5',
             'hasta' => 'required|string|max:5',
             'tiempo' => 'required|integer|min:0|max:99',
@@ -39,10 +39,10 @@ class HorarioRequest extends BaseFormRequest
     public function messages()
 {
     return [
-        'profesional_id.required' => 'El campo de profesional_id es obligatorio.',
-        'profesional_id.exists' => 'El profesional seleccionado no existe.',
+        'prof_cod.required' => 'El campo de prof_cod es obligatorio.',
+        'prof_cod.exists' => 'El profesional seleccionado no existe.',
         'dia.required' => 'El campo dia es obligatorio.',
-        'dia.date' => 'El campo dia debe ser una fecha válida.',
+        'dia.string' => 'El campo dia debe ser un dia de la semana válida.',
         'desde.required' => 'El campo desde es obligatorio.',
         'desde.max' => 'El campo desde no puede tener más de :max caracteres.',
         'hasta.required' => 'El campo hasta es obligatorio.',

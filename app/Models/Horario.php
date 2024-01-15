@@ -14,7 +14,7 @@ class Horario extends Model
     protected $table = 'horarios';
 
     protected $fillable = [
-        'profesional_id', 
+        'prof_cod', 
         'dia', 
         'desde', 
         'hasta', 
@@ -27,9 +27,6 @@ class Horario extends Model
         $validator = Validator::make($request->all(), $request->rules());
 
         if ($validator->fails()) {
-            // Maneja el error según tus necesidades, puede lanzar una excepción o devolver un mensaje de error
-            // Puedes personalizar esta lógica según tus necesidades
-            // Por ejemplo, puedes lanzar una excepción BadRequestHttpException con el mensaje de error
             $data = [
                 'status' => false,
                 'error'  => $validator->errors()->first(),
@@ -38,56 +35,11 @@ class Horario extends Model
         }
 
         $data = $request->validated();
+        $data['dia'] = strtoupper($data['dia']);
 
-        $fecha = $data['dia'];
-        $fechaActual = Carbon::now()->setTimezone('GMT-3')->format('Y-m-d');
-        if ($fecha < $fechaActual) {
-            $data = [
-                'status' => false,
-                'error' => 'La fecha debe ser igual o mayor a la fecha actual',
-            ];
-            return response()->json($data, 400);
-        }
-        // Convierte las horas desde y hasta en objetos Carbon para operar con el tiempo
-        $desde = Carbon::createFromFormat('H:i', $data['desde']);
-        $hasta = Carbon::createFromFormat('H:i', $data['hasta']);
+        $horario = $this->create($data);
 
-        $intervaloMinutos = $data['tiempo'];
-        $horarios = [];
-
-        while ($desde < $hasta) {
-            $nuevoHorario = [
-                'profesional_id' => $data['profesional_id'],
-                'dia' => $data['dia'],
-                'desde' => $desde->format('H:i'),
-                'hasta' => $desde->addMinutes($intervaloMinutos)->format('H:i'),
-                'tiempo' => $intervaloMinutos,
-                'usuario' => $data['usuario'],
-            ];
-    
-            $horarios[] = $nuevoHorario;
-        }
-    
-        try {
-            $horarios = $this->insert($horarios);
-        } catch (\Illuminate\Database\QueryException $ex) {
-            if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
-                $data = [
-                    'status' => false,
-                    'error' => 'El horario para este profesional, dia y hora ya existe',
-                ];
-                return response()->json($data, 400);
-            } else {
-                // Otro manejo de errores si es necesario
-                $data = [
-                    'status' => false,
-                    'error' => 'Error al crear el turno: ' . $ex->getMessage(),
-                ];
-                return response()->json($data, 400);
-            }
-        }
-
-        return $horarios;
+        return $horario;
     }
 
     public function deleteHorarioModel($horarioId)
