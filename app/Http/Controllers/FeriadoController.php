@@ -9,12 +9,12 @@ use App\Http\Resources\UserResource;
 
 class FeriadoController extends Controller
 {
-    public function __construct()
+    public function __construct() 
     {
         $this->middleware('auth:sanctum');
     }
 
-    public function allFeriados(IndexRequest $request)
+    public function allFeriados()
     {
         $feriados = Feriado::all();
         if ($feriados->isEmpty()) {

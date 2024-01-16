@@ -6,7 +6,7 @@ use App\Models\Feriado;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class feriadoPolicy
+class FeriadoPolicy
 {
     use HandlesAuthorization;
 
