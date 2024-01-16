@@ -28,6 +28,7 @@ class FeriadoRequest extends BaseFormRequest
             'fecha' => 'required|date|unique:feriados',
             'motivo' => 'string',
             'titulo' => 'required|string',
+            'usuario' => 'required|max:50',
         ];
     }
 
@@ -40,6 +41,8 @@ class FeriadoRequest extends BaseFormRequest
             'motivo.string' => 'El motivo debe ser una cadena de texto.',
             'titulo.required' => 'El título es obligatorio.',
             'titulo.string' => 'El título debe ser una cadena de texto.',
+            'usuario.required' => 'El nombre de usuario es obligatorio.',
+            'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
         ];
     }
 }

@@ -20,6 +20,7 @@ class Feriados extends Migration
                 $table->string('titulo')->nullable(false);
                 $table->string('motivo')->nullable();
                 $table->timestamps();
+                $table->string('usuario', 50)->nullable(false);
             });
         }
     }

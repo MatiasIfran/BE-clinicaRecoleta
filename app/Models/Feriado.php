@@ -14,9 +14,10 @@ class Feriado extends Model
     protected $table = 'feriados';
 
     protected $fillable = [
-        'fecha', 
+        'fecha',
         'titulo',
-        'motivo', 
+        'motivo',
+        'usuario'
     ];
 
     public function createFeriadoModal(FeriadoRequest $request)
