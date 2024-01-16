@@ -95,7 +95,6 @@ class TurnoController extends Controller
     {
         $turno = new Turno;
         $turno = $turno->obtenerTurnosLibres($request);
-        info($turno);
 
         if ($this->isJsonResponse($turno)) {
             return $turno;
