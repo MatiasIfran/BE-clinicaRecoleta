@@ -74,4 +74,10 @@ Route::prefix('obrasocial')->group(function () {
     Route::get('/codigo/{obraSocialCodigo}', 'ObraSocialController@getObraSocialByCodigo')->name('getObraSocialByCodigo');
 });
 
+Route::prefix('feriado')->group(function () {
+    Route::get('/all', 'FeriadoController@allFeriados')->name('allFeriados');
+    Route::get('/{feriadoId}', 'FeriadoController@getFeriadoById')->name('getFeriadoById');
+    Route::post('/createFeriado', 'FeriadoController@createFeriado')->name('createFeriado');
+});
+
 // Put
