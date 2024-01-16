@@ -16,9 +16,9 @@ class Feriados extends Migration
         if (!Schema::hasTable('feriados')) {
             Schema::create('feriados', function (Blueprint $table) {
                 $table->id();
-                $table->date('fecha');
-                $table->string('titulo');
-                $table->string('motivo');
+                $table->date('fecha')->nullable(false)->unique();
+                $table->string('titulo')->nullable(false);
+                $table->string('motivo')->nullable();
                 $table->timestamps();
             });
         }

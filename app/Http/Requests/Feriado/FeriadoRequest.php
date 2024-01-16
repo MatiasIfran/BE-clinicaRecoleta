@@ -25,7 +25,7 @@ class FeriadoRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'fecha' => 'required|date',
+            'fecha' => 'required|date|unique:feriados',
             'motivo' => 'string',
             'titulo' => 'required|string',
         ];
@@ -35,6 +35,7 @@ class FeriadoRequest extends BaseFormRequest
     {
         return [
             'fecha.required' => 'La fecha es obligatoria.',
+            'fecha.unique' => 'La fecha ya está en uso.',
             'fecha.date' => 'Formato de fecha inválido.',
             'motivo.string' => 'El motivo debe ser una cadena de texto.',
             'titulo.required' => 'El título es obligatorio.',
