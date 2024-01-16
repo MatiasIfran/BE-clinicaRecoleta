@@ -54,16 +54,16 @@ class HorarioController extends Controller
         return response()->json($data, 200);
     }
 
-    public function getHorarioByDate(Request $request)
+    public function getHorarioByNameDay(Request $request)
     {
-        $fecha = $request->input('fecha');
+        $dia = $request->input('dia');
 
-        $horarios = Horario::whereDate('dia', $fecha)->get();
+        $horarios = Horario::where('dia', $dia)->get();
 
         if ($horarios->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron horarios para la fecha '.$fecha
+                'error' => 'No se encontraron horarios para la fecha '.$dia
             ];
             return response()->json($data, 404);
         }

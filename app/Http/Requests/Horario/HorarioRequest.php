@@ -29,8 +29,8 @@ class HorarioRequest extends BaseFormRequest
         return [
             'prof_cod' => 'required|integer|exists:profesionales,codigo',
             'dia' => 'required|string',
-            'desde' => 'required|string|max:5',
-            'hasta' => 'required|string|max:5',
+            'desde' => 'required|string|max:5|regex:/^\d{2}:\d{2}$/',
+            'hasta' => 'required|string|max:5|regex:/^\d{2}:\d{2}$/',
             'tiempo' => 'required|integer|min:0|max:99',
             'usuario' => 'required|max:50',
         ];
@@ -45,8 +45,10 @@ class HorarioRequest extends BaseFormRequest
         'dia.string' => 'El campo dia debe ser un dia de la semana válida.',
         'desde.required' => 'El campo desde es obligatorio.',
         'desde.max' => 'El campo desde no puede tener más de :max caracteres.',
+        'desde.regex' => 'La hora de inicio debe tener el formato hh:mm.',
         'hasta.required' => 'El campo hasta es obligatorio.',
         'hasta.max' => 'El campo hasta no puede tener más de :max caracteres.',
+        'hasta.regex' => 'La hora de fin debe tener el formato hh:mm.',
         'tiempo.required' => 'El campo tiempo es obligatorio.',
         'tiempo.integer' => 'El campo tiempo debe ser un número entero.',
         'tiempo.min' => 'El campo tiempo no puede ser menor que :min.',

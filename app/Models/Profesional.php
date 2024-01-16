@@ -26,7 +26,6 @@ class Profesional extends Model
         'Categoria',
         'Cuit',
         'Codigo',
-        'ProfesionalTurno',
         'usuario',
     ];
 

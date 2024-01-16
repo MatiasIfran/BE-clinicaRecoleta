@@ -38,6 +38,10 @@ class CreateProfesionalRequest extends BaseFormRequest
                                 'integer', 
                                 Rule::exists('tipoDocumento', 'idTipoDocumento')
             ],
+            'Matricula'  => 'nullable',
+            'Categoria' => 'nullable',
+            'Cuit'  => 'nullable',
+            'Codigo'  => 'required|integer|unique:profesionales',
             'usuario' => 'required|string|max:50',
         ];
     }
@@ -55,6 +59,8 @@ class CreateProfesionalRequest extends BaseFormRequest
             'tipoDocumento.required' => 'El tipo de documento es obligatorio.',
             'NumDocumento.required' => 'El numero de documento es obligatorio.',
             'NumDocumento.unique' => 'El numero de documento ya está en uso.',
+            'Codigo.required' => 'El codigo es obligatorio.',
+            'Codigo.unique' => 'El codigo ya está en uso.',
         ];
     }
 }
