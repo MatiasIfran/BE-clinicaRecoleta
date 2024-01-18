@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\BaseFormRequest;
 use Illuminate\Validation\Rule;
 use App\Models\Horario;
- 
+
 class HorarioRequest extends BaseFormRequest
 {
     /**
@@ -37,25 +37,24 @@ class HorarioRequest extends BaseFormRequest
     }
 
     public function messages()
-{
-    return [
-        'prof_cod.required' => 'El campo de prof_cod es obligatorio.',
-        'prof_cod.exists' => 'El profesional seleccionado no existe.',
-        'dia.required' => 'El campo dia es obligatorio.',
-        'dia.string' => 'El campo dia debe ser un dia de la semana válida.',
-        'desde.required' => 'El campo desde es obligatorio.',
-        'desde.max' => 'El campo desde no puede tener más de :max caracteres.',
-        'desde.regex' => 'La hora de inicio debe tener el formato hh:mm.',
-        'hasta.required' => 'El campo hasta es obligatorio.',
-        'hasta.max' => 'El campo hasta no puede tener más de :max caracteres.',
-        'hasta.regex' => 'La hora de fin debe tener el formato hh:mm.',
-        'tiempo.required' => 'El campo tiempo es obligatorio.',
-        'tiempo.integer' => 'El campo tiempo debe ser un número entero.',
-        'tiempo.min' => 'El campo tiempo no puede ser menor que :min.',
-        'tiempo.max' => 'El campo tiempo no puede ser mayor que :max.',
-        'usuario.required' => 'El nombre de usuario es obligatorio.',
-        'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
-    ];
-}
-
+    {
+        return [
+            'prof_cod.required' => 'El campo de prof_cod es obligatorio.',
+            'prof_cod.exists' => 'El profesional seleccionado no existe.',
+            'dia.required' => 'El campo dia es obligatorio.',
+            'dia.string' => 'El campo dia debe ser un dia de la semana válida.',
+            'desde.required' => 'El campo desde es obligatorio.',
+            'desde.max' => 'El campo desde no puede tener más de :max caracteres.',
+            'desde.regex' => 'La hora de inicio debe tener el formato hh:mm.',
+            'hasta.required' => 'El campo hasta es obligatorio.',
+            'hasta.max' => 'El campo hasta no puede tener más de :max caracteres.',
+            'hasta.regex' => 'La hora de fin debe tener el formato hh:mm.',
+            'tiempo.required' => 'El campo tiempo es obligatorio.',
+            'tiempo.integer' => 'El campo tiempo debe ser un número entero.',
+            'tiempo.min' => 'El campo tiempo no puede ser menor que :min.',
+            'tiempo.max' => 'El campo tiempo no puede ser mayor que :max.',
+            'usuario.required' => 'El nombre de usuario es obligatorio.',
+            'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
+        ];
+    }
 }

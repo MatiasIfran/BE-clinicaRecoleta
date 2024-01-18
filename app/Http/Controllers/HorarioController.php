@@ -11,7 +11,7 @@ use App\Http\Resources\UserResource;
 
 class HorarioController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('auth:sanctum');
     }
@@ -63,7 +63,7 @@ class HorarioController extends Controller
         if ($horarios->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron horarios para la fecha '.$dia
+                'error' => 'No se encontraron horarios para la fecha ' . $dia
             ];
             return response()->json($data, 404);
         }
@@ -116,5 +116,11 @@ class HorarioController extends Controller
         $horario = $horario->deleteHorarioModel($horarioId);
         return $horario;
     }
-    
+
+    public function updateHorario(Request $request, $turnoId)
+    {
+        $turno = new Horario();
+        $turno = $turno->updateHorario($request, $turnoId);
+        return $turno;
+    }
 }
