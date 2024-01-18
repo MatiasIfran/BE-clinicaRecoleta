@@ -53,6 +53,11 @@ class Profesional extends Model
     public function updateProfesional(Request $request, $profesionalId)
     {
         $validator = Validator::make($request->all(), [
+            'Direccion' => 'string',
+            'Telefono' => 'string',
+            'Mail' => 'string',
+            'Categoria' => 'nullable',
+            'daTurnos' => 'sometimes|boolean',
             'usuario' => 'required|max:50',
         ]);
 
@@ -60,7 +65,11 @@ class Profesional extends Model
             return response()->json(['status' => false, 'error' => 'El nombre de usuario es obligatorio.'], 400);
         }
 
-        if (empty(array_diff_key(array_filter($request->all()), array_flip(['usuario'])))) {
+        $filtered = array_filter($request->all(), function ($value) { // Conservar 0 y '0' en la matriz
+            return $value !== null || $value !== '';
+        });
+
+        if (empty(array_diff_key($filtered, array_flip(['usuario'])))) {
             $data = [
                 'status' => false,
                 'error' => 'Debe proporcionar al menos un campo para actualizar.',

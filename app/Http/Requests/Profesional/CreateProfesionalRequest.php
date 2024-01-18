@@ -43,7 +43,7 @@ class CreateProfesionalRequest extends BaseFormRequest
             'Categoria' => 'nullable',
             'Cuit'  => 'nullable',
             'Codigo'  => 'required|integer|unique:profesionales',
-            'daTurno' => 'nullable|boolean',
+            'daTurnos' => 'nullable|boolean',
             'usuario' => 'required|max:50',
         ];
     }
