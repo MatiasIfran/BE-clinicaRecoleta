@@ -41,19 +41,19 @@ INSERT INTO codpos (codigo, Ciudad, Provincia, usuario, created_at, updated_at) 
     ('3011', 'SAN GERONIMO NORTE', 'SANTA FE', 'admin', NOW(), NOW());
 
 -- Profesionales
-INSERT INTO profesionales (Nombre, Apellido, FechaNacimiento, Genero, Direccion, Telefono, Mail, TipoDocumento, NumDocumento, Matricula, Categoria, Cuit, Codigo, created_at, updated_at, usuario)
+INSERT INTO profesionales (Nombre, Apellido, FechaNacimiento, Genero, Direccion, Telefono, Mail, TipoDocumento, NumDocumento, Matricula, Categoria, Cuit, Codigo, daTurnos,created_at, updated_at, usuario)
 VALUES
-    ('RICARDO', 'TONINI', NULL, NULL, NULL, NULL, NULL, 1, '00', 55, NULL, NULL, '1111', NOW(), NOW(), 'admin'),
-    ('GUILLERMO', 'MAGNANO', NULL, NULL, NULL, NULL, NULL, 1, '01', 45, NULL, NULL, '2222', NOW(), NOW(), 'admin'),
-    ('ADRIAN', 'ROCCO', NULL, NULL, NULL, NULL, NULL, 1, '02', 58, NULL, NULL, '3333', NOW(), NOW(), 'admin'),
-    ('MARCELO', 'BORDON', NULL, NULL, NULL, NULL, NULL, 1, '03', 52, NULL, NULL, '4444', NOW(), NOW(), 'admin'),
-    ('VICTORIA', 'LOPEZ CANDIOTI', NULL, NULL, NULL, NULL, NULL, 1, '04', 51, NULL, NULL, '6666', NOW(), NOW(), 'admin'),
-    ('PATRICIA', 'BAISSETTO', NULL, NULL, NULL, NULL, NULL, 1, '05', 56, NULL, NULL, '7777', NOW(), NOW(), 'admin'),
-    ('MILAGROS', 'CRISTOFOLI', NULL, NULL, NULL, NULL, NULL, 1, '06', NULL, NULL, NULL, '8888', NOW(), NOW(), 'admin'),
-    ('ROSALIA', 'MEILAN', NULL, NULL, NULL, NULL, NULL, 1, '07', NULL, NULL, NULL, '9999', NOW(), NOW(), 'admin'),
-    ('JUAN', 'MANTARAS', NULL, NULL, NULL, NULL, NULL, 1, '08', NULL, NULL, NULL, '2016', NOW(), NOW(), 'admin'),
-    ('SEBASTIAN', 'HILGERT', NULL, NULL, NULL, NULL, NULL, 1, '09', NULL, NULL, NULL, '5432', NOW(), NOW(), 'admin'),
-    ('JORGE', 'CORRAL', NULL, NULL, NULL, NULL, NULL, 1, '10', NULL, NULL, NULL, '5555', NOW(), NOW(), 'admin');
+    ('RICARDO', 'TONINI', NULL, NULL, NULL, NULL, NULL, 1, '00', 55, NULL, NULL, '1111', 1,NOW(), NOW(), 'admin'),
+    ('GUILLERMO', 'MAGNANO', NULL, NULL, NULL, NULL, NULL, 1, '01', 45, NULL, NULL, '2222', 1, NOW(), NOW(), 'admin'),
+    ('ADRIAN', 'ROCCO', NULL, NULL, NULL, NULL, NULL, 1, '02', 58, NULL, NULL, '3333', 1, NOW(), NOW(), 'admin'),
+    ('MARCELO', 'BORDON', NULL, NULL, NULL, NULL, NULL, 1, '03', 52, NULL, NULL, '4444', 1, NOW(), NOW(), 'admin'),
+    ('VICTORIA', 'LOPEZ CANDIOTI', NULL, NULL, NULL, NULL, NULL, 1, '04', 51, NULL, NULL, '6666', 1, NOW(), NOW(), 'admin'),
+    ('PATRICIA', 'BAISSETTO', NULL, NULL, NULL, NULL, NULL, 1, '05', 56, NULL, NULL, '7777', 0, NOW(), NOW(), 'admin'),
+    ('MILAGROS', 'CRISTOFOLI', NULL, NULL, NULL, NULL, NULL, 1, '06', NULL, NULL, NULL, '8888', 1, NOW(), NOW(), 'admin'),
+    ('ROSALIA', 'MEILAN', NULL, NULL, NULL, NULL, NULL, 1, '07', NULL, NULL, NULL, '9999', 1, NOW(), NOW(), 'admin'),
+    ('JUAN', 'MANTARAS', NULL, NULL, NULL, NULL, NULL, 1, '08', NULL, NULL, NULL, '2016', 1, NOW(), NOW(), 'admin'),
+    ('SEBASTIAN', 'HILGERT', NULL, NULL, NULL, NULL, NULL, 1, '09', NULL, NULL, NULL, '5432', 1, NOW(), NOW(), 'admin'),
+    ('JORGE', 'CORRAL', NULL, NULL, NULL, NULL, NULL, 1, '10', NULL, NULL, NULL, '5555', 0, NOW(), NOW(), 'admin');
 
 -- Obra sociales
 INSERT INTO obra_social 
