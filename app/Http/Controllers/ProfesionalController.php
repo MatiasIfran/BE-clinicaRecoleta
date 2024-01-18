@@ -10,17 +10,27 @@ use App\Http\Resources\UserResource;
 
 class ProfesionalController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('auth:sanctum');
     }
 
-    public function allProfesionales(IndexRequest $request)
+    public function allProfesionales()
     {
         $Profesionales = Profesional::all();
         $data = [
             'status'    => true,
             'users'     => $Profesionales,
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function allProfesionalesActivos()
+    {
+        $Profesionales = Profesional::where('daTurnos', '!=', false)->get();
+        $data = [
+            'status'    => true,
+            'profesionales'     => $Profesionales,
         ];
         return response()->json($data, 200);
     }
@@ -77,5 +87,12 @@ class ProfesionalController extends Controller
         ];
 
         return response()->json($data, 201);
+    }
+
+    public function updateProfesional(Request $request, $profesionalId)
+    {
+        $profesional = new Profesional();
+        $profesional = $profesional->updateProfesional($request, $profesionalId);
+        return $profesional;
     }
 }

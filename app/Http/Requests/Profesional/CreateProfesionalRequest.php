@@ -34,15 +34,17 @@ class CreateProfesionalRequest extends BaseFormRequest
             'Telefono' => 'nullable|string|max:15',
             'Mail' => 'nullable|string|email|unique:profesionales',
             'NumDocumento' => 'required|integer|unique:profesionales',
-            'tipoDocumento' => ['required',
-                                'integer', 
-                                Rule::exists('tipoDocumento', 'idTipoDocumento')
+            'tipoDocumento' => [
+                'required',
+                'integer',
+                Rule::exists('tipoDocumento', 'idTipoDocumento')
             ],
             'Matricula'  => 'nullable',
             'Categoria' => 'nullable',
             'Cuit'  => 'nullable',
             'Codigo'  => 'required|integer|unique:profesionales',
-            'usuario' => 'required|string|max:50',
+            'daTurno' => 'nullable|boolean',
+            'usuario' => 'required|max:50',
         ];
     }
 
@@ -61,6 +63,8 @@ class CreateProfesionalRequest extends BaseFormRequest
             'NumDocumento.unique' => 'El numero de documento ya está en uso.',
             'Codigo.required' => 'El codigo es obligatorio.',
             'Codigo.unique' => 'El codigo ya está en uso.',
+            'usuario.required' => 'El nombre de usuario es obligatorio.',
+            'usuario.max' => 'El nombre de usuario no puede superar los 50 caracteres.',
         ];
     }
 }
