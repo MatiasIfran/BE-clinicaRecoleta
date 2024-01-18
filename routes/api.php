@@ -57,6 +57,7 @@ Route::prefix('turno')->group(function () {
     Route::get('/libre/turnosDisponible', 'TurnoController@getTurnosDisponibles')->name('getTurnosDisponibles');
     Route::post('/createTurno', 'TurnoController@createTurno')->name('createTurno');
     Route::delete('/deleteTurno/{turnoId}', 'TurnoController@deleteTurno')->name('deleteTurno');
+    Route::put('/update/{turnoId}', 'TurnoController@updateTurno')->name('updateTurno');
 });
 
 Route::prefix('horario')->group(function () {

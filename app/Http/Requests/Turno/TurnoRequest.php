@@ -30,6 +30,11 @@ class TurnoRequest extends BaseFormRequest
             "fechaInicio" => 'required|date_format:Y-m-d',
             "fechaFin"  => 'required|date_format:Y-m-d',
             'paciente_id' => 'integer|exists:pacientes,id',
+            'observ' => 'nullable|string',
+            'atendido' => 'nullable|boolean',
+            'presente' => 'nullable|boolean',
+            'primeraVisita' => 'nullable|boolean',
+            'obra_social' => 'nullable|string',
             'usuario' => 'required|max:50',
         ];
     }
@@ -38,7 +43,7 @@ class TurnoRequest extends BaseFormRequest
     {
         return [
             'prof_cod.required' => 'El id del prof_cod es obligatorio.',
-            'prof_cod.exists' => 'El prof_cod seleccionado no existe.',
+            'prof_cod.exists' => 'El codigo del profesional seleccionado no existe o no tiene horarios asociados.',
             'fechaInicio.required' => 'La fecha inicio es requerida',
             'fechaFin.required' => 'La fecha fin es requerida',
             'fechaInicio.date_format' => 'El formato de la fecha debe ser YYYY-MM-DD.',

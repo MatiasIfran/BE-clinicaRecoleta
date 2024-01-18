@@ -135,4 +135,11 @@ class TurnoController extends Controller
         $turno = $turno->deleteTurnoModel($turnoId);
         return $turno;
     }
+
+    public function updateTurno(Request $request, $turnoId)
+    {
+        $turno = new Turno;
+        $turno = $turno->updateTurno($request, $turnoId);
+        return $turno;
+    }
 }

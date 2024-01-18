@@ -58,7 +58,6 @@ class Turno extends Model
         foreach ($horariosDisponibles as $horario) {
             $fechaHorario = $this->calculateFechaHorario($fechaInicio, $fechaFin, $horario->dia);
             $horaActual = $horario->desde;
-            info($fechaHorario);
 
             if ($fechaHorario != null) {
                 foreach ($fechaHorario as $fecha) {
@@ -185,6 +184,49 @@ class Turno extends Model
         $data = [
             'status' => false,
             'error' => 'No se pudo eliminar el turno',
+        ];
+        return response()->json($data, 400);
+    }
+
+    public function updateTurno(Request $request, $turnoId)
+    {
+        if(empty(array_filter($request->all()))) {
+            $data = [
+                'status' => false,
+                'error' => 'Debe proporcionar al menos un campo para actualizar.',
+            ];
+            return response()->json($data, 400);
+        }
+
+        $turno = Turno::find($turnoId);
+        if (!$turno) {
+            $data = [
+                'status' => false,
+                'error' => 'Turno no encontrado',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $turno->fill($request->only([
+            'paciente_id',
+            'observ',
+            'atendido',
+            'presente',
+            'primeraVisita',
+            'obra_social',
+        ]));
+
+        if ($turno->save()) {
+            $data = [
+                'status' => true,
+                'message' => 'Turno actualizado correctamente',
+            ];
+            return response()->json($data, 200);
+        }
+
+        $data = [
+            'status' => false,
+            'error' => 'No se pudo actualizar el turno',
         ];
         return response()->json($data, 400);
     }
