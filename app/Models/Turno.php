@@ -228,6 +228,7 @@ class Turno extends Model
             $data = [
                 'status' => true,
                 'message' => 'Turno actualizado correctamente',
+                'result' => $turno,
             ];
             return response()->json($data, 200);
         }
