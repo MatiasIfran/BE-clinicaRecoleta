@@ -190,7 +190,15 @@ class Turno extends Model
 
     public function updateTurno(Request $request, $turnoId)
     {
-        if(empty(array_filter($request->all()))) {
+        $validator = Validator::make($request->all(), [
+            'usuario' => 'required|max:50',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'error' => 'El nombre de usuario es obligatorio.'], 400);
+        }
+
+        if (empty(array_diff_key(array_filter($request->all()), array_flip(['usuario'])))) {
             $data = [
                 'status' => false,
                 'error' => 'Debe proporcionar al menos un campo para actualizar.',
