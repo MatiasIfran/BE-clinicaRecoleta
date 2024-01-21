@@ -120,4 +120,18 @@ class Horario extends Model
         ];
         return response()->json($data, 400);
     }
+
+    public function updateAllHorario(Request $request)
+    {
+        $results = [];
+        $datos = $request->json()->all();
+        
+        foreach ($datos as $dato) {
+            $id = $dato['horario_id'];
+            $newRequest = new Request($dato);
+            $result = $this->updateHorario($newRequest, $id);
+            $results[] = $result;
+        }
+        return response()->json(['status' => true, 'results' => $results]);
+    }
 }

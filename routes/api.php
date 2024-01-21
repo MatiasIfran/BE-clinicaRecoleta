@@ -70,6 +70,7 @@ Route::prefix('horario')->group(function () {
     Route::post('/createHorario', 'HorarioController@createHorario')->name('createHorario');
     Route::delete('/deleteHorario/{horarioId}', 'HorarioController@deleteHorario')->name('deleteHorario');
     Route::put('/update/{horarioId}', 'HorarioController@updateHorario')->name('updateHorario');
+    Route::put('/updateAll', 'HorarioController@updateAllHorario')->name('updateAllHorario');
 });
 
 Route::prefix('obrasocial')->group(function () {

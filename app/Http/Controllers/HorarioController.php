@@ -123,4 +123,12 @@ class HorarioController extends Controller
         $turno = $turno->updateHorario($request, $turnoId);
         return $turno;
     }
+
+    public function updateAllHorario(Request $request) 
+    {
+        $turno = new Horario();
+        $turno = $turno->updateAllHorario($request);
+        return $turno;
+    }
+
 }
