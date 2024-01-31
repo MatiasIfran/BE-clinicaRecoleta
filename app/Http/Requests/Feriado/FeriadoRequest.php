@@ -26,6 +26,7 @@ class FeriadoRequest extends BaseFormRequest
     {
         return [
             'fecha' => 'required|date|unique:feriados',
+            'prof_cod' => 'integer',
             'motivo' => 'string',
             'titulo' => 'required|string',
             'usuario' => 'required|max:50',

@@ -17,6 +17,7 @@ class Feriados extends Migration
             Schema::create('feriados', function (Blueprint $table) {
                 $table->id();
                 $table->date('fecha')->nullable(false)->unique();
+                $table->integer('prof_cod')->nullable();
                 $table->string('titulo')->nullable(false);
                 $table->string('motivo')->nullable();
                 $table->timestamps();

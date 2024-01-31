@@ -15,6 +15,7 @@ class Feriado extends Model
 
     protected $fillable = [
         'fecha',
+        'prof_cod',
         'titulo',
         'motivo',
         'usuario'
