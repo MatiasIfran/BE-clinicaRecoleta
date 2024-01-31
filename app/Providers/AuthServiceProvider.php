@@ -18,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Persona' => 'App\Policies\PersonaPolicy',
         'App\Models\Paciente' => 'App\Policies\PacientePolicy',
         'App\Models\Profesional' => 'App\Policies\ProfesionalPolicy',
-
+        'App\Models\Feriado' => 'App\Policies\FeriadoPolicy',
     ];
 
     /**

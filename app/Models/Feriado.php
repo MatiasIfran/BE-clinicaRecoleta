@@ -19,12 +19,11 @@ class Feriado extends Model
         'prof_cod',
         'titulo',
         'motivo',
-        'usuario'
+        'usuario',
     ];
 
     public function createFeriadoModal(FeriadoRequest $request)
     {
-        info("request in createFeriadoModal: ".$request);
         $validator = Validator::make($request->all(), $request->rules());
         if ($validator->fails()) {
             $data = [
