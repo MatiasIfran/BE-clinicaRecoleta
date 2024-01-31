@@ -85,4 +85,12 @@ Route::prefix('feriado')->group(function () {
     Route::post('/createFeriado', 'FeriadoController@createFeriado')->name('createFeriado');
 });
 
+Route::prefix('historiaclinica')->group(function () {
+    Route::get('/all', 'HistoriaClinicaController@allHistoriaClinica');
+    Route::get('/profesional/{prof_cod}', 'HistoriaClinicaController@getHistoriaClinicaByProfesionalCodigo');
+    Route::get('/paciente/{pacienteId}', 'HistoriaClinicaController@getHistoriaClinicaByPacienteId');
+    Route::post('/create', 'HistoriaClinicaController@createHistoriaClinica');
+    Route::delete('/delete/{historiaClinicaId}', 'HistoriaClinicaController@deleteHistoriaClinica');
+});
+
 // Put
