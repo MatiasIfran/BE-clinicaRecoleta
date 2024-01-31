@@ -73,7 +73,6 @@ class HistoriaClinicaController extends Controller
     public function createHistoriaClinica(HistoriaClinicaRequest $request)
     {
         $historiaClinica = new HistoriaClinica;
-        info($request);
         $historiaClinica = $historiaClinica->createHistoriaClinicaModel($request);
 
         if ($this->isJsonResponse($historiaClinica)) {

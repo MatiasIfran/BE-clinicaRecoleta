@@ -55,6 +55,7 @@ class FeriadoController extends Controller
     public function createFeriado(FeriadoRequest $request)
     {
         $feriado = new Feriado();
+        info("request en createFeriado: " . $request);
         $feriado = $feriado->createFeriadoModal($request);
 
         if ($this->isJsonResponse($feriado)) {
@@ -62,7 +63,7 @@ class FeriadoController extends Controller
         }
         $data = [
             'status'    => true,
-            'codigoPostal'  => new UserResource($feriado),
+            'codigoPostal'  => $feriado,
         ];
 
         return response()->json($data, 201);

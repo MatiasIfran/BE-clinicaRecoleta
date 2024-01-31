@@ -23,6 +23,7 @@ class Feriado extends Model
 
     public function createFeriadoModal(FeriadoRequest $request)
     {
+        info("request in createFeriadoModal: ".$request);
         $validator = Validator::make($request->all(), $request->rules());
         if ($validator->fails()) {
             $data = [
@@ -33,6 +34,7 @@ class Feriado extends Model
         }
 
         $data = $request->validated();
+        info("request validate: ".$data);
 
         $feriado = $this->create($data);
 
