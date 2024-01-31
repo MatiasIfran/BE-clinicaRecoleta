@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Feriado;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Validation\Rule;
 use App\Models\Feriado;
 
 class FeriadoRequest extends BaseFormRequest
@@ -14,6 +16,7 @@ class FeriadoRequest extends BaseFormRequest
      */
     public function authorize()
     {
+        info("info autorize:" . $this);
         return $this->user()->can('create', new Feriado);
     }
 
