@@ -12,7 +12,8 @@ class JsonAuthorizationException extends Exception
 
     public function render($request) {
         return response()->json([
-            'message'   =>  'No authorizado.'
+            'message'   =>  'No authorizado.',
+            'request'   => $request
         ], 403);
     }
 }
