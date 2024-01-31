@@ -83,6 +83,7 @@ Route::prefix('feriado')->group(function () {
     Route::get('/all', 'FeriadoController@allFeriados')->name('allFeriados');
     Route::get('/{feriadoId}', 'FeriadoController@getFeriadoById')->name('getFeriadoById');
     Route::post('/createFeriado', 'FeriadoController@createFeriado')->name('createFeriado');
+    Route::post('/create', 'FeriadoController@createFeriadoV2')->name('createFeriadoV2');
 });
 
 Route::prefix('historiaclinica')->group(function () {

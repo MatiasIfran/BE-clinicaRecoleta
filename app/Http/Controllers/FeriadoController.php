@@ -68,4 +68,26 @@ class FeriadoController extends Controller
 
         return response()->json($data, 201);
     }
+
+    public function createFeriadoV2(FeriadoRequest $request)
+    {
+        try {
+            $feriado = new Feriado();
+            $feriado = $feriado->createFeriadoModal($request);
+    
+            $data = [
+                'status' => true,
+                'feriado' => $feriado,
+            ];
+    
+            return response()->json($data, 201);
+        } catch (\Exception $e) {
+            $data = [
+                'status' => false,
+                'error' => 'Error al crear el feriado',
+            ];
+
+            return response()->json($data, 500);
+        }
+    }
 }
