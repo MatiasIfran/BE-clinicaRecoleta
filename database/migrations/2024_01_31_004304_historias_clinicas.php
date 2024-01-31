@@ -17,7 +17,7 @@ class Historiasclinicas extends Migration
             Schema::create('historias_clinicas', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('id_paciente')->nullable(false);
-                $table->unsignedBigInteger('prof_cod')->nullable(false);
+                $table->integer('prof_cod')->nullable(false);
                 $table->string('trata')->nullable();
                 $table->string('observ')->nullable();
                 $table->string('link_imagen')->nullable();
