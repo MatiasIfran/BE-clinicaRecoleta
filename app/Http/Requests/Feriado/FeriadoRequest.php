@@ -16,7 +16,8 @@ class FeriadoRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('create', new Feriado);
+        return true;
+        //return $this->user()->can('create', new Feriado);
     }
 
     /**
