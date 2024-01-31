@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\Feriado\FeriadoRequest;
 use App\Http\Requests\User\IndexRequest;
 use App\Models\Feriado;
-use App\Http\Resources\UserResource;
 
 class FeriadoController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('auth:sanctum');
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use App\Http\Requests\Feriado\FeriadoRequest;
 
 
@@ -34,7 +35,6 @@ class Feriado extends Model
         }
 
         $data = $request->validated();
-        info("request validate: ".$data);
 
         $feriado = $this->create($data);
 
