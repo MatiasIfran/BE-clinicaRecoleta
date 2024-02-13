@@ -32,6 +32,7 @@ Route::prefix('paciente')->group(function () {
     Route::get('/all', 'PacienteController@allPacientes')->name('allPacientes');
     Route::get('/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
     Route::get('/dni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
+    Route::get('input/getPacienteByName', 'PacienteController@getPacienteByNombreApellido')->name('getPacienteByNombreApellido');
     Route::post('/createPaciente', 'PacienteController@createPaciente')->name('createPaciente');
 });
 

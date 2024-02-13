@@ -17,7 +17,12 @@ class PacienteController extends Controller
 
     public function allPacientes(IndexRequest $request)
     {
-        $pacientes = Paciente::all();
+        $limit = $request->input('limit', 25); 
+
+        $pacientes = Paciente::orderBy('updated_at', 'desc')
+        ->take($limit)
+        ->get();
+        
         $data = [
             'status'    => true,
             'pacientes' => $pacientes,
@@ -52,6 +57,35 @@ class PacienteController extends Controller
             $data = [
                 'status' => false,
                 'error'  => 'Paciente no encontrado',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'status'   => true,
+            'paciente' => $paciente,
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function getPacienteByNombreApellido(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Paciente::query();
+
+        if ($search) {
+            // Si se proporciona un parámetro de búsqueda, realizar la búsqueda por nombre o apellido
+            $query->where('nombre', 'LIKE', "%$search%")
+                  ->orWhere('apellido', 'LIKE', "%$search%");
+        }
+
+        $paciente = $query->get();
+
+        if (!$paciente) {
+            $data = [
+                'status' => false,
+                'error'  => 'Paciente no encontrado por nombre o apellido',
             ];
             return response()->json($data, 404);
         }
