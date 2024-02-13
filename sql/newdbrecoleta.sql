@@ -239,8 +239,16 @@ VALUES
     ('1111', 'JUEVES', '15:30', '20:00', 15, NOW(), NOW(), 'admin'),
     ('1111', 'VIERNES', '10:00', '12:30', 15, NOW(), NOW(), 'admin');
 
--- Pacientes
-INSERT INTO pacientes (Nombre, Apellido, FechaNacimiento, Genero, Direccion, CodPos, Telefono, Mail, TipoDocumento, NumDocumento, Cuit, NumAfiliado, Empres, DetaPlan, Plan, Antecedentes, updated_at, created_at, usuario)
+INSERT INTO `historias_clinicas`(`id`, `id_paciente`, `prof_cod`, `trata`, `observ`, `link_imagen`, `fecha`, `usuario`) 
 VALUES 
-('CARMEN CELIA', 'HADAD', '1900-01-01', '', 'S. DEL ESTERO 2490 2ºP B', '3000', '4534673', '', '1', 1115883, '01', '', '', '', '', '1111', '2022-06-23 09:05:09', '2022-06-23 09:04:59', 'Admin'),
-('VANESA', 'MAAS', '1979-11-22', '', 'PJE AMERICA 986 GALVEZ', '0000', '03404-4209', '', '1', 27733570, '03', '', '', '', '', '1111', '2022-05-11 23:12:55', NULL, 'Admin');
+(1, 2, 2222, NULL, 'TINO', '0','2022-05-12 15:07:20','admin'),
+(2, 2, 2222, NULL, 'AV 10 -10 CC AO\rREFIERE DIPLOPIA\rHACER FONDO DE OJO Y PIO', '0', '2022-05-12 15:07:20', 'admin'),
+(3, 2, 2222, NULL, 'RESUMEN: OD OPERADO DE CATARATA  CON LIO EN CAMARA\rPOSTERIOR. AV 10-10 CC ( 10 +2.50 +1 )\r         OI CATARATA. AV 2-10 CC ( -1 )\rPIO NORMAL AO\r HAGO TRAMITES PARA OPERAR OI', '0', '2022-05-12 15:07:20', 'admin'),
+(4, 3, 2222, NULL, 'LIGERA CATARATA AO\rAV 7-10 CC AO\rPIO NORMAL AO\rDOY REFRESTEARS\rNO CAMBIO LENTES', '0', '2022-05-12 15:07:20', 'admin'),
+(5, 5, 2222, NULL, 'RESUMEN: AV OD 8-10 CC OI LUZ\r         GLAUCOMA  TRAT CON OFAL Y TRAVATAN\r         PIO OD 21\r             OI 20\r         FONDO DE OJO PAPILAS OD 4/6\r                              OI 6/6\rANTECEDENTE DE TROMBOSIS OI', '0', '2022-05-12 15:07:20', 'admin'),
+(6, 4, 1111, NULL, 'RESUMEN. TRATADA CON TRAVATAN,  DOS PERIMETRIA CON\rDAÑO CAMPIMETRCO . PIO O.D 14  O.I. 16  IGUAL TTO.', '0', '2022-05-12 15:07:20', 'admin'),
+(7, 4, 1111, NULL, 'SOLICITO AUTORIZ. PARA CX. PTERIGION O.D., PIO\rNORMAL', '0', '2022-05-12 15:07:20', 'admin'),
+(8, 2, 2222, NULL, 'OD +2.50\rOI +1.50\rADD +3\rPIO NORMAL AO', '0', '2022-05-12 15:07:20', 'admin'),
+(9, 8, 2222, NULL, 'control arreglado', '0', '2022-05-12 15:07:20', 'admin'),
+(10, 6, 1111, NULL, 'TINE CON FLUORESC. OCLUSION CON POMADA ATB.\rCONTROL EN 24 HS.', '0', '2022-05-12 15:07:20', 'admin'),
+	
