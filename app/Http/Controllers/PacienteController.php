@@ -97,6 +97,40 @@ class PacienteController extends Controller
         return response()->json($data, 200);
     }
 
+    public function searchPaciente(Request $request)
+    {
+        $search = $request->input('search');
+        $limit = $request->input('limit', 25); 
+
+        $searchParts = preg_split('/(?<=\D)(?=\d)|(?<=\d)(?=\D)/', $search);
+        $query = Paciente::query();
+
+        foreach ($searchParts as $part) {
+            if (is_numeric($part)) {
+                $query->orWhere('numDocumento', $part);
+            } else {
+                // Si la parte es una cadena, buscar por nombre o apellido
+                $query->orWhere('nombre', 'LIKE', "%$part%")
+                      ->orWhere('apellido', 'LIKE', "%$part%");
+            }
+        }
+        $pacientes = $query->take($limit)->get();
+        
+        if ($pacientes->isEmpty()) {
+            $data = [
+                'status' => false,
+                'error'  => 'No se encontraron pacientes',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'status'    => true,
+            'pacientes' => $pacientes,
+        ];
+        return response()->json($data, 200);
+    }
+
     public function createPaciente(CreatePacienteRequest $request)
     {
         $paciente = new Paciente;

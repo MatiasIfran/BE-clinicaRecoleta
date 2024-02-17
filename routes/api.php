@@ -30,6 +30,7 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('paciente')->group(function () {
     Route::get('/all', 'PacienteController@allPacientes')->name('allPacientes');
+    Route::get('/searchPaciente', 'PacienteController@searchPaciente')->name('searchPaciente');
     Route::get('/{pacienteId}', 'PacienteController@getPacienteById')->name('getPacienteById');
     Route::get('/dni/{pacienteDni}', 'PacienteController@getPacienteByDni')->name('getPacienteByDni');
     Route::get('input/getPacienteByName', 'PacienteController@getPacienteByNombreApellido')->name('getPacienteByNombreApellido');
