@@ -75,9 +75,7 @@ class PacienteController extends Controller
         $query = Paciente::query();
 
         if ($search) {
-            // Si se proporciona un parámetro de búsqueda, realizar la búsqueda por nombre o apellido
-            $query->where('nombre', 'LIKE', "%$search%")
-                  ->orWhere('apellido', 'LIKE', "%$search%");
+            $query->where('nombre', 'LIKE', "%$search%");
         }
 
         $paciente = $query->get();
@@ -85,7 +83,7 @@ class PacienteController extends Controller
         if (!$paciente) {
             $data = [
                 'status' => false,
-                'error'  => 'Paciente no encontrado por nombre o apellido',
+                'error'  => 'Paciente no encontrado por nombre',
             ];
             return response()->json($data, 404);
         }
@@ -109,9 +107,7 @@ class PacienteController extends Controller
             if (is_numeric($part)) {
                 $query->orWhere('numDocumento', $part);
             } else {
-                // Si la parte es una cadena, buscar por nombre o apellido
-                $query->orWhere('nombre', 'LIKE', "%$part%")
-                      ->orWhere('apellido', 'LIKE', "%$part%");
+                $query->orWhere('nombre', 'LIKE', "%$part%");
             }
         }
         $pacientes = $query->take($limit)->get();
@@ -147,5 +143,11 @@ class PacienteController extends Controller
         return response()->json($data, 201);
     }
 
+    public function updatePaciente(Request $request, $pacienteDni)
+    {
+        $paciente = new Paciente();
+        $paciente = $paciente->updatePaciente($request, $pacienteDni);
+        return $paciente;
+    }
 
 }

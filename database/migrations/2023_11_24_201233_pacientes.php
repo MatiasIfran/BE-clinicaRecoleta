@@ -16,7 +16,6 @@ class Pacientes extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre')->nullable(false);
-            $table->string('Apellido')->nullable(false)->default('');
             $table->string('Direccion', 100)->nullable();
             $table->string('CodPos', 5)->nullable();
             $table->unsignedBigInteger('TipoDocumento')->nullable(false)->default('0000');
