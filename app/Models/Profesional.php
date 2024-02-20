@@ -50,7 +50,7 @@ class Profesional extends Model
         return $profesional;
     }
 
-    public function updateProfesional(Request $request, $profesionalId)
+    public function updateProfesional(Request $request, $profesionalCod)
     {
         $validator = Validator::make($request->all(), [
             'Direccion' => 'string',
@@ -77,7 +77,8 @@ class Profesional extends Model
             return response()->json($data, 400);
         }
 
-        $profesional = Profesional::find($profesionalId);
+        $profesional = Profesional::where('Codigo', $profesionalCod)->first();
+
         if (!$profesional) {
             $data = [
                 'status' => false,

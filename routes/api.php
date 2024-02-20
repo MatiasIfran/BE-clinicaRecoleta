@@ -41,10 +41,10 @@ Route::prefix('paciente')->group(function () {
 Route::prefix('profesional')->group(function () {
     Route::get('/all', 'ProfesionalController@allProfesionales')->name('allProfesionales');
     Route::get('/allActivos', 'ProfesionalController@allProfesionalesActivos')->name('allProfesionalesActivos');
-    Route::get('/{profesionalId}', 'ProfesionalController@getProfesionalById')->name('getProfesionalById');
+    Route::get('/{profesionalCod}', 'ProfesionalController@getProfesionalByCodigo')->name('getProfesionalByCodigo');
     Route::get('/dni/{profesionalDni}', 'ProfesionalController@getProfesionalByDni')->name('getProfesionalByDni');
     Route::post('/createProfesional', 'ProfesionalController@createProfesional')->name('createProfesional');
-    Route::put('/update/{profesionalId}', 'ProfesionalController@updateProfesional')->name('updateProfesional');
+    Route::put('/update/{profesionalCod}', 'ProfesionalController@updateProfesional')->name('updateProfesional');
 });
 
 Route::prefix('cp')->group(function () {

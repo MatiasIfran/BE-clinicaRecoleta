@@ -35,9 +35,9 @@ class ProfesionalController extends Controller
         return response()->json($data, 200);
     }
 
-    public function getProfesionalById($profesionalId)
+    public function getProfesionalByCodigo($profesionalCod)
     {
-        $profesional = Profesional::find($profesionalId);
+        $profesional = Profesional::where('Codigo', $profesionalCod)->first();
 
         if (!$profesional) {
             $data = [
@@ -89,10 +89,10 @@ class ProfesionalController extends Controller
         return response()->json($data, 201);
     }
 
-    public function updateProfesional(Request $request, $profesionalId)
+    public function updateProfesional(Request $request, $profesionalCod)
     {
         $profesional = new Profesional();
-        $profesional = $profesional->updateProfesional($request, $profesionalId);
+        $profesional = $profesional->updateProfesional($request, $profesionalCod);
         return $profesional;
     }
 }
