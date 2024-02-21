@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Paciente\CreatePacienteRequest;
 use App\Http\Requests\User\IndexRequest;
 use App\Models\Paciente;
+use App\Models\CodigoPostal;
 use App\Http\Resources\UserResource;
 
 class PacienteController extends Controller
@@ -23,10 +24,16 @@ class PacienteController extends Controller
         ->take($limit)
         ->get();
         
-        $data = [
-            'status'    => true,
-            'pacientes' => $pacientes,
-        ];
+        foreach ($pacientes as $paciente) {
+            info($paciente->CodPos);
+            $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
+    
+            $data['pacientes'][] = [
+                'paciente' => $paciente,
+                'ciudad'   => ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null,
+            ];
+        }
+    
         return response()->json($data, 200);
     }
 
