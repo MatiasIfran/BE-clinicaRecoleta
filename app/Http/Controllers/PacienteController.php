@@ -127,10 +127,16 @@ class PacienteController extends Controller
             return response()->json($data, 404);
         }
 
-        $data = [
-            'status'    => true,
-            'pacientes' => $pacientes,
-        ];
+        foreach ($pacientes as $paciente) {
+            info($paciente->CodPos);
+            $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
+    
+            $data['pacientes'][] = [
+                'paciente' => $paciente,
+                'ciudad'   => ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null,
+            ];
+        }
+        
         return response()->json($data, 200);
     }
 
