@@ -150,14 +150,20 @@ class Turno extends Model
 
     private function translateDayToEnglish($day)
     {
+        $replacementMap = [
+            'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u',
+            'Á' => 'A', 'É' => 'E', 'Í' => 'I', 'Ó' => 'O', 'Ú' => 'U',
+            'ñ' => 'n', 'Ñ' => 'N',
+        ];
+    
         $translationMap = [
             'lunes' => 'Monday',
             'martes' => 'Tuesday',
-            'miércoles' => 'Wednesday',
+            'miercoles' => 'Wednesday',
             'jueves' => 'Thursday',
             'viernes' => 'Friday',
         ];
-        $lowercaseDay = strtolower($day);
+        $lowercaseDay = strtolower(strtr($day, $replacementMap));
         return array_key_exists($lowercaseDay, $translationMap) ? $translationMap[$lowercaseDay] : $day;
     }
 
