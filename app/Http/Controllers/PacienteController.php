@@ -25,7 +25,6 @@ class PacienteController extends Controller
         ->get();
         
         foreach ($pacientes as $paciente) {
-            info($paciente->CodPos);
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
     
             $data['pacientes'][] = [
@@ -128,7 +127,6 @@ class PacienteController extends Controller
         }
 
         foreach ($pacientes as $paciente) {
-            info($paciente->CodPos);
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
     
             $data['pacientes'][] = [

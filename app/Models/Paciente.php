@@ -101,7 +101,6 @@ class Paciente extends Model
 
         $paciente = Paciente::where('NumDocumento', $pacienteDni)->first();
 
-        info($paciente);
         if (!$paciente) {
             $data = [
                 'status' => false,

@@ -230,6 +230,15 @@ class Turno extends Model
             'obra_social',
         ]));
 
+        $pacienteId = $request->input('paciente_id');
+        
+        if($pacienteId) {
+            $primeraVezPaciente = HistoriaClinica::where('id_paciente', $pacienteId)->get();
+            if($primeraVezPaciente->isEmpty()) {
+                $turno->primeraVisita = true;
+            }
+        }
+
         if ($turno->save()) {
             $data = [
                 'status' => true,
