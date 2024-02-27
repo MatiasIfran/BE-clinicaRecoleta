@@ -27,7 +27,7 @@ class HistoriaClinicaController extends Controller
 
         $data = [
             'status' => true,
-            'historia Clinica' => $historiaClinica,
+            'hc' => $historiaClinica,
         ];
         return response()->json($data, 200);
     }
@@ -46,7 +46,7 @@ class HistoriaClinicaController extends Controller
 
         $data = [
             'status' => true,
-            'historias clinicas' => $historiaClinica,
+            'hc' => $historiaClinica,
         ];
         return response()->json($data, 200);
     }
@@ -65,7 +65,7 @@ class HistoriaClinicaController extends Controller
 
         $data = [
             'status' => true,
-            'historias clinicas' => $historiaClinica,
+            'hc' => $historiaClinica,
         ];
         return response()->json($data, 200);
     }
@@ -80,7 +80,7 @@ class HistoriaClinicaController extends Controller
         }
         $data = [
             'status' => true,
-            'historias Clinicas' => $historiaClinica,
+            'hc' => $historiaClinica,
         ];
 
         return response()->json($data, 201);
