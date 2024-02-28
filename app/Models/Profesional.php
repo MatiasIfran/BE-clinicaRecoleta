@@ -21,7 +21,7 @@ class Profesional extends Model
         'Direccion',
         'Telefono',
         'Mail',
-        'tipoDocumento',
+        'TipoDocumento',
         'NumDocumento',
         'Matricula',
         'Categoria',

@@ -34,7 +34,7 @@ class CreateProfesionalRequest extends BaseFormRequest
             'Telefono' => 'nullable|string|max:15',
             'Mail' => 'nullable|string|email|unique:profesionales',
             'NumDocumento' => 'required|integer|unique:profesionales',
-            'tipoDocumento' => [
+            'TipoDocumento' => [
                 'required',
                 'integer',
                 Rule::exists('tipoDocumento', 'idTipoDocumento')
@@ -58,7 +58,7 @@ class CreateProfesionalRequest extends BaseFormRequest
             'Apellido.string' => 'El campo Apellido debe ser una cadena de texto.',
             'Apellido.max' => 'El campo Apellido no debe tener más de :max caracteres.',
             'Mail.unique' => 'La dirección de correo electrónico ya está en uso.',
-            'tipoDocumento.required' => 'El tipo de documento es obligatorio.',
+            'TipoDocumento.required' => 'El tipo de documento es obligatorio.',
             'NumDocumento.required' => 'El numero de documento es obligatorio.',
             'NumDocumento.unique' => 'El numero de documento ya está en uso.',
             'Codigo.required' => 'El codigo es obligatorio.',

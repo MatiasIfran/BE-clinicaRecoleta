@@ -62,7 +62,7 @@ class Paciente extends Model
             'Nombre' => 'string',
             'Direccion' => 'string',
             'CodPos' => 'string',
-            'TipoDocumento' => 'string',
+            'TipoDocumento' => 'numeric',
             'NumDocumento' => 'numeric',
             'Telefono' => 'string',
             'Celular' => 'string',

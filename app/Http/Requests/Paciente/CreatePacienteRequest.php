@@ -33,7 +33,7 @@ class CreatePacienteRequest extends BaseFormRequest
             'Telefono' => 'nullable|string|max:15',
             'Mail' => 'nullable|string|email|unique:pacientes',
             'NumDocumento' => 'required|integer|unique:pacientes',
-            'tipoDocumento' => ['required',
+            'TipoDocumento' => ['required',
                                 'integer', 
                                 Rule::exists('tipoDocumento', 'idTipoDocumento')
             ],
@@ -48,7 +48,7 @@ class CreatePacienteRequest extends BaseFormRequest
             'Nombre.string' => 'El campo Nombre debe ser una cadena de texto.',
             'Nombre.max' => 'El campo Nombre no debe tener más de :max caracteres.',
             'Mail.unique' => 'La dirección de correo electrónico ya está en uso.',
-            'tipoDocumento.required' => 'El tipo de documento es obligatorio.',
+            'TipoDocumento.required' => 'El tipo de documento es obligatorio.',
             'NumDocumento.required' => 'El numero de documento es obligatorio.',
             'NumDocumento.unique' => 'El numero de documento ya está en uso.',
             'usuario.required' => 'El campo usuario es obligatorio.',
