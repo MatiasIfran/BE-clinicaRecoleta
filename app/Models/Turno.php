@@ -204,14 +204,6 @@ class Turno extends Model
             return response()->json(['status' => false, 'error' => 'El nombre de usuario es obligatorio.'], 400);
         }
 
-        if (empty(array_diff_key(array_filter($request->all()), array_flip(['usuario'])))) {
-            $data = [
-                'status' => false,
-                'error' => 'Debe proporcionar al menos un campo para actualizar.',
-            ];
-            return response()->json($data, 400);
-        }
-
         $turno = Turno::find($turnoId);
         if (!$turno) {
             $data = [
