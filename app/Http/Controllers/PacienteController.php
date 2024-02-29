@@ -8,6 +8,7 @@ use App\Http\Requests\User\IndexRequest;
 use App\Models\Paciente;
 use App\Models\CodigoPostal;
 use App\Http\Resources\UserResource;
+use App\Models\Profesional;
 
 class PacienteController extends Controller
 {
@@ -26,12 +27,13 @@ class PacienteController extends Controller
         
         foreach ($pacientes as $paciente) {
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
+            $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
+        
+            $MedCabecera = Profesional::where('codigo', $paciente->MedCabecera)->first();
+            $paciente->MedCabeceraNombre = ($MedCabecera) ? $MedCabecera->Apellido . " " .  $MedCabecera->Nombre : null;
     
-            $data['pacientes'][] = [
-                'paciente' => $paciente,
-                'ciudad'   => ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null,
-            ];
-        }
+            $data['pacientes'][] = $paciente;
+        }   
     
         return response()->json($data, 200);
     }
@@ -128,13 +130,15 @@ class PacienteController extends Controller
 
         foreach ($pacientes as $paciente) {
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
-    
-            $data['pacientes'][] = [
-                'paciente' => $paciente,
-                'ciudad'   => ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null,
-            ];
-        }
         
+            $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
+        
+            $MedCabecera = Profesional::where('codigo', $paciente->MedCabecera)->first();
+            $paciente->MedCabeceraNombre = ($MedCabecera) ? $MedCabecera->Apellido . " " .  $MedCabecera->Nombre : null;
+    
+            $data['pacientes'][] = $paciente;
+        }
+
         return response()->json($data, 200);
     }
 
