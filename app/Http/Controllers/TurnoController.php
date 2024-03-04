@@ -91,6 +91,14 @@ class TurnoController extends Controller
         return response()->json($data, 200);
     }
 
+    public function getTurnosxProfxDia(Request $request)
+    {
+        info("entro");
+        $turno = new Turno;
+        $turno = $turno->obtenerTurnosxProfxDia($request);
+        return $turno;
+    }
+
     public function getTurnosDisponibles(Request $request)
     {
         $turno = new Turno;

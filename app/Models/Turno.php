@@ -99,6 +99,30 @@ class Turno extends Model
         return response()->json(['status' => true, 'message' => 'Turnos creados correctamente']);
     }
 
+    public function obtenerTurnosxProfxDia(Request $request)
+    {
+        $fecha = $request->input('fecha');
+        $profCod = $request->input('prof_cod');
+    
+        $turnos = Turno::whereDate('fecha', $fecha)
+                       ->where('prof_cod', $profCod)
+                       ->get();
+    
+        if ($turnos->isEmpty()) {
+            $data = [
+                'status' => false,
+                'error' => 'No se encontraron turnos para la fecha ' . $fecha . ' y prof_cod ' . $profCod,
+            ];
+            return response()->json($data, 404);
+        }
+    
+        $data = [
+            'status' => true,
+            'turnos' => $turnos,
+        ];
+        return response()->json($data, 200);
+    }
+
     public function obtenerTurnosLibres(Request $request)
     {
         $validator = Validator::make($request->all(), [
