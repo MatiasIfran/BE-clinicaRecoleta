@@ -53,23 +53,9 @@ class TurnoController extends Controller
 
     public function getTurnoByDate(Request $turnoDate)
     {
-        $fecha = $turnoDate->input('fecha'); // Obtiene la fecha del request
-
-        $turnos = Turno::whereDate('fecha', $fecha)->get();
-
-        if ($turnos->isEmpty()) {
-            $data = [
-                'status' => false,
-                'error' => 'No se encontraron turnos para la fecha ' . $fecha,
-            ];
-            return response()->json($data, 404);
-        }
-
-        $data = [
-            'status' => true,
-            'turnos' => $turnos,
-        ];
-        return response()->json($data, 200);
+        $turno = new Turno;
+        $turno = $turno->obtenerTurnosxDia($turnoDate);
+        return $turno;
     }
 
     public function getTurnoByPaciente($pacienteId)
@@ -93,7 +79,6 @@ class TurnoController extends Controller
 
     public function getTurnosxProfxDia(Request $request)
     {
-        info("entro");
         $turno = new Turno;
         $turno = $turno->obtenerTurnosxProfxDia($request);
         return $turno;

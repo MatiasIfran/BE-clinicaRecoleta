@@ -129,6 +129,28 @@ class Turno extends Model
         return $this->belongsTo(Paciente::class, 'paciente_id', 'id');
     }
 
+    public function obtenerTurnosxDia(Request $turnoDate)
+    {
+        $fecha = $turnoDate->input('fecha');
+
+        $turnos = Turno::with('paciente')
+        ->whereDate('fecha', $fecha)->get();
+
+        if ($turnos->isEmpty()) {
+            $data = [
+                'status' => false,
+                'error' => 'No se encontraron turnos para la fecha ' . $fecha,
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'status' => true,
+            'turnos' => $turnos,
+        ];
+        return response()->json($data, 200);
+    }
+
     public function obtenerTurnosLibres(Request $request)
     {
         $validator = Validator::make($request->all(), [
