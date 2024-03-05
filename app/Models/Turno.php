@@ -104,9 +104,10 @@ class Turno extends Model
         $fecha = $request->input('fecha');
         $profCod = $request->input('prof_cod');
     
-        $turnos = Turno::whereDate('fecha', $fecha)
-                       ->where('prof_cod', $profCod)
-                       ->get();
+        $turnos = Turno::with('paciente')
+        ->whereDate('fecha', $fecha)
+        ->where('prof_cod', $profCod)
+        ->get();
     
         if ($turnos->isEmpty()) {
             $data = [
@@ -121,6 +122,11 @@ class Turno extends Model
             'turnos' => $turnos,
         ];
         return response()->json($data, 200);
+    }
+
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class, 'paciente_id', 'id');
     }
 
     public function obtenerTurnosLibres(Request $request)
