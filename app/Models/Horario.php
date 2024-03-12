@@ -43,6 +43,32 @@ class Horario extends Model
         return $horario;
     }
 
+    public function horarioByProfCod($prof_cod)
+    {
+        $horarios = Horario::with('profesional')
+        ->where('prof_cod', $prof_cod)
+        ->get();
+
+        if ($horarios->isEmpty()) {
+            $data = [
+                'status' => false,
+                'error' => 'No se encontraron horarios para el profesional especificado',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'status' => true,
+            'horarios' => $horarios,
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function profesional()
+    {
+        return $this->belongsTo(Profesional::class, 'prof_cod', 'Codigo');
+    }
+
     public function deleteHorarioModel($horarioId)
     {
         $horario = $this->find($horarioId);

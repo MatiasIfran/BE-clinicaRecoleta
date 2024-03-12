@@ -77,21 +77,9 @@ class HorarioController extends Controller
 
     public function getHorarioByProfesionalCodigo($prof_cod)
     {
-        $horarios = Horario::where('prof_cod', $prof_cod)->get();
-
-        if ($horarios->isEmpty()) {
-            $data = [
-                'status' => false,
-                'error' => 'No se encontraron horarios para el profesional especificado',
-            ];
-            return response()->json($data, 404);
-        }
-
-        $data = [
-            'status' => true,
-            'horarios' => $horarios,
-        ];
-        return response()->json($data, 200);
+        $horario = new Horario;
+        $horario = $horario->horarioByProfCod($prof_cod);
+        return $horario;
     }
 
     public function createHorario(HorarioRequest $request)
