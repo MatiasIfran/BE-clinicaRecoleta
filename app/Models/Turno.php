@@ -129,11 +129,16 @@ class Turno extends Model
         return $this->belongsTo(Paciente::class, 'paciente_id', 'id');
     }
 
+    public function profesional()
+    {
+        return $this->belongsTo(Profesional::class, 'prof_cod', 'Codigo');
+    }
+
     public function obtenerTurnosxDia(Request $turnoDate)
     {
         $fecha = $turnoDate->input('fecha');
 
-        $turnos = Turno::with('paciente')
+        $turnos = Turno::with(['paciente', 'profesional'])
         ->whereDate('fecha', $fecha)->get();
 
         if ($turnos->isEmpty()) {
