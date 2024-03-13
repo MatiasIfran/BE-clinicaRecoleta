@@ -104,7 +104,7 @@ class Turno extends Model
         $fecha = $request->input('fecha');
         $profCod = $request->input('prof_cod');
     
-        $turnos = Turno::with('paciente')
+        $turnos = Turno::with(['paciente', 'profesional'])
         ->whereDate('fecha', $fecha)
         ->where('prof_cod', $profCod)
         ->get();
