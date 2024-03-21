@@ -42,6 +42,58 @@ class HistoriaClinica extends Model
         return $historiaClinica;
     }
 
+     public function obtenerHCxProf($prof_cod)
+     {
+        $historiaClinica = HistoriaClinica::with(['paciente', 'profesional'])
+        ->where('prof_cod', $profCod)
+        ->get();
+
+         if ($historiaClinica->isEmpty()) {
+             $data = [
+                 'status' => false,
+                 'error' => 'No se encontraron historias clinicas para el profesional especificado',
+             ];
+             return response()->json($data, 404);
+         }
+
+         $data = [
+             'status' => true,
+             'hc' => $historiaClinica,
+         ];
+         return response()->json($data, 200);
+     }
+
+     public function obtenerHCxPacienteId($prof_cod)
+     {
+        $historiaClinica = HistoriaClinica::with(['paciente', 'profesional'])
+        ->where('id_paciente', $pacienteId)
+        ->get();
+
+         if ($historiaClinica->isEmpty()) {
+             $data = [
+                 'status' => false,
+                 'error' => 'No se encontraron historias clinicas para el paciente especificado',
+             ];
+             return response()->json($data, 404);
+         }
+
+         $data = [
+             'status' => true,
+             'hc' => $historiaClinica,
+         ];
+         return response()->json($data, 200);
+     }
+
+    public function profesional()
+    {
+        return $this->belongsTo(Profesional::class, 'prof_cod', 'Codigo');
+    }
+
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class, 'paciente_id', 'id');
+    }
+
     public function deleteHistoriaClinicaModel($historiaClinicaId)
     {
         $historiaClinica = HistoriaClinica::find($historiaClinicaId);
