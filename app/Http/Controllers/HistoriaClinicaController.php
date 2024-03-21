@@ -34,40 +34,16 @@ class HistoriaClinicaController extends Controller
 
     public function getHistoriaClinicaByProfesionalCodigo($prof_cod)
     {
-        $historiaClinica = HistoriaClinica::where('prof_cod', $prof_cod)->get();
-
-        if ($historiaClinica->isEmpty()) {
-            $data = [
-                'status' => false,
-                'error' => 'No se encontraron historias clinicas para el profesional especificado',
-            ];
-            return response()->json($data, 404);
-        }
-
-        $data = [
-            'status' => true,
-            'hc' => $historiaClinica,
-        ];
-        return response()->json($data, 200);
+        $historiaClinica = new HistoriaClinica;
+        $historiaClinica = $historiaClinica->obtenerHCxProf($prof_cod);
+        return $historiaClinica;
     }
 
     public function getHistoriaClinicaByPacienteId($pacienteId)
     {
-        $historiaClinica = HistoriaClinica::where('id_paciente', $pacienteId)->get();
-
-        if ($historiaClinica->isEmpty()) {
-            $data = [
-                'status' => false,
-                'error' => 'No se encontraron historias clinicas para el paciente especificado',
-            ];
-            return response()->json($data, 404);
-        }
-
-        $data = [
-            'status' => true,
-            'hc' => $historiaClinica,
-        ];
-        return response()->json($data, 200);
+        $historiaClinica = new HistoriaClinica;
+        $historiaClinica = $historiaClinica->obtenerHCxPacienteId($pacienteId);
+        return $historiaClinica;
     }
 
     public function createHistoriaClinica(HistoriaClinicaRequest $request)
