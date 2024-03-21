@@ -45,7 +45,7 @@ class HistoriaClinica extends Model
      public function obtenerHCxProf($prof_cod)
      {
         $historiaClinica = HistoriaClinica::with(['paciente', 'profesional'])
-        ->where('prof_cod', $profCod)
+        ->where('prof_cod', $prof_cod)
         ->get();
 
          if ($historiaClinica->isEmpty()) {
@@ -63,7 +63,7 @@ class HistoriaClinica extends Model
          return response()->json($data, 200);
      }
 
-     public function obtenerHCxPacienteId($prof_cod)
+     public function obtenerHCxPacienteId($pacienteId)
      {
         $historiaClinica = HistoriaClinica::with(['paciente', 'profesional'])
         ->where('id_paciente', $pacienteId)
