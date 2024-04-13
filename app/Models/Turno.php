@@ -8,6 +8,7 @@ use App\Http\Requests\Turno\TurnoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class Turno extends Model
 {
@@ -55,12 +56,22 @@ class Turno extends Model
             ->whereIn('dia', ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES'])
             ->get();
 
+        $feriadosProf = Feriado::where('prof_cod', $profesionalCodigo)
+        ->orWhereNull('prof_cod')
+        ->orWhere('prof_cod', '')
+        ->get();
+
+        $fechasFeriados = $feriadosProf->pluck('fecha')->toArray();
+      
         foreach ($horariosDisponibles as $horario) {
             $fechaHorario = $this->calculateFechaHorario($fechaInicio, $fechaFin, $horario->dia);
             $horaActual = $horario->desde;
 
             if ($fechaHorario != null) {
                 foreach ($fechaHorario as $fecha) {
+                    if (in_array($fecha, $fechasFeriados)) {
+                        continue;
+                    }
                     while ($horaActual < $horario->hasta) {
                         $turno = new Turno([
                             'prof_cod' => $profesionalCodigo,
@@ -74,15 +85,18 @@ class Turno extends Model
                             'obra_social' => $request->input('obra_social'),
                             'usuario' => $request->input('usuario'),
                         ]);
+
                         try {
                             $turno->save();
                         } catch (\Illuminate\Database\QueryException $ex) {
                             if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
-                                $data = [
-                                    'status' => false,
-                                    'error' => 'El turno ya existe',
-                                ];
-                                return response()->json($data, 400);
+                                $message = 'Error al guardar turno: El turno ya existe para la fecha '.$fecha.' a la hora'.$horaActual;
+                                Log::error($message);
+                                $errores[] = $message;
+                            }
+                            else {
+                                Log::error('Error al guardar turno: ' . $ex->getMessage());
+                                $errores[] = $ex->getMessage();
                             }
                         }
                         $horaActual = Carbon::parse($horaActual)->addMinutes($horario->tiempo)->format('H:i');
@@ -96,7 +110,7 @@ class Turno extends Model
                 return response()->json($data, 400);
             }
         }
-        return response()->json(['status' => true, 'message' => 'Turnos creados correctamente']);
+        return response()->json(['status' => true, 'message' => 'Turnos creados correctamente.', 'errores' => $errores]);
     }
 
     public function obtenerTurnosxProfxDia(Request $request)
