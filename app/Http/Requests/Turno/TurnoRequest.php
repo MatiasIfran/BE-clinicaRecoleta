@@ -27,8 +27,10 @@ class TurnoRequest extends BaseFormRequest
     {
         return [
             'prof_cod' => 'required|integer|exists:profesionales,codigo',
-            "fechaInicio" => 'required|date_format:Y-m-d',
-            "fechaFin"  => 'required|date_format:Y-m-d',
+            "fecha" => 'date_format:Y-m-d',
+            "hora" => 'date_format:H:i|min:0|max:24',
+            "fechaInicio" => 'date_format:Y-m-d',
+            "fechaFin"  => 'date_format:Y-m-d',
             'paciente_id' => 'integer|exists:pacientes,id',
             'observ' => 'nullable|string',
             'atendido' => 'nullable|boolean',

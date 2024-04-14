@@ -28,6 +28,39 @@ class Turno extends Model
         'usuario'
     ];
 
+    public function createIndividualTurn(TurnoRequest $request)
+    {
+        $validator = Validator::make($request->all(), $request->rules());
+
+        if ($validator->fails()) {
+            $data = [
+                'status' => false,
+                'error'  => $validator->errors()->first(),
+            ];
+            return response()->json($data, 400);
+        }
+
+        $data = $request->validated();
+        $data['fecha'] = strtoupper($data['fecha']);
+
+        try {
+            $turno = $this->create($data);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
+                $data = [
+                    'status' => false,
+                    'error' => 'Error al guardar turno: El turno ya existe',
+                ];
+                return response()->json($data, 400);
+            }
+        }
+        $data = [
+            'status' => true,
+            'turno' => $turno,
+        ];
+        return response()->json($data, 200);
+    }
+
     public function createTurnoModel(TurnoRequest $request)
     {
         $validator = Validator::make($request->all(), $request->rules());

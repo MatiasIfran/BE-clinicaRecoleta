@@ -122,6 +122,13 @@ class TurnoController extends Controller
         return response()->json($data, 201);
     }
 
+    public function createTurnoIndividual(TurnoRequest $request)
+    {
+        $turno = new Turno;
+        $turno = $turno->createIndividualTurn($request);
+        return $turno;
+    }
+
     public function deleteTurno($turnoId)
     {
         $turno = new Turno;
