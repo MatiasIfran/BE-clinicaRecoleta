@@ -20,7 +20,7 @@ class Pacientes extends Migration
             $table->string('CodPos', 5)->nullable();
             $table->string('dirpart', 50)->nullable();
             $table->string('zona', 2)->nullable();
-            $table->unsignedBigInteger('NumDocumento')->nullable(false)->unique();
+            $table->unsignedBigInteger('NumDocumento')->nullable(false);
             $table->string('Telefono', 100)->nullable();
             $table->string('Celular', 100)->nullable();
             $table->date('FechaNacimiento')->nullable();
