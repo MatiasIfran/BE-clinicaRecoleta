@@ -16,11 +16,12 @@ class Feriados extends Migration
         if (!Schema::hasTable('feriados')) {
             Schema::create('feriados', function (Blueprint $table) {
                 $table->id();
-                $table->date('fecha')->nullable(false)->unique();
+                $table->date('fecha')->nullable(false);
                 $table->integer('prof_cod')->nullable();
                 $table->string('titulo')->nullable(false);
                 $table->string('motivo')->nullable();
-                $table->timestamps();
+                $table->timestamp('updated_at')->useCurrent();
+                $table->timestamp('created_at')->default(now());   
                 $table->string('usuario', 50)->nullable(false)->default('admin');
             });
         }
