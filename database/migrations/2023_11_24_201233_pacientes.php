@@ -33,14 +33,14 @@ class Pacientes extends Migration
             $table->string('prexist')->nullable();
             $table->string('Iva')->nullable();
             $table->string('Cuit')->nullable();
-            $table->integer('MedCabecera')->nullable();
+            $table->integer('Cabecera')->nullable();
             $table->unsignedBigInteger('TipoDocumento')->nullable(false)->default('0000');
             $table->string('DetaPlan')->nullable();
             $table->string('Plan')->nullable();
             $table->string('Antecedentes')->nullable();
             $table->string('Plan2')->nullable();
             $table->string('Modulo')->nullable();
-            $table->string('Cabecera', 100)->nullable();
+            $table->string('MedCabecera', 100)->nullable();
             $table->string('Mail', 100)->nullable();
             $table->string('hc')->nullable();
             $table->string('Genero', 10)->nullable();
@@ -48,7 +48,7 @@ class Pacientes extends Migration
             $table->timestamp('updated_at')->useCurrent();
             $table->string('usuario', 50)->nullable(false)->default('admin');
             $table->foreign('TipoDocumento')->references('idTipoDocumento')->on('tipoDocumento');
-            $table->foreign('MedCabecera')->references('Codigo')->on('profesionales');
+            $table->foreign('Cabecera')->references('Codigo')->on('profesionales');
         });
     }
 
