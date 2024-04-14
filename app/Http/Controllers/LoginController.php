@@ -16,10 +16,12 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)) {
 
+            $user = Auth::user();
             $token = Auth::user()->createToken(Auth::id())->plainTextToken;
 
             return response()->json([
-                'token' => $token
+                'token' => $token,
+                'user'  => $user
             ]);
 
         }
