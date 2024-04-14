@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('prof_cod')->references('Codigo')->on('profesionales');
         });
     }
 
