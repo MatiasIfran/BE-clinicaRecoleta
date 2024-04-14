@@ -39,7 +39,7 @@ class Pacientes extends Migration
             $table->integer('MedCabecera')->nullable();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->default(now());            
-            $table->string('usuario', 50)->nullable(false);
+            $table->string('usuario', 50)->nullable(false)->default('admin');
             $table->foreign('TipoDocumento')->references('idTipoDocumento')->on('tipoDocumento');
             $table->foreign('MedCabecera')->references('Codigo')->on('profesionales');
         });

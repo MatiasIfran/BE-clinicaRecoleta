@@ -27,7 +27,7 @@ class Turnos extends Migration
                 $table->unsignedBigInteger('obra_social')->nullable();
                 $table->timestamp('updated_at')->useCurrent();
                 $table->timestamp('created_at')->default(now());            
-                $table->string('usuario', 50)->nullable(false);
+                $table->string('usuario', 50)->nullable(false)->default('admin');
                 $table->unique(['fecha', 'hora', 'paciente_id']);
                 $table->unique(['prof_cod', 'fecha', 'hora']);
                 $table->foreign('prof_cod')->references('Codigo')->on('profesionales');

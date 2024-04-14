@@ -32,7 +32,7 @@ class Profesionales extends Migration
             $table->boolean("daTurnos")->nullable()->default(true);
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->default(now());            
-            $table->string('usuario', 50)->nullable(false);
+            $table->string('usuario', 50)->nullable(false)->default('admin');
             $table->foreign('TipoDocumento')->references('idTipoDocumento')->on('tipoDocumento');
 
         });

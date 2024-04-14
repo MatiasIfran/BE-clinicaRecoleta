@@ -21,7 +21,7 @@ class CodigoPostal extends Migration
                 $table->string('provincia', 50)->nullable();
                 $table->timestamp('updated_at')->useCurrent();
                 $table->timestamp('created_at')->default(now());            
-                $table->string('usuario', 50)->nullable(false);
+                $table->string('usuario', 50)->nullable(false)->default('admin');
             });
         }
 
