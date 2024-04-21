@@ -19,10 +19,15 @@ class ObraSocial extends Migration
             $table->string('descripcion');
             $table->string('codArancel', 20);
             $table->boolean('activa')->default(true);
+            $table->integer('orden');
             $table->decimal('valor', 10, 2);
             $table->integer('maxAnual')->default(0);
             $table->integer('maxMensual')->default(0);
             $table->string('obraSocial');
+            $table->date('vigencia')->nullable();
+            $table->string('mensaje1');
+            $table->string('mensaje2');
+            $table->string('mensaje3');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->default(now());
             $table->string('usuario', 50)->nullable(false)->default('admin');

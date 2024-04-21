@@ -16,12 +16,17 @@ class Historiasclinicas extends Migration
         if (!Schema::hasTable('historias_clinicas')) {
             Schema::create('historias_clinicas', function (Blueprint $table) {
                 $table->id();
-                $table->unsignedBigInteger('id_paciente')->nullable(false);
-                $table->integer('prof_cod')->nullable(false);
+                $table->unsignedBigInteger('id_paciente')->nullable();
+                $table->integer('prof_cod')->nullable();
+                $table->integer('tipoDiag')->nullable();
+                $table->integer('tipoVisita')->nullable();
+                $table->string('diag')->nullable();
                 $table->string('trata')->nullable();
                 $table->string('observ')->nullable();
                 $table->string('link_imagen')->nullable();
                 $table->date('fecha')->nullable();
+                $table->string('registro')->nullable();
+                $table->string('estudio')->nullable();
                 $table->timestamp('updated_at')->useCurrent();
                 $table->timestamp('created_at')->default(now()); 
                 $table->string('usuario', 50)->nullable(false)->default('admin');

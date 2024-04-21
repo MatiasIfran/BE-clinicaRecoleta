@@ -20,7 +20,7 @@ class Pacientes extends Migration
             $table->string('CodPos', 5)->nullable();
             $table->string('dirpart', 50)->nullable();
             $table->string('zona', 2)->nullable();
-            $table->unsignedBigInteger('NumDocumento')->nullable(false);
+            $table->unsignedBigInteger('NumDocumento')->nullable();
             $table->string('Telefono', 100)->nullable();
             $table->string('Celular', 100)->nullable();
             $table->date('FechaNacimiento')->nullable();
@@ -34,7 +34,7 @@ class Pacientes extends Migration
             $table->string('Iva')->nullable();
             $table->string('Cuit')->nullable();
             $table->integer('Cabecera')->nullable();
-            $table->unsignedBigInteger('TipoDocumento')->nullable(false)->default('0000');
+            $table->unsignedBigInteger('TipoDocumento')->nullable()->default('1');
             $table->string('DetaPlan')->nullable();
             $table->string('Plan')->nullable();
             $table->string('Antecedentes')->nullable();
