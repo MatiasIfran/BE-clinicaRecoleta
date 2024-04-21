@@ -47,7 +47,6 @@ class Pacientes extends Migration
             $table->timestamp('created_at')->default(now());            
             $table->timestamp('updated_at')->useCurrent();
             $table->string('usuario', 50)->nullable(false)->default('admin');
-            $table->foreign('TipoDocumento')->references('idTipoDocumento')->on('tipoDocumento');
             $table->foreign('Cabecera')->references('Codigo')->on('profesionales');
         });
     }
