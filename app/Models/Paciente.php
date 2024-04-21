@@ -29,6 +29,7 @@ class Paciente extends Model
         'Cuit',
         'DetaPlan',
         'Plan',
+        'Plan2',
         'Mail',
         'Genero',
         'Modulo',
@@ -74,6 +75,7 @@ class Paciente extends Model
             'Cuit' => 'string',
             'DetaPlan' => 'string',
             'Plan' => 'string',
+            'Plan2' => 'string',
             'Mail' => 'string',
             'Genero' => 'string',
             'Modulo' => 'string',
@@ -112,7 +114,7 @@ class Paciente extends Model
         $paciente->fill($request->only([
             'Nombre', 'Direccion', 'CodPos', 'TipoDocumento', 'NumDocumento',
             'Telefono', 'Celular', 'FechaNacimiento', 'NumAfiliado', 'Empres',
-            'Antecedentes', 'Iva', 'Cuit', 'DetaPlan', 'Plan', 'Mail', 'Genero',
+            'Antecedentes', 'Iva', 'Cuit', 'DetaPlan', 'Plan', 'Plan2', 'Mail', 'Genero',
             'Modulo', 'hc', 'MedCabecera', 'usuario'
         ]));
 
