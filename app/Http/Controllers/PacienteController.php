@@ -29,7 +29,7 @@ class PacienteController extends Controller
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
             $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
         
-            $MedCabecera = Profesional::where('codigo', $paciente->MedCabecera)->first();
+            $MedCabecera = Profesional::where('codigo', $paciente->Cabecera)->first();
             $paciente->MedCabeceraNombre = ($MedCabecera) ? $MedCabecera->Apellido . " " .  $MedCabecera->Nombre : null;
     
             $data['pacientes'][] = $paciente;
@@ -133,7 +133,7 @@ class PacienteController extends Controller
         
             $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
         
-            $MedCabecera = Profesional::where('codigo', $paciente->MedCabecera)->first();
+            $MedCabecera = Profesional::where('codigo', $paciente->Cabecera)->first();
             $paciente->MedCabeceraNombre = ($MedCabecera) ? $MedCabecera->Apellido . " " .  $MedCabecera->Nombre : null;
     
             $data['pacientes'][] = $paciente;

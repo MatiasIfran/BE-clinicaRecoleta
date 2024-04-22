@@ -40,7 +40,7 @@ class Pacientes extends Migration
             $table->string('Antecedentes')->nullable();
             $table->string('Plan2')->nullable();
             $table->string('Modulo')->nullable();
-            $table->string('MedCabecera', 100)->nullable();
+            $table->string('Categoria', 100)->nullable();
             $table->string('Mail', 100)->nullable();
             $table->string('hc')->nullable();
             $table->string('Genero', 10)->nullable();

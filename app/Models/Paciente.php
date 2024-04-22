@@ -34,7 +34,7 @@ class Paciente extends Model
         'Genero',
         'Modulo',
         'hc',
-        'MedCabecera',
+        'Cabecera',
         'usuario',
     ];
 
@@ -80,7 +80,7 @@ class Paciente extends Model
             'Genero' => 'string',
             'Modulo' => 'string',
             'hc' => 'string',
-            'MedCabecera' => 'string',
+            'Cabecera' => 'string',
             'usuario' => 'required|max:50',
         ]);
 
@@ -115,7 +115,7 @@ class Paciente extends Model
             'Nombre', 'Direccion', 'CodPos', 'TipoDocumento', 'NumDocumento',
             'Telefono', 'Celular', 'FechaNacimiento', 'NumAfiliado', 'Empres',
             'Antecedentes', 'Iva', 'Cuit', 'DetaPlan', 'Plan', 'Plan2', 'Mail', 'Genero',
-            'Modulo', 'hc', 'MedCabecera', 'usuario'
+            'Modulo', 'hc', 'Cabecera','Categoria', 'usuario'
         ]));
 
         if ($paciente->save()) {
