@@ -143,7 +143,7 @@ class Turno extends Model
                 return response()->json($data, 400);
             }
         }
-        return response()->json(['status' => true, 'message' => 'Turnos creados correctamente.', 'errores' => $errores]);
+        return response()->json(['status' => true, 'message' => 'Turnos creados correctamente.', 'errores' => $errores ? $errores : null]);
     }
 
     public function obtenerTurnosxProfxDia(Request $request)
