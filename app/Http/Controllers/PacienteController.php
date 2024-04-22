@@ -28,6 +28,12 @@ class PacienteController extends Controller
         
         foreach ($pacientes as $paciente) {
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
+
+            $historiaClinica = HistoriaClinica::where('id_paciente', $paciente->id)
+                ->latest('created_at')
+                ->first();
+            
+            $paciente->UltimaVisita = $historiaClinica->created_at;
             $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
         
             $MedCabecera = Profesional::where('codigo', $paciente->Cabecera)->first();
@@ -131,7 +137,7 @@ class PacienteController extends Controller
 
         foreach ($pacientes as $paciente) {
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
-            
+
             $historiaClinica = HistoriaClinica::where('id_paciente', $paciente->id)
                 ->latest('created_at')
                 ->first();
