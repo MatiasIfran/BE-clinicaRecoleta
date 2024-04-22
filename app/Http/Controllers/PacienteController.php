@@ -33,7 +33,7 @@ class PacienteController extends Controller
                 ->latest('created_at')
                 ->first();
             
-            $paciente->UltimaVisita = $historiaClinica->created_at;
+            $paciente->UltimaVisita = $historiaClinica ? $historiaClinica->created_at : null;
             $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
         
             $MedCabecera = Profesional::where('codigo', $paciente->Cabecera)->first();
@@ -142,7 +142,7 @@ class PacienteController extends Controller
                 ->latest('created_at')
                 ->first();
             
-            $paciente->UltimaVisita = $historiaClinica->created_at;
+            $paciente->UltimaVisita = $historiaClinica ? $historiaClinica->created_at : null;
             $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
         
             $MedCabecera = Profesional::where('codigo', $paciente->Cabecera)->first();
