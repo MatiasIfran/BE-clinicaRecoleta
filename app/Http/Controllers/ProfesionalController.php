@@ -20,7 +20,7 @@ class ProfesionalController extends Controller
         $Profesionales = Profesional::all();
         $data = [
             'status'    => true,
-            'users'     => $Profesionales,
+            'profesionales'     => $Profesionales,
         ];
         return response()->json($data, 200);
     }
