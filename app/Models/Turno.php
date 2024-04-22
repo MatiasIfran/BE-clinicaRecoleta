@@ -123,7 +123,7 @@ class Turno extends Model
                             $turno->save();
                         } catch (\Illuminate\Database\QueryException $ex) {
                             if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
-                                $message = 'Error al guardar turno: El turno ya existe para la fecha '.$fecha.' a la hora'.$horaActual;
+                                $message = 'Error al guardar turno: El turno ya existe para la fecha '.$fecha.' a la hora '.$horaActual;
                                 Log::error($message);
                                 $errores[] = $message;
                             }
