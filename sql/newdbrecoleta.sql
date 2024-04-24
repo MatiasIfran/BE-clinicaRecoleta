@@ -61,6 +61,28 @@ VALUES
     ('WMICAELA', '', NULL, NULL, NULL, NULL, NULL, 1, '15', NULL, NULL, NULL, '5678', 0, NOW(), NOW(), 'admin'),
     ('SIN PROF', '', NULL, NULL, NULL, NULL, NULL, 1, '16', NULL, NULL, NULL, '0000', 0, NOW(), NOW(), 'admin');
 
+-- Usuarios
+
+INSERT INTO users (id, name, prof_cod, email, email_verified_at, password, remember_token, created_at, updated_at) 
+VALUES
+    (1, 'Ricardo Herzog PhD', NULL, 'laron34@example.net', '2023-11-27 02:19:05', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Xg7PaxoM36', '2023-11-27 02:19:05', '2023-11-27 02:19:05'),
+    (2, 'Fernando Romero', NULL, 'fernando@romero.com', NULL, '$2y$10$op8DqNXEPriQtP/6n3OrBOPbuj7lsh10boDgGs9gUqgdHnURMbmI2', NULL, '2023-11-27 12:57:25', '2023-11-27 12:57:25'),
+    (3, 'Francisco', NULL, 'montejo.fran@gmail.com', NULL, '$2y$10$C6TYlShvJQjoNkdQSWkzA.oHE3Dq1a5nbSZrSK4OsPCE8YlNb1Kf6', NULL, '2023-11-27 17:55:10', '2023-11-27 17:55:10'),
+    (4, 'Matias Ifran', 4444, 'matias@ifran.com', NULL, '$2y$10$Nr5jPHJv9vC8BDm9Ik4M2u2ApSKP.uGJQRrtEZspk19Tbgs6/vivS', NULL, '2023-12-12 02:50:46', '2023-12-12 02:50:46'),
+    (9, 'fmontejo', NULL, 'fmontejo@gmail.com', NULL, '$2y$10$dAlAXBD0ANc.hE4iQHzKTOaW2EVwjYGaxF.NnLxk0chBM8ocJqRT.', NULL, '2024-01-23 20:58:45', '2024-01-23 20:58:45'),
+    (10, 'dgonzalez', NULL, 'dgonzalez@gmail.com', NULL, '$2y$10$Ml8yY0u1OZenr5r32Cev6eXilN.sD57twjnqS6gsc8w24yrztKk5K', NULL, '2024-03-25 23:17:40', '2024-03-25 23:17:40'),
+    (11, 'Ricardo Tonini ', 1111, 'tonini@email.com', NULL, '$2y$10$fj7EHTqK7tN/IvVlKi35O.LL8M./HgxCNgRp9Slnja16wx6sDrJE2', NULL, '2024-04-24 02:18:10', '2024-04-24 02:18:10'),
+    (12, 'Guillermo Magnano', 2222, 'magnano@email.com', NULL, '$2y$10$kHKR0.Prl.uU4yV7PQd4o.yeer.jEvfIFhvg0Yza3wypL0TgjPMkO', NULL, '2024-04-24 02:19:44', '2024-04-24 02:19:44'),
+    (13, 'Victoria Lopez Candiotti', 6666, 'lcandiotti@email.com', NULL, '$2y$10$Bn45/tNe/ySCxZWrSFy8keGSGCbfp7LvvyOo7eDX8tmt8E1PcQxo.', NULL, '2024-04-24 02:20:15', '2024-04-24 02:20:15'),
+    (14, 'Rosalia Meilan', 9999, 'meilan@email.com', NULL, '$2y$10$TllPCt8bNzWCetoM5XZJ8uUv9PDYgtvjgeGc9mPB/.qu8NwrenJ52', NULL, '2024-04-24 02:20:56', '2024-04-24 02:20:56'),
+    (15, 'Sebastian Hilgert', 5432, 'hilgert@email.com', NULL, '$2y$10$dlITd7OqR9cZnjIH/N3yPuV1fSAEXcuvnoYaz0rkztqSKMHV8ymaC', NULL, '2024-04-24 02:21:35', '2024-04-24 02:21:35'),
+    (16, 'Antonela', NULL, 'antonela@email.com', NULL, '$2y$10$ZeaFXgQSOmclWyV/j3CgF.20QhcP1IOLv0Zxl5Yf754OLKbYE8mKG', NULL, '2024-04-24 02:22:57', '2024-04-24 02:22:57'),
+    (17, 'Veronica', NULL, 'veronica@email.com', NULL, '$2y$10$eJGWm3pOuxVy2IGbLmOxneSKacMz1ulHZBSj4ITUnNnfJ1FdkJSxK', NULL, '2024-04-24 02:23:24', '2024-04-24 02:23:24'),
+    (18, 'Gabriela', NULL, 'gabriela@email.com', NULL, '$2y$10$/yBIJeXDT7Mz.qpYdS8vjuKChENOu.XV01HlbEyXKP7Lts7fjD.0m', NULL, '2024-04-24 02:23:51', '2024-04-24 02:23:51'),
+    (19, 'Marcelo Bordon', 4444, 'bordon@email.com', NULL, '$2y$10$k8ROAxMv02uEdvb3VM1uOuTXYi6a8GdWERX536s6AUhBFWoSgSCFO', NULL, '2024-04-24 02:25:02', '2024-04-24 02:25:02'),
+    (20, 'Milagros Cristofoli', 8888, 'cristofoli@email.com', NULL, '$2y$10$HdD6kj1AAu/UkyUc.rOU2OvVTuGkWUX6YITutxDy5qe7ngi8QPqYu', NULL, '2024-04-24 02:26:05', '2024-04-24 02:26:05'),
+    (21, 'Juan Mantaras', 2016, 'mantaras@email.com', NULL, '$2y$10$AxrJNgZGycnfpDaOkTRvA.WUOm46.GGsrVHN2WD/u4O2nLvc4Gzr6', NULL, '2024-04-24 02:26:47', '2024-04-24 02:26:47');
+
 -- Obra sociales
 
 INSERT INTO obra_social (id, codigo, descripcion, codArancel, activa, orden, valor, maxAnual, maxMensual, obraSocial, vigencia, mensaje1, mensaje2, mensaje3) VALUES
