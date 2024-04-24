@@ -80,7 +80,7 @@ class Paciente extends Model
             'Genero' => 'string',
             'Modulo' => 'string',
             'hc' => 'string',
-            'Cabecera' => 'string',
+            'Cabecera' => 'numeric',
             'usuario' => 'required|max:50',
         ]);
 
