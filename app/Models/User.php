@@ -49,7 +49,8 @@ class User extends Authenticatable
         $data = $request->only([
             'name',
             'email',
-            'password'
+            'password',
+            'prof_cod'
         ]);
         $data['password'] = bcrypt($data['password']);
 
