@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\User\IndexRequest; 
 use App\Models\ObraSocial;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\obraSocial\ObraSocialRequest;
 
 
 class ObraSocialController extends Controller
@@ -70,6 +71,29 @@ class ObraSocialController extends Controller
             'obra_social'  => $obraSocial,
         ];
         return response()->json($data, 200);
+    }
+
+    public function createObraSocial(ObraSocialRequest $request)
+    {
+        $obraSocial = new ObraSocial();
+        $obraSocial = $obraSocial->createObraSocialModel($request);
+
+        if ($this->isJsonResponse($obraSocial)) {
+            return $obraSocial;
+        }
+        $data = [
+            'status'    => true,
+            'obraSocial'  => new UserResource($obraSocial),
+        ];
+
+        return response()->json($data, 201);
+    }
+
+    public function updateObraSocial(Request $request, $obraSocialId)
+    {
+        $obraSocial = new ObraSocial();
+        $obraSocial = $obraSocial->updatePaciente($request, $obraSocialId);
+        return $obraSocial;
     }
 
 }

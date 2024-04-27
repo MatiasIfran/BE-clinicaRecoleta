@@ -82,6 +82,8 @@ Route::prefix('obrasocial')->group(function () {
     Route::get('/all', 'ObraSocialController@allObrasSociales')->name('allObrasSociales');
     Route::get('/{obraSocialId}', 'ObraSocialController@getObraSocialById')->name('getObraSocialById');
     Route::get('/codigo/{obraSocialCodigo}', 'ObraSocialController@getObraSocialByCodigo')->name('getObraSocialByCodigo');
+    Route::post('/createObraSocial', 'ObraSocialController@createObraSocial')->name('createObraSocial');
+    Route::put('/update/{obraSocialId}', 'ObraSocialController@updateObraSocial')->name('updateObraSocial');
 });
 
 Route::prefix('feriado')->group(function () {
