@@ -151,7 +151,7 @@ class Turno extends Model
         $fecha = $request->input('fecha');
         $profCod = $request->input('prof_cod');
     
-        $turnos = Turno::with(['paciente', 'profesional'])
+        $turnos = Turno::with(['paciente', 'profesional', 'obra_social'])
         ->whereDate('fecha', $fecha)
         ->where('prof_cod', $profCod)
         ->get();
@@ -176,6 +176,11 @@ class Turno extends Model
         return $this->belongsTo(Paciente::class, 'paciente_id', 'id');
     }
 
+    public function obra_social()
+    {
+        return $this->belongsTo(ObraSocial::class, 'obra_social', 'id');
+    }
+
     public function profesional()
     {
         return $this->belongsTo(Profesional::class, 'prof_cod', 'Codigo');
@@ -185,7 +190,7 @@ class Turno extends Model
     {
         $fecha = $turnoDate->input('fecha');
 
-        $turnos = Turno::with(['paciente', 'profesional'])
+        $turnos = Turno::with(['paciente', 'profesional', 'obra_social'])
         ->whereDate('fecha', $fecha)->get();
 
         if ($turnos->isEmpty()) {
