@@ -22,9 +22,10 @@ class PacienteController extends Controller
     {
         $limit = $request->input('limit', 25); 
 
-        $pacientes = Paciente::orderBy('updated_at', 'desc')
-        ->take($limit)
-        ->get();
+        $pacientes = Paciente::with('obra_social')
+            ->orderBy('updated_at', 'desc')
+            ->take($limit)
+            ->get();
         
         foreach ($pacientes as $paciente) {
             $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
@@ -47,7 +48,8 @@ class PacienteController extends Controller
 
     public function getPacienteById($pacienteId)
     {
-        $paciente = Paciente::find($pacienteId);
+        $paciente = Paciente::with('obra_social')
+            ->find($pacienteId);
 
         if (!$paciente) {
             $data = [
@@ -66,7 +68,9 @@ class PacienteController extends Controller
 
     public function getPacienteByDni($dni)
     {
-        $paciente = Paciente::where('NumDocumento', $dni)->first();
+        $paciente = Paciente::with('obra_social')
+            ->where('NumDocumento', $dni)
+            ->first();
 
         if (!$paciente) {
             $data = [
@@ -87,7 +91,7 @@ class PacienteController extends Controller
     {
         $search = $request->input('search');
 
-        $query = Paciente::query();
+        $query = Paciente::query()->with('obra_social');
 
         if ($search) {
             $query->where('nombre', 'LIKE', "%$search%");
@@ -116,7 +120,7 @@ class PacienteController extends Controller
         $limit = $request->input('limit', 25); 
 
         $searchParts = preg_split('/(?<=\D)(?=\d)|(?<=\d)(?=\D)/', $search);
-        $query = Paciente::query();
+        $query = Paciente::query()->with('obra_social');
 
         foreach ($searchParts as $part) {
             if (is_numeric($part)) {

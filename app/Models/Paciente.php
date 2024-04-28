@@ -57,6 +57,11 @@ class Paciente extends Model
         return $paciente;
     }
 
+    public function obra_social()
+    {
+        return $this->belongsTo(ObraSocial::class, 'Plan', 'codigo');
+    }
+
     public function updatePaciente(Request $request, $pacienteDni)
     {
         $validator = Validator::make($request->all(), [
