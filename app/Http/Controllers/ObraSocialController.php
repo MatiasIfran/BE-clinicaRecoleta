@@ -19,7 +19,7 @@ class ObraSocialController extends Controller
 
     public function allObrasSociales(IndexRequest $request)
     {
-        $obrasSociales = ObraSocial::all();
+        $obrasSociales = ObraSocial::orderBy('descripcion', 'asc')->get();
         if ($obrasSociales->isEmpty()) {
             $data = [
                 'status' => false,
