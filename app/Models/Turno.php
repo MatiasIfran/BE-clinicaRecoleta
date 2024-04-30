@@ -154,6 +154,8 @@ class Turno extends Model
         $turnos = Turno::with(['paciente', 'profesional', 'obra_social'])
         ->whereDate('fecha', $fecha)
         ->where('prof_cod', $profCod)
+        ->orderBy('fecha')
+        ->orderBy('hora')
         ->get();
     
         if ($turnos->isEmpty()) {
@@ -191,7 +193,10 @@ class Turno extends Model
         $fecha = $turnoDate->input('fecha');
 
         $turnos = Turno::with(['paciente', 'profesional', 'obra_social'])
-        ->whereDate('fecha', $fecha)->get();
+        ->whereDate('fecha', $fecha)
+        ->orderBy('fecha')
+        ->orderBy('hora')
+        ->get();
 
         if ($turnos->isEmpty()) {
             $data = [
@@ -234,6 +239,8 @@ class Turno extends Model
         $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
             ->where('fecha', $fecha)
             ->whereNull('paciente_id')
+            ->orderBy('fecha')
+            ->orderBy('hora')
             ->get();
 
         return $horariosDisponibles;
