@@ -48,7 +48,7 @@ class ObraSocial extends Model
         return $codigoPostal;
     }
 
-    public function updatePaciente(Request $request, $obraSocialId)
+    public function updateObraSocial(Request $request, $obraSocialId)
     {
         $validator = Validator::make($request->all(), [
             'usuario' => 'required|max:50',

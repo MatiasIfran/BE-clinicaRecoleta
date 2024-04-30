@@ -92,7 +92,7 @@ class ObraSocialController extends Controller
     public function updateObraSocial(Request $request, $obraSocialId)
     {
         $obraSocial = new ObraSocial();
-        $obraSocial = $obraSocial->updatePaciente($request, $obraSocialId);
+        $obraSocial = $obraSocial->updateObraSocial($request, $obraSocialId);
         return $obraSocial;
     }
 
