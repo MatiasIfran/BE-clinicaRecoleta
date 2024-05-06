@@ -264,17 +264,32 @@ class Turno extends Model
         }
 
         $profesionalCodigo = $request->input('prof_cod');
-        $limit = $request->input('limit', 25); 
-
+        $limitPerDay = 7;
+        $totalLimit = 50;
+         
         $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
             ->whereNull('paciente_id')
             ->orderBy('fecha')
             ->orderBy('hora')
-            ->take($limit)
             ->get();
-
-        return $horariosDisponibles;
-    }
+         
+         foreach ($horariosDisponibles as $turno) {
+            $fecha = $turno->fecha;
+            if (!$horariosPorDia->has($fecha)) {
+                $horariosPorDia->put($fecha, collect());
+            }
+            $horariosPorDia[$fecha]->push($turno);
+         }
+    
+        foreach ($horariosPorDia as $fecha => $turnos) {
+            $limit = min($limitPerDay, $turnos->count());
+            $horariosFiltrados = $horariosFiltrados->merge($turnos->take($limit));
+        }
+    
+        $horariosFiltrados = $horariosFiltrados->take($totalLimit);
+    
+        return $horariosFiltrados;    
+     }
 
     private function calculateFechaHorario($fechaInicio, $fechaFin, $dia)
     {
