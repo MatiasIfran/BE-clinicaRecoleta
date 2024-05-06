@@ -106,6 +106,28 @@ class TurnoController extends Controller
         return response()->json($data, 201);
     }
 
+    public function getTurnosDisponiblesProfesional(Request $request)
+    {
+        $turno = new Turno;
+        $turno = $turno->obtenerTurnosLibresProfesional($request);
+
+        if ($this->isJsonResponse($turno)) {
+            return $turno;
+        } else if ($turno->isEmpty()) {
+            $data = [
+                'status' => false,
+                'turno' => 'No se encontraron turnos disponibles.',
+            ];
+
+            return response()->json($data, 400);
+        }
+        $data = [
+            'status' => true,
+            'turnos' => $turno,
+        ];
+        return response()->json($data, 201);
+    }
+
     public function createTurno(TurnoRequest $request)
     {
         $turno = new Turno;
