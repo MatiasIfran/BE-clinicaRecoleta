@@ -61,6 +61,7 @@ Route::prefix('turno')->group(function () {
     Route::get('/datePaciente/{idPaciente}', 'TurnoController@getTurnoByPaciente')->name('getTurnoByPaciente');
     Route::get('/paciente/turnosProfesionalDia', 'TurnoController@getTurnosxProfxDia')->name('getTurnosxProfxDia');
     Route::get('/libre/turnosDisponible', 'TurnoController@getTurnosDisponibles')->name('getTurnosDisponibles');
+    Route::get('/libre/turnosProfesional', 'TurnoController@getTurnosDisponiblesProfesional')->name('getTurnosDisponiblesProfesional');
     Route::post('/createTurno', 'TurnoController@createTurno')->name('createTurno');
     Route::post('/createTurnoIndividual', 'TurnoController@createTurnoIndividual')->name('createTurnoIndividual');
     Route::delete('/deleteTurno/{turnoId}', 'TurnoController@deleteTurno')->name('deleteTurno');
