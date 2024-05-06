@@ -277,7 +277,7 @@ class Turno extends Model
          $horariosPorDia = collect();
 
          foreach ($horariosDisponibles as $turno) {
-            $fecha = $turno->fecha;
+            $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
             if (!$horariosPorDia->has($fecha)) {
                 $horariosPorDia->put($fecha, collect());
             }
