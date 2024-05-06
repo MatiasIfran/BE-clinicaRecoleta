@@ -273,6 +273,9 @@ class Turno extends Model
             ->orderBy('hora')
             ->get();
          
+         $horariosFiltrados = collect();
+         $horariosPorDia = collect();
+
          foreach ($horariosDisponibles as $turno) {
             $fecha = $turno->fecha;
             if (!$horariosPorDia->has($fecha)) {
