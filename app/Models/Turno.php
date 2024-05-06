@@ -246,6 +246,36 @@ class Turno extends Model
         return $horariosDisponibles;
     }
 
+     public function obtenerTurnosLibresProfesional(Request $request)
+     {
+        $validator = Validator::make($request->all(), [
+            'prof_cod' => 'required|integer',
+        ], [
+            'prof_cod.required' => 'El codigo del profesional es obligatorio. (prof_cod)',
+            'prof_cod.integer' => 'El id del profesional debe ser un número entero.',
+        ]);
+
+        if ($validator->fails()) {
+            $data = [
+                'status' => false,
+                'error'  => $validator->errors()->first(),
+            ];
+            return response()->json($data, 400);
+        }
+
+        $profesionalCodigo = $request->input('prof_cod');
+        $limit = $request->input('limit', 25); 
+
+        $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
+            ->whereNull('paciente_id')
+            ->orderBy('fecha')
+            ->orderBy('hora')
+            ->take($limit)
+            ->get();
+
+        return $horariosDisponibles;
+    }
+
     private function calculateFechaHorario($fechaInicio, $fechaFin, $dia)
     {
         $carbonFechaInicio = Carbon::parse($fechaInicio);
