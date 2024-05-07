@@ -81,6 +81,7 @@ Route::prefix('horario')->group(function () {
 
 Route::prefix('obrasocial')->group(function () {
     Route::get('/all', 'ObraSocialController@allObrasSociales')->name('allObrasSociales');
+    Route::get('/allActivas', 'ObraSocialController@allActivasObrasSociales')->name('allActivasObrasSociales');
     Route::get('/{obraSocialId}', 'ObraSocialController@getObraSocialById')->name('getObraSocialById');
     Route::get('/codigo/{obraSocialCodigo}', 'ObraSocialController@getObraSocialByCodigo')->name('getObraSocialByCodigo');
     Route::post('/createObraSocial', 'ObraSocialController@createObraSocial')->name('createObraSocial');
