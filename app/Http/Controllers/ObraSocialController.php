@@ -35,6 +35,27 @@ class ObraSocialController extends Controller
         return response()->json($data, 200);
     }
 
+    public function allActivasObrasSociales(IndexRequest $request)
+    {
+        $obrasSociales = ObraSocial::where('activa', '!=', false)
+            ->orderBy('descripcion', 'asc')
+            ->get();
+            
+        if ($obrasSociales->isEmpty()) {
+            $data = [
+                'status' => false,
+                'message' => 'No hay obras sociales activas en este momento.',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'status'         => true,
+            'obras_sociales' => $obrasSociales,
+        ];
+        return response()->json($data, 200);
+    }
+
     public function getObraSocialById($obraSocialId)
     {
         $obraSocial = ObraSocial::find($obraSocialId);
