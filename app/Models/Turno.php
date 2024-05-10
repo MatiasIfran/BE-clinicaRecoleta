@@ -274,9 +274,12 @@ class Turno extends Model
         $profesionalCodigo = $request->input('prof_cod');
         $limitPerDay = 7;
         $totalLimit = 50;
-         
+        
+        $fechaActual = Carbon::now()->format('Y-m-d');
+
         $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
             ->whereNull('paciente_id')
+            ->where('fecha', '>=', $fechaActual) // Filtrar turnos a partir de hoy
             ->orderBy('fecha')
             ->orderBy('hora')
             ->get();
