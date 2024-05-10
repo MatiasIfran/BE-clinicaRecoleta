@@ -41,7 +41,6 @@ class ObraSocial extends Model
         }
 
         $data = $request->validated();
-        info($data);
 
         $codigoPostal = $this->create($data);
 

@@ -404,10 +404,6 @@ class Turno extends Model
 
             $fechaTurno = $turno->fecha;
             $diaSemanaTurno = Carbon::parse($fechaTurno)->format('N');
-            info('fecha' . $fechaTurno);
-            info('dia de semana ' . $diaSemanaTurno);
-            info('pami ' . $pami);
-
             if ($pami == 0) {
                 $cantidadTurnosOS10 = Turno::whereDate('fecha', $fechaTurno)
                     ->where('obra_social', 10)
@@ -421,12 +417,10 @@ class Turno extends Model
                     return response()->json($data, 400);
                 }
             } else {
-                info('dia de semana entro else ' . $diaSemanaTurno);
-
                 if ($diaSemanaTurno != $pami) {
                     $data = [
                         'status' => false,
-                        'error' => 'No se pueden asignar turnos para el día especificado en PAMI.',
+                        'error' => 'No se pueden asignar turnos para el día especificado con la obra social PAMI.',
                     ];
                     return response()->json($data, 400);
                 }
