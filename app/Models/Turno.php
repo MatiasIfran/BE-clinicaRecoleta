@@ -52,6 +52,14 @@ class Turno extends Model
                     'error' => 'Error al guardar turno: El turno ya existe',
                 ];
                 return response()->json($data, 400);
+            } else {
+                $errorType = get_class($ex);
+                $errorMessage = $ex->getMessage();
+                $data = [
+                    'status' => false,
+                    'error' => 'Error al guardar turno: ' . $errorMessage . ' (' . $errorType . ')',
+                ];
+                return response()->json($data, 500);
             }
         }
         $data = [
