@@ -423,7 +423,7 @@ class Turno extends Model
             } else {
                 info('dia de semana entro else ' . $diaSemanaTurno);
 
-                if ($diaSemanaTurno == $pami) {
+                if ($diaSemanaTurno != $pami) {
                     $data = [
                         'status' => false,
                         'error' => 'No se pueden asignar turnos para el día especificado en PAMI.',
