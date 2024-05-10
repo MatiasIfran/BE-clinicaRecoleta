@@ -388,42 +388,46 @@ class Turno extends Model
             return response()->json($data, 404);
         }
 
-        $profCod = $turno->prof_cod;
-        $profesional = Profesional::where('Codigo', $profCod)->first();
-        if (!$profesional) {
-            $data = [
-                'status' => false,
-                'error' => 'Profesional no encontrado para el turno elegido',
-            ];
-            return response()->json($data, 404);
-        }
-        $pami = $profesional->pami;
+        $pacienteId = $request->input('paciente_id');
 
-        $fechaTurno = $turno->fecha;
-        $diaSemanaTurno = Carbon::parse($fechaTurno)->format('N');
-        info('fecha' . $fechaTurno);
-        info('dia de semana ' . $diaSemanaTurno);
-        if ($pami == 0) {
-            $cantidadTurnosOS10 = Turno::whereDate('fecha', $fechaTurno)
-                ->where('obra_social', 10)
-                ->count();
-
-            if ($cantidadTurnosOS10 > 4) {
+        if ($pacienteId != null) {
+            $profCod = $turno->prof_cod;
+            $profesional = Profesional::where('Codigo', $profCod)->first();
+            if (!$profesional) {
                 $data = [
                     'status' => false,
-                    'error' => 'Ya existen más de 4 turnos para obra social con código 10 en esta fecha.',
+                    'error' => 'Profesional no encontrado para el turno elegido',
                 ];
-                return response()->json($data, 400);
+                return response()->json($data, 404);
             }
-        } else {
-            info('dia de semana entro else ' . $diaSemanaTurno);
+            $pami = $profesional->pami;
 
-            if ($diaSemanaTurno == $pami) {
-                $data = [
-                    'status' => false,
-                    'error' => 'No se pueden asignar turnos para el día especificado en PAMI.',
-                ];
-                return response()->json($data, 400);
+            $fechaTurno = $turno->fecha;
+            $diaSemanaTurno = Carbon::parse($fechaTurno)->format('N');
+            info('fecha' . $fechaTurno);
+            info('dia de semana ' . $diaSemanaTurno);
+            if ($pami == 0) {
+                $cantidadTurnosOS10 = Turno::whereDate('fecha', $fechaTurno)
+                    ->where('obra_social', 10)
+                    ->count();
+
+                if ($cantidadTurnosOS10 > 4) {
+                    $data = [
+                        'status' => false,
+                        'error' => 'Ya existen más de 4 turnos para obra social con código 10 en esta fecha.',
+                    ];
+                    return response()->json($data, 400);
+                }
+            } else {
+                info('dia de semana entro else ' . $diaSemanaTurno);
+
+                if ($diaSemanaTurno == $pami) {
+                    $data = [
+                        'status' => false,
+                        'error' => 'No se pueden asignar turnos para el día especificado en PAMI.',
+                    ];
+                    return response()->json($data, 400);
+                }
             }
         }
 
@@ -435,8 +439,6 @@ class Turno extends Model
             'primeraVisita',
             'obra_social',
         ]));
-
-        $pacienteId = $request->input('paciente_id');
         
         if($pacienteId) {
             $primeraVezPaciente = HistoriaClinica::where('id_paciente', $pacienteId)->get();
