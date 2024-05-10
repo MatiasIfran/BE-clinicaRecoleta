@@ -42,7 +42,7 @@ class Turno extends Model
 
         $data = $request->validated();
         $data['fecha'] = strtoupper($data['fecha']);
-
+        $turno = null;
         try {
             $turno = $this->create($data);
         } catch (\Illuminate\Database\QueryException $ex) {
@@ -55,7 +55,7 @@ class Turno extends Model
             }
         }
         $data = [
-            'status' => true,
+            'status' => isset($turno),
             'turno' => $turno,
         ];
         return response()->json($data, 200);
