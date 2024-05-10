@@ -388,6 +388,19 @@ class Turno extends Model
             return response()->json($data, 404);
         }
 
+        $fechaTurno = $turno->fecha;
+        $cantidadTurnosOS10 = Turno::whereDate('created_at', $fechaTurno)
+            ->where('obra_social', 10)
+            ->count();
+            
+        if ($cantidadTurnosOS10 > 4) {
+            $data = [
+                'status' => false,
+                'error' => 'Ya existen más de 4 turnos para obra social con código 10 en esta fecha.',
+            ];
+            return response()->json($data, 400);
+        }
+
         $turno->fill($request->only([
             'paciente_id',
             'observ',
