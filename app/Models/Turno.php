@@ -389,7 +389,7 @@ class Turno extends Model
         }
 
         $profCod = $turno->prof_cod;
-        $profesional = Profesional::where('prof_cod', $profCod)->first();
+        $profesional = Profesional::where('Codigo', $profCod)->first();
         if (!$profesional) {
             $data = [
                 'status' => false,
