@@ -389,10 +389,12 @@ class Turno extends Model
         }
 
         $fechaTurno = $turno->fecha;
+        info($fechaTurno);
         $cantidadTurnosOS10 = Turno::whereDate('created_at', $fechaTurno)
             ->where('obra_social', 10)
             ->count();
-            
+        info($cantidadTurnosOS10);
+
         if ($cantidadTurnosOS10 > 4) {
             $data = [
                 'status' => false,
