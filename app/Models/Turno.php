@@ -401,7 +401,7 @@ class Turno extends Model
                 return response()->json($data, 404);
             }
             $pami = $profesional->pami;
-
+            $obra_social_input = $request->input('obra_social');
             $fechaTurno = $turno->fecha;
             $diaSemanaTurno = Carbon::parse($fechaTurno)->format('N');
             if ($pami == 0) {
@@ -409,8 +409,7 @@ class Turno extends Model
                     ->where('obra_social', 10)
                     ->count();
 
-                info($turno);
-                if ($cantidadTurnosOS10 > 4 && $turno->obra_social === 10) {
+                if ($cantidadTurnosOS10 > 4 && $obra_social_input === 10) {
                     $data = [
                         'status' => false,
                         'error' => 'Ya existen más de 4 turnos para obra social con código 10 en esta fecha.',
