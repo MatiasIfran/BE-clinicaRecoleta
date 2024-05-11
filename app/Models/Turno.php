@@ -409,7 +409,8 @@ class Turno extends Model
                     ->where('obra_social', 10)
                     ->count();
 
-                if ($cantidadTurnosOS10 > 4 && $turno->obra_social == 10) {
+                info($turno->obra_social);
+                if ($cantidadTurnosOS10 > 4 && $turno->obra_social === 10) {
                     $data = [
                         'status' => false,
                         'error' => 'Ya existen más de 4 turnos para obra social con código 10 en esta fecha.',
