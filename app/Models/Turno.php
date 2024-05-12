@@ -406,10 +406,10 @@ class Turno extends Model
             $diaSemanaTurno = Carbon::parse($fechaTurno)->format('N');
             if ($pami == 0) {
                 $cantidadTurnosOS10 = Turno::whereDate('fecha', $fechaTurno)
+                    ->where('Codigo', $profCod)
                     ->where('obra_social', 10)
                     ->count();
 
-                info($cantidadTurnosOS10);
                 if ($cantidadTurnosOS10 > 4 && $obra_social_input === '10') {
                     $data = [
                         'status' => false,
