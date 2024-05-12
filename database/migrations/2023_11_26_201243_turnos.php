@@ -21,6 +21,7 @@ class Turnos extends Migration
                 $table->date("fecha")->nullable(false);
                 $table->string('hora', 5)->nullable(false);
                 $table->string('observ')->nullable();
+                $table->string('tele')->nullable();
                 $table->tinyInteger('atendido')->nullable();
                 $table->tinyInteger('presente')->nullable();
                 $table->tinyInteger('primeraVisita')->nullable();
