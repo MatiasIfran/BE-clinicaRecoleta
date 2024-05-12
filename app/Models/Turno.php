@@ -410,6 +410,7 @@ class Turno extends Model
                     ->where('obra_social', 10)
                     ->count();
 
+                info($cantidadTurnosOS10);
                 if ($cantidadTurnosOS10 > 4 && $obra_social_input === '10') {
                     $data = [
                         'status' => false,
