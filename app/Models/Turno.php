@@ -406,7 +406,7 @@ class Turno extends Model
             $diaSemanaTurno = Carbon::parse($fechaTurno)->format('N');
             if ($pami == 0) {
                 $cantidadTurnosOS10 = Turno::whereDate('fecha', $fechaTurno)
-                    ->where('Codigo', $profCod)
+                    ->where('prof_cod', $profCod)
                     ->where('obra_social', 10)
                     ->count();
 
