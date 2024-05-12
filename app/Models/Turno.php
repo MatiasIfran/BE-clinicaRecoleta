@@ -411,7 +411,7 @@ class Turno extends Model
                     ->count();
 
                 info($cantidadTurnosOS10);
-                if ($cantidadTurnosOS10 > 4 && $obra_social_input === '10') {
+                if ($cantidadTurnosOS10 => 4 && $obra_social_input === '10') {
                     $data = [
                         'status' => false,
                         'error' => 'Ya existen más de 4 turnos para obra social con código 10 en esta fecha.',
