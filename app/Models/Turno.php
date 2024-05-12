@@ -188,7 +188,7 @@ class Turno extends Model
 
     public function obraSocial()
     {
-        return $this->belongsTo(ObraSocial::class, 'obra_social', 'Codigo');
+        return $this->belongsTo(ObraSocial::class, 'obra_social', 'codigo');
     }
 
     public function profesional()
