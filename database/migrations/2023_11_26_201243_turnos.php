@@ -32,7 +32,6 @@ class Turnos extends Migration
                 $table->unique(['fecha', 'hora', 'paciente_id']);
                 $table->unique(['prof_cod', 'fecha', 'hora']);
                 $table->foreign('prof_cod')->references('Codigo')->on('profesionales');
-                $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
             });
         }
     }
