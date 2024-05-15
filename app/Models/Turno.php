@@ -418,7 +418,7 @@ class Turno extends Model
                     return response()->json($data, 400);
                 }
             } else {
-                if ($diaSemanaTurno != $pami) {
+                if ($diaSemanaTurno != $pami && $obra_social_input === '10') {
                     $data = [
                         'status' => false,
                         'error' => 'No se pueden asignar turnos para el día especificado con la obra social PAMI.',
