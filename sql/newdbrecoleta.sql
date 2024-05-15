@@ -41,29 +41,29 @@ INSERT INTO codpos (codigo, Ciudad, Provincia, usuario, created_at, updated_at) 
     ('3011', 'SAN GERONIMO NORTE', 'SANTA FE', 'admin', NOW(), NOW());
 
 -- Profesionales
-INSERT INTO profesionales (Nombre, Apellido, FechaNacimiento, Genero, Direccion, Telefono, Mail, TipoDocumento, NumDocumento, Matricula, Categoria, Cuit, Codigo, daTurnos,created_at, updated_at, usuario)
+INSERT INTO profesionales (Nombre, Apellido, FechaNacimiento, Genero, Direccion, Telefono, Mail, TipoDocumento, NumDocumento, Matricula, Categoria, Cuit, Codigo, daTurnos, pami,created_at, updated_at, usuario)
 VALUES
-    ('RICARDO', 'TONINI', NULL, NULL, NULL, NULL, NULL, 1, '00', 55, NULL, NULL, '1111', 1,NOW(), NOW(), 'admin'),
-    ('GUILLERMO', 'MAGNANO', NULL, NULL, NULL, NULL, NULL, 1, '01', 45, NULL, NULL, '2222', 1, NOW(), NOW(), 'admin'),
-    ('ADRIAN', 'ROCCO', NULL, NULL, NULL, NULL, NULL, 1, '02', 58, NULL, NULL, '3333', 0, NOW(), NOW(), 'admin'),
-    ('MARCELO', 'BORDON', NULL, NULL, NULL, NULL, NULL, 1, '03', 52, NULL, NULL, '4444', 1, NOW(), NOW(), 'admin'),
-    ('VICTORIA', 'LOPEZ CANDIOTI', NULL, NULL, NULL, NULL, NULL, 1, '04', 51, NULL, NULL, '6666', 1, NOW(), NOW(), 'admin'),
-    ('PATRICIA', 'BAISSETTO', NULL, NULL, NULL, NULL, NULL, 1, '05', 56, NULL, NULL, '7777', 0, NOW(), NOW(), 'admin'),
-    ('MILAGROS', 'CRISTOFOLI', NULL, NULL, NULL, NULL, NULL, 1, '06', NULL, NULL, NULL, '8888', 1, NOW(), NOW(), 'admin'),
-    ('ROSALIA', 'MEILAN', NULL, NULL, NULL, NULL, NULL, 1, '07', NULL, NULL, NULL, '9999', 1, NOW(), NOW(), 'admin'),
-    ('JUAN', 'MANTARAS', NULL, NULL, NULL, NULL, NULL, 1, '08', NULL, NULL, NULL, '2016', 1, NOW(), NOW(), 'admin'),
-    ('SEBASTIAN', 'HILGERT', NULL, NULL, NULL, NULL, NULL, 1, '09', NULL, NULL, NULL, '5432', 1, NOW(), NOW(), 'admin'),
-    ('JORGE', 'CORRAL', NULL, NULL, NULL, NULL, NULL, 1, '10', NULL, NULL, NULL, '5555', 0, NOW(), NOW(), 'admin'),
-    ('PERIMETRÍA', '', NULL, NULL, NULL, NULL, NULL, 1, '11', NULL, NULL, NULL, '1234', 0, NOW(), NOW(), 'admin'),
-    ('FEDERICO', '', NULL, NULL, NULL, NULL, NULL, 1, '12', NULL, NULL, NULL, '1235', 0, NOW(), NOW(), 'admin'),
-    ('VERONICA', '', NULL, NULL, NULL, NULL, NULL, 1, '13', NULL, NULL, NULL, '1236', 0, NOW(), NOW(), 'admin'),
-    ('PAULA', '', NULL, NULL, NULL, NULL, NULL, 1, '14', NULL, NULL, NULL, '555', 0, NOW(), NOW(), 'admin'),
-    ('WMICAELA', '', NULL, NULL, NULL, NULL, NULL, 1, '15', NULL, NULL, NULL, '5678', 0, NOW(), NOW(), 'admin'),
-    ('SIN PROF', '', NULL, NULL, NULL, NULL, NULL, 1, '16', NULL, NULL, NULL, '0000', 0, NOW(), NOW(), 'admin');
+    ('RICARDO', 'TONINI', NULL, NULL, NULL, NULL, NULL, 1, '00', 55, NULL, NULL, '1111', 1, 0, NOW(), NOW(), 'admin'),
+    ('GUILLERMO', 'MAGNANO', NULL, NULL, NULL, NULL, NULL, 1, '01', 45, NULL, NULL, '2222', 1, 4, NOW(), NOW(), 'admin'),
+    ('ADRIAN', 'ROCCO', NULL, NULL, NULL, NULL, NULL, 1, '02', 58, NULL, NULL, '3333', 0, 2, NOW(), NOW(), 'admin'),
+    ('MARCELO', 'BORDON', NULL, NULL, NULL, NULL, NULL, 1, '03', 52, NULL, NULL, '4444', 1, 0, NOW(), NOW(), 'admin'),
+    ('VICTORIA', 'LOPEZ CANDIOTI', NULL, NULL, NULL, NULL, NULL, 1, '04', 51, NULL, NULL, '6666', 1, 3, NOW(), NOW(), 'admin'),
+    ('PATRICIA', 'BAISSETTO', NULL, NULL, NULL, NULL, NULL, 1, '05', 56, NULL, NULL, '7777', 0, 0, NOW(), NOW(), 'admin'),
+    ('MILAGROS', 'CRISTOFOLI', NULL, NULL, NULL, NULL, NULL, 1, '06', NULL, NULL, NULL, '8888', 1, 0, NOW(), NOW(), 'admin'),
+    ('ROSALIA', 'MEILAN', NULL, NULL, NULL, NULL, NULL, 1, '07', NULL, NULL, NULL, '9999', 1, 0, NOW(), NOW(), 'admin'),
+    ('JUAN', 'MANTARAS', NULL, NULL, NULL, NULL, NULL, 1, '08', NULL, NULL, NULL, '2016', 1, 0, NOW(), NOW(), 'admin'),
+    ('SEBASTIAN', 'HILGERT', NULL, NULL, NULL, NULL, NULL, 1, '09', NULL, NULL, NULL, '5432', 1, 0, NOW(), NOW(), 'admin'),
+    ('JORGE', 'CORRAL', NULL, NULL, NULL, NULL, NULL, 1, '10', NULL, NULL, NULL, '5555', 0, 0, NOW(), NOW(), 'admin'),
+    ('PERIMETRÍA', '', NULL, NULL, NULL, NULL, NULL, 1, '11', NULL, NULL, NULL, '1234', 0, 0, NOW(), NOW(), 'admin'),
+    ('FEDERICO', '', NULL, NULL, NULL, NULL, NULL, 1, '12', NULL, NULL, NULL, '1235', 0, 0, NOW(), NOW(), 'admin'),
+    ('VERONICA', '', NULL, NULL, NULL, NULL, NULL, 1, '13', NULL, NULL, NULL, '1236', 0, 0, NOW(), NOW(), 'admin'),
+    ('PAULA', '', NULL, NULL, NULL, NULL, NULL, 1, '14', NULL, NULL, NULL, '555', 0, 0, NOW(), NOW(), 'admin'),
+    ('WMICAELA', '', NULL, NULL, NULL, NULL, NULL, 1, '15', NULL, NULL, NULL, '5678', 0, 0, NOW(), NOW(), 'admin'),
+    ('SIN PROF', '', NULL, NULL, NULL, NULL, NULL, 1, '16', NULL, NULL, NULL, '0000', 0, 0, NOW(), NOW(), 'admin');
 
 -- Usuarios
 
-INSERT INTO users (id, name, prof_cod, email, email_verified_at, password, remember_token, created_at, updated_at) 
+INSERT IGNORE users (id, name, prof_cod, email, email_verified_at, password, remember_token, created_at, updated_at) 
 VALUES
     (1, 'Ricardo Herzog PhD', NULL, 'laron34@example.net', '2023-11-27 02:19:05', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Xg7PaxoM36', '2023-11-27 02:19:05', '2023-11-27 02:19:05'),
     (2, 'Fernando Romero', NULL, 'fernando@romero.com', NULL, '$2y$10$op8DqNXEPriQtP/6n3OrBOPbuj7lsh10boDgGs9gUqgdHnURMbmI2', NULL, '2023-11-27 12:57:25', '2023-11-27 12:57:25'),
