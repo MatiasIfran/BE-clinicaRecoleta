@@ -67,6 +67,7 @@ class HistoriaClinica extends Model
      {
         $historiaClinica = HistoriaClinica::with(['paciente', 'profesional'])
         ->where('id_paciente', $pacienteId)
+        ->orderBy('fecha', 'desc') // Ordena por fecha de forma ascendente
         ->get();
 
          if ($historiaClinica->isEmpty()) {
