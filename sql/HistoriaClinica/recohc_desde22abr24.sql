@@ -1,4 +1,4 @@
-INSERT IGNORE INTO historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, diag, trata, fecha, prof_cod, created_at, updated_at, usuario, observ, link_imagen, registro, estudio) VALUES
+INSERT IGNORE historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, diag, trata, fecha, prof_cod, created_at, updated_at, usuario, observ, link_imagen, registro, estudio) VALUES
 	(455597, 16331, 0, 1, NULL, 'OJ OSECO', '2024-04-22', '2016', '2024-04-22 09:55:59', NULL, 'MANTARAS', 'bmc ao folciulos, but 3 \r\nlotevis + rt', 0, 0, 0),
 	(455598, 157086, 0, 1, NULL, 'CATARATA', '2024-04-22', '2016', '2024-04-22 09:59:19', NULL, 'MANTARAS', 'control lio ok \r\ngotas cada 12 hs', 0, 0, 0),
 	(455599, 158936, 0, 1, NULL, 'ASTIGMATISMO', '2024-04-22', '2016', '2024-04-22 10:07:32', NULL, 'MANTARAS', 've menos de cerca con el lente puesto\r\nexplico', 0, 0, 0),
@@ -118,7 +118,7 @@ INSERT IGNORE INTO historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, di
 	(455713, 159144, 0, 1, NULL, '', '2024-04-23', '9999', '2024-04-23 17:20:47', NULL, 'MEILAN', 'CONJUNTIVITIS \r\nDOY TOBRADEX', 0, 0, 0),
 	(455714, 158809, 0, 1, NULL, '', '2024-04-23', '1111', '2024-04-23 17:22:28', NULL, 'TONINI', 'doy v.c.  o.d. +0.50 a 150  +2.50\r\no.i. +0.50 a 180  +2.50\r\npio normal', 0, 0, 0),
 	(455715, 158436, 0, 1, NULL, '', '2024-04-23', '9999', '2024-04-23 17:23:57', NULL, 'MEILAN', 'CICLO +1.50-2.00 X 12\r\n            +1.50-3.00 X 0\r\nBMC: AO SP\r\nFO: AO SP', 0, 0, 0);
-INSERT IGNORE INTO historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, diag, trata, fecha, prof_cod, created_at, updated_at, usuario, observ, link_imagen, registro, estudio) VALUES
+INSERT IGNORE historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, diag, trata, fecha, prof_cod, created_at, updated_at, usuario, observ, link_imagen, registro, estudio) VALUES
 	(455716, 116304, 0, 1, NULL, '', '2024-04-23', '1111', '2024-04-23 17:29:52', NULL, 'TONINI', 'doy traler , resto s-p', 0, 0, 0),
 	(455717, 159001, 0, 1, NULL, '', '2024-04-23', '9999', '2024-04-23 17:34:37', '2024-04-23 17:34:57', 'MEILAN', 'CEFAELA\r\nOPERADA DE ESOTROPIA DE NIÑA\r\nAV VCD A 3 MTS C/+0.75\r\n      1.0 C/+0.25\r\nARF +0.75+0.50 X 89\r\n        +0.00\r\nCITO PARA ALCON MIDRYL', 0, 0, 0),
 	(455718, 121258, 0, 1, NULL, '', '2024-04-23', '1111', '2024-04-23 17:35:31', NULL, 'TONINI', 'f. de o.  normal', 0, 0, 0),
@@ -767,7 +767,7 @@ INSERT IGNORE INTO historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, di
 	(456362, 157019, 0, 1, NULL, '', '2024-05-02', '1111', '2024-05-02 12:27:48', NULL, 'TONINI', 'oct  dentro de parametros normales\r\ncito ara lentes', 0, 0, 0),
 	(456363, 157007, 0, 1, NULL, '', '2024-05-02', '6666', '2024-05-02 12:30:36', NULL, 'ADMIN', 'TODO OK OD.\r\nARF OD 0.00 Y OI NO MIDE.\r\nPIO 11/11.\r\n', 0, 0, 0),
 	(456364, 159247, 0, 1, NULL, '', '2024-05-02', '9999', '2024-05-02 12:37:16', NULL, 'MEILAN', 'DOY -2.00-0.50 X 63 (1.0)\r\n        -1.50-0.75 X 111 (1.0)', 0, 0, 0);
-INSERT IGNORE INTO historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, diag, trata, fecha, prof_cod, created_at, updated_at, usuario, observ, link_imagen, registro, estudio) VALUES
+INSERT IGNORE historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, diag, trata, fecha, prof_cod, created_at, updated_at, usuario, observ, link_imagen, registro, estudio) VALUES
 	(456365, 154508, 0, 1, NULL, '', '2024-05-02', '1111', '2024-05-02 12:39:32', NULL, 'TONINI', 'hago oct y biom', 0, 0, 0),
 	(456366, 103438, 0, 1, NULL, '', '2024-05-02', '6666', '2024-05-02 12:42:42', NULL, 'ADMIN', 'TIENE ROSACEA.SENSACION DE CE EN OI.\r\nDOY MIRUS Y LUBROL.\r\nPIO 10/10.\r\nMVC 10/10 AO CON DIF OI.\r\nCERCA OK.\r\nCITO PARA OBI.', 0, 0, 0),
 	(456367, 121768, 0, 1, NULL, '', '2024-05-02', '1111', '2024-05-02 12:46:10', NULL, 'TONINI', 'oct  normal  cito para lkentes  sino mejora operar', 0, 0, 0),
@@ -857,7 +857,7 @@ INSERT IGNORE INTO historias_clinicas (id, id_paciente, tipoDiag, tipoVisita, di
 	(456451, 145118, 0, 1, NULL, '', '2024-05-03', '5432', '2024-05-03 12:49:18', NULL, 'HILGERT', 'Ausente.', 0, 0, 0),
 	(456452, 141509, 0, 1, NULL, '', '2024-05-03', '5432', '2024-05-03 12:49:27', NULL, 'HILGERT', 'Ausente.', 0, 0, 0),
 	(456453, 159218, 0, 1, NULL, '', '2024-05-03', '5432', '2024-05-03 12:49:41', NULL, 'HILGERT', 'Ausente.', 0, 0, 0),
-	(456454, 159270, 0, 1, NULL, 'CATARATA', '2024-05-03', '2016', '2024-05-03 12:53:49', NULL, 'MANTARAS', 'miope alto\r\nambliope oi?\r\nbmc ao catarata\r\nto 14-14\r\nfo ao n3 densa, retina sp\r\nexplico cx cata\r\n350 dolares', 0, 0, 0),
+	(456454, 159270, 0, 1, NULL, 'CATARATA', '2024-05-03', '2016', '2024-05-03 12:53:49', NULL, 'MANTARAS', 'miope alto\r\nambliope oi r\nbmc ao catarata\r\nto 14-14\r\nfo ao n3 densa, retina sp\r\nexplico cx cata\r\n350 dolares', 0, 0, 0),
 	(456455, 64554, 0, 1, NULL, '', '2024-05-03', '1111', '2024-05-03 12:59:42', NULL, 'TONINI', 'DOY O.D. -1.25  -1.50 A 180\r\nO.I. -1.25  -1.00  A 180', 0, 0, 0),
 	(456456, 156002, 0, 1, NULL, 'MACULOPATIA', '2024-05-03', '2016', '2024-05-03 13:16:05', NULL, 'MANTARAS', 'av 4/10 csc\r\nhacer oct y ver lentes', 0, 0, 0),
 	(456457, 156498, 0, 1, NULL, 'HIPEMA', '2024-05-03', '2016', '2024-05-03 13:16:48', NULL, 'MANTARAS', 'bmc oi casi sin nivelde hemo\r\nto 40\r\ndiabo cada 12 hs p forte y glauco td', 0, 0, 0),
