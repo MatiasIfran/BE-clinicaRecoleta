@@ -25,7 +25,7 @@ class Turnos extends Migration
                 $table->tinyInteger('atendido')->nullable();
                 $table->tinyInteger('presente')->nullable();
                 $table->tinyInteger('primeraVisita')->nullable();
-                $table->unsignedBigInteger('obra_social')->nullable();
+                $table->string('obra_social')->nullable();
                 $table->timestamp('updated_at')->useCurrent();
                 $table->timestamp('created_at')->default(now());            
                 $table->string('usuario', 50)->nullable(false)->default('admin');
