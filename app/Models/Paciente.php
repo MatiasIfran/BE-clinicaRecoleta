@@ -112,7 +112,7 @@ class Paciente extends Model
             return response()->json($data, 400);
         }
 
-        $paciente = $pacienteId ? Paciente::where('id', $pacienteDni)->first() : Paciente::where('NumDocumento', $pacienteDni)->first();
+        $paciente = $pacienteId ? Paciente::where('id', $pacienteId)->first() : Paciente::where('NumDocumento', $pacienteDni)->first();
 
         if (!$paciente) {
             $data = [
