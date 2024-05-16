@@ -68,7 +68,7 @@ class Paciente extends Model
     }
 
 
-    public function updatePaciente(Request $request, $pacienteDni)
+    public function updatePaciente(Request $request, $pacienteDni, $pacienteId)
     {
         $validator = Validator::make($request->all(), [
             'Nombre' => 'string',
@@ -112,7 +112,7 @@ class Paciente extends Model
             return response()->json($data, 400);
         }
 
-        $paciente = Paciente::where('NumDocumento', $pacienteDni)->first();
+        $paciente = $busquedaPorId ? Paciente::where('id', $pacienteDni)->first() : Paciente::where('NumDocumento', $pacienteDni)->first();
 
         if (!$paciente) {
             $data = [

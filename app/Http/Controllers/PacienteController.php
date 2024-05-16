@@ -177,7 +177,14 @@ class PacienteController extends Controller
     public function updatePaciente(Request $request, $pacienteDni)
     {
         $paciente = new Paciente();
-        $paciente = $paciente->updatePaciente($request, $pacienteDni);
+        $paciente = $paciente->updatePaciente($request, $pacienteDni, null);
+        return $paciente;
+    }
+
+    public function updatePacienteId(Request $request, $pacienteId)
+    {
+        $paciente = new Paciente();
+        $paciente = $paciente->updatePaciente($request, null, $pacienteId);
         return $paciente;
     }
 
