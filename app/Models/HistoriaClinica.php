@@ -51,7 +51,7 @@ class HistoriaClinica extends Model
          if ($historiaClinica->isEmpty()) {
              $data = [
                  'status' => false,
-                 'error' => 'No se encontraron historias clinicas para el profesional especificado',
+                 'error' => 'No se encontraron historias clínicas para el profesional especificado',
              ];
              return response()->json($data, 404);
          }
@@ -73,7 +73,7 @@ class HistoriaClinica extends Model
          if ($historiaClinica->isEmpty()) {
              $data = [
                  'status' => false,
-                 'error' => 'No se encontraron historias clinicas para el paciente especificado',
+                 'error' => 'No se encontraron historias clínicas para el paciente especificado',
              ];
              return response()->json($data, 404);
          }
@@ -102,7 +102,7 @@ class HistoriaClinica extends Model
         if (!$historiaClinica) {
             $data = [
                 'status' => false,
-                'error' => 'La historia clinica no existe',
+                'error' => 'La historia clínica no existe',
             ];
             return response()->json($data, 404);
         }
@@ -110,17 +110,72 @@ class HistoriaClinica extends Model
         if ($historiaClinica->delete()) {
             $data = [
                 'status' => true,
-                'message' => 'Historia clinica eliminado correctamente',
+                'message' => 'Historia clínica eliminado correctamente',
             ];
             return response()->json($data, 200);
         }
 
         $data = [
             'status' => false,
-            'error' => 'No se pudo eliminar la historia clinica',
+            'error' => 'No se pudo eliminar la historia clínica',
         ];
         return response()->json($data, 400);
     }
 
+    public function updateHistoriaClinicaModel(Request $request, $historiaClinicaId)
+    {
+        $validator = Validator::make($request->all(), [
+            'usuario' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'error' => 'El nombre de usuario es obligatorio.'], 400);
+        }
+
+        if (empty(array_diff_key(array_filter($request->all()), array_flip(['usuario'])))) {
+            $data = [
+                'status' => false,
+                'error' => 'Debe proporcionar al menos un campo para actualizar.',
+            ];
+            return response()->json($data, 400);
+        }
+
+        $historiaClinica = HistoriaClinica::find($historiaClinicaId);
+        if (!$historiaClinica) {
+            $data = [
+                'status' => false,
+                'error' => 'Historia clínica no encontrada.',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $historiaClinica->fill($request->only([
+            'observ',
+            'usuario'
+        ]));
+
+        $fechaHoy = Carbon::now()->toDateString();
+        if ($historiaClinica->fecha !== $fechaHoy) {
+                $data = [
+                    'status' => false,
+                    'error' => 'La historia clínica no es de hoy, no se puede actualizar.',
+                ];
+                return response()->json($data, 400);
+            }
+        if ($historiaClinica->save()) {
+            $data = [
+                'status' => true,
+                'message' => 'Historia clínica actualizada correctamente',
+                'result' => $historiaClinica,
+            ];
+            return response()->json($data, 200);
+        }
+
+        $data = [
+            'status' => false,
+            'error' => 'No se pudo actualizar la historia clínica.',
+        ];
+        return response()->json($data, 400);
+    }
 
 }

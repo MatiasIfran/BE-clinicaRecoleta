@@ -68,4 +68,11 @@ class HistoriaClinicaController extends Controller
         $historiaClinica = $historiaClinica->deleteHistoriaClinicaModel($historiaClinicaId);
         return $historiaClinica;
     }
+
+    public function updateHistoriaClinica(Request $request, $historiaClinicaId)
+    {
+        $historiaClinica = new HistoriaClinica();
+        $historiaClinica = $historiaClinica->updateHistoriaClinicaModel($request, $historiaClinicaId);
+        return $historiaClinica;
+    }
 }

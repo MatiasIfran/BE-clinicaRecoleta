@@ -101,6 +101,7 @@ Route::prefix('historiaclinica')->group(function () {
     Route::get('/paciente/{pacienteId}', 'HistoriaClinicaController@getHistoriaClinicaByPacienteId');
     Route::post('/create', 'HistoriaClinicaController@createHistoriaClinica');
     Route::delete('/delete/{historiaClinicaId}', 'HistoriaClinicaController@deleteHistoriaClinica');
+    Route::put('/update/{historiaClinicaId}', 'HistoriaClinicaController@updateHistoriaClinica')->name('updateHistoriaClinica');
 });
 
 // Put
