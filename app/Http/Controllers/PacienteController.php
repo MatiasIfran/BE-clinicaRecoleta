@@ -59,6 +59,18 @@ class PacienteController extends Controller
             return response()->json($data, 404);
         }
 
+        $codigoPostal = CodigoPostal::where('codigo', $paciente->CodPos)->first();
+        
+        $historiaClinica = HistoriaClinica::where('id_paciente', $paciente->id)
+            ->latest('created_at')
+            ->first();
+        
+        $paciente->UltimaVisita = $historiaClinica ? $historiaClinica->created_at->format('d-m-Y H:i')  : null;
+        $paciente->ciudad = ($codigoPostal) ? $codigoPostal->ciudad . " - " .  $codigoPostal->provincia : null;
+    
+        $MedCabecera = Profesional::where('codigo', $paciente->Cabecera)->first();
+        $paciente->MedCabeceraNombre = ($MedCabecera) ? $MedCabecera->Apellido . " " .  $MedCabecera->Nombre : null;
+    
         $data = [
             'status'   => true,
             'paciente' => $paciente,
