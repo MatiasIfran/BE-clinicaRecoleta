@@ -279,23 +279,26 @@ class Turno extends Model
         
         $fechaActual = Carbon::now()->format('Y-m-d');
 
-        $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
-            ->whereNull('paciente_id')
-            ->where('fecha', '>=', $fechaActual) // Filtrar turnos a partir de hoy
-            ->orderBy('fecha')
-            ->orderBy('hora')
-            ->get();
-         
-         $horariosFiltrados = collect();
-         $horariosPorDia = collect();
+        if ($obraSocialCodigo == '10') {
 
-         foreach ($horariosDisponibles as $turno) {
-            $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
-            if (!$horariosPorDia->has($fecha)) {
-                $horariosPorDia->put($fecha, collect());
-            }
-            $horariosPorDia[$fecha]->push($turno);
-         }
+        } else {
+            $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
+                ->whereNull('paciente_id')
+                ->where('fecha', '>=', $fechaActual) // Filtrar turnos a partir de hoy
+                ->orderBy('fecha')
+                ->orderBy('hora');
+        }
+         
+        $horariosFiltrados = $horariosDisponibles->get();
+        $horariosPorDia = collect();
+
+        foreach ($horariosDisponibles as $turno) {
+        $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
+        if (!$horariosPorDia->has($fecha)) {
+            $horariosPorDia->put($fecha, collect());
+        }
+        $horariosPorDia[$fecha]->push($turno);
+        }
     
         foreach ($horariosPorDia as $fecha => $turnos) {
             $limit = min($limitPerDay, $turnos->count());
@@ -305,7 +308,7 @@ class Turno extends Model
         $horariosFiltrados = $horariosFiltrados->take($totalLimit);
     
         return $horariosFiltrados;    
-     }
+    }
 
     public function obtenerTurnosProfesional(Request $request)
     {
