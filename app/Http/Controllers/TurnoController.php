@@ -125,7 +125,7 @@ class TurnoController extends Controller
             'status' => true,
             'turnos' => $turno,
         ];
-        return response()->json($data, 201);
+        return response()->json($data, 200);
     }
 
     public function allTurnosProfesional(Request $request)
