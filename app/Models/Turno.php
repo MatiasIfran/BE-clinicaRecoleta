@@ -254,10 +254,11 @@ class Turno extends Model
         return $horariosDisponibles;
     }
 
-     public function obtenerTurnosLibresProfesional(Request $request)
-     {
+    public function obtenerTurnosLibresProfesional(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'prof_cod' => 'required|integer',
+            'obraSocial' => 'string',
         ], [
             'prof_cod.required' => 'El codigo del profesional es obligatorio. (prof_cod)',
             'prof_cod.integer' => 'El id del profesional debe ser un número entero.',
@@ -272,7 +273,8 @@ class Turno extends Model
         }
 
         $profesionalCodigo = $request->input('prof_cod');
-        $limitPerDay = 7;
+        $obraSocialCodigo = $request->input('obraSocial');
+        $limitPerDay = 4;
         $totalLimit = 50;
         
         $fechaActual = Carbon::now()->format('Y-m-d');
