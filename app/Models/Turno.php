@@ -307,6 +307,70 @@ class Turno extends Model
         return $horariosFiltrados;    
      }
 
+    public function obtenerTurnosProfesional(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'prof_cod' => 'required|integer',
+        ], [
+            'prof_cod.required' => 'El código del profesional es obligatorio. (prof_cod)',
+            'prof_cod.integer' => 'El código del profesional debe ser un número entero.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'error'  => $validator->errors()->first(),
+            ], 400);
+        }
+
+        $profesionalCodigo = $request->input('prof_cod');
+
+        $fechaActual = Carbon::now();
+        $fechaInicio = $fechaActual->copy()->subDays(10);
+        $fechaFin = $fechaActual->copy()->addDays(30);
+
+        // Obtener todas las fechas en el rango especificado
+        $fechasEnRango = Turno::where('prof_cod', $profesionalCodigo)
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->distinct()
+            ->pluck('fecha');
+
+        if ($fechasEnRango->isEmpty()) {
+            $data = [
+                'status' => false,
+                'error' => 'No se encontraron turnos para las fechas especificadas.',
+            ];
+            return response()->json($data, 404);
+        }
+
+        $fechasDisponibles = collect();
+        $fechasNoDisponibles = collect();
+
+        // Filtrar fechas disponibles y no disponibles
+        $fechasEnRango->each(function ($fecha) use ($profesionalCodigo, $fechasDisponibles, $fechasNoDisponibles) {
+            $totalTurnos = Turno::where('prof_cod', $profesionalCodigo)
+                ->where('fecha', $fecha)
+                ->count();
+
+            $turnosOcupados = Turno::where('prof_cod', $profesionalCodigo)
+                ->where('fecha', $fecha)
+                ->whereNotNull('paciente_id')
+                ->count();
+
+            if ($totalTurnos > 0 && $totalTurnos == $turnosOcupados) {
+                $fechasNoDisponibles->push($fecha);
+            } else {
+                $fechasDisponibles->push($fecha);
+            }
+    });
+
+    return response()->json([
+        'status' => true,
+        'fechasDisponibles' => $fechasDisponibles->values(),
+        'fechasNoDisponibles' => $fechasNoDisponibles->values(),
+    ]);
+    }
+
     private function calculateFechaHorario($fechaInicio, $fechaFin, $dia)
     {
         $carbonFechaInicio = Carbon::parse($fechaInicio);

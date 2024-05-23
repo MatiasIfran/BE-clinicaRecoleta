@@ -128,6 +128,13 @@ class TurnoController extends Controller
         return response()->json($data, 201);
     }
 
+    public function getTurnosDisponiblesProfesional(Request $request)
+    {
+        $turnos = new Turno;
+        $turnos = $turnos->obtenerTurnosProfesional($request);
+        return $turnos;
+    }
+
     public function createTurno(TurnoRequest $request)
     {
         $turno = new Turno;
