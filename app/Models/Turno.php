@@ -280,7 +280,7 @@ class Turno extends Model
         
         $fechaActual = Carbon::now()->format('Y-m-d');
 
-        if ($obraSocialCodigo == '10') {
+        if (false) {
             $horariosDisponibles = DB::table('turnos as l')
             ->select('l.fecha', 'l.hora', 'l.id')
             ->selectRaw('ROW_NUMBER() OVER (PARTITION BY l.fecha ORDER BY l.hora ASC) AS rowNum')
@@ -316,7 +316,6 @@ class Turno extends Model
         $horariosPorDia = collect();
 
         foreach ($horariosDisponibles as $turno) {
-            dd($turno);
             $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
             if (!$horariosPorDia->has($fecha)) {
                 $horariosPorDia->put($fecha, collect());
