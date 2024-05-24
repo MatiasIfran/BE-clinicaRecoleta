@@ -289,8 +289,9 @@ class Turno extends Model
                                  FROM turnos tmp
                                  WHERE obra_social = ?
                                    AND fecha >= CURDATE()
-                                   AND prof_cod = ?
+                                   AND prof_cod = ? 
                                  GROUP BY fecha) as tomaPami'), 'tomaPami.fecha', '=', 'l.fecha')
+            ->setBindings([$obraSocialCodigo, $profesionalCodigo])
             ->whereRaw('l.fecha > LEFT(CURDATE(), 10)')
             ->whereNull('l.paciente_id')
             ->where('l.prof_cod', $profesionalCodigo)
