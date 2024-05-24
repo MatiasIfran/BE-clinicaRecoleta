@@ -281,10 +281,8 @@ class Turno extends Model
         $fechaActual = Carbon::now()->format('Y-m-d');
 
         if ($obraSocialCodigo == '10') {
-            $horariosDisponibles = DB::table(DB::raw("(SELECT l.fecha,
-                    l.hora,
-                    l.id,
-                    ROW_NUMBER() OVER (PARTITION BY l.fecha
+            $horariosDisponibles = DB::table(DB::raw("(SELECT l.fecha, l.hora, l.id,
+            ROW_NUMBER() OVER (PARTITION BY l.fecha
                                     ORDER BY l.hora ASC) AS rowNum
             FROM turnos l
             LEFT JOIN profesionales prof ON prof.codigo=l.prof_cod
@@ -308,8 +306,8 @@ class Turno extends Model
                     ->where('tmpnro.rowNum', '<', 5)
                     ->setBindings([$profesionalCodigo, $profesionalCodigo]);
 
-            // Imprimir la consulta SQL generada
             $sql = $horariosDisponibles->toSql();
+            info($sql);
             dd($sql);
         } else {
             $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
