@@ -281,34 +281,28 @@ class Turno extends Model
         $fechaActual = Carbon::now()->format('Y-m-d');
 
         if ($obraSocialCodigo == '10') {
-            $horariosDisponibles = DB::table(DB::raw("(SELECT l.fecha, l.hora, l.id,
-            ROW_NUMBER() OVER (PARTITION BY l.fecha
-                                    ORDER BY l.hora ASC) AS rowNum
-            FROM turnos l
-            LEFT JOIN profesionales prof ON prof.codigo=l.prof_cod
-            LEFT JOIN
-            (SELECT fecha,
-                    COUNT(id) cantPami
-                FROM turnos tmp
-                WHERE obra_social ='10'
-                AND fecha>=CURDATE()
-                AND prof_cod= ? 
-                GROUP BY fecha) tomaPami ON tomaPami.fecha= l.fecha
-            WHERE l.fecha> LEFT(CURDATE(), 10)
-            AND COALESCE(l.paciente_id, '0')='0'
-            AND l.prof_cod = ? 
-            AND (IF(prof.pami=0, 1, 0)=1
-                    OR DAYOFWEEK(l.fecha)=prof.pami)
-            AND IF(prof.pami=0, 4, 99) > COALESCE(tomaPami.cantPami, 0)
-            AND l.fecha< LAST_DAY(l.fecha)-2
-            ORDER BY l.fecha,
-                    l.hora)) as tmpnro"))
-                    ->where('tmpnro.rowNum', '<', 5)
-                    ->setBindings([$profesionalCodigo, $profesionalCodigo]);
-
-            $sql = $horariosDisponibles->toSql();
-            info($sql);
-            dd($sql);
+            $horariosDisponibles = DB::table('turnos as l')
+            ->select('l.fecha', 'l.hora', 'l.id')
+            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY l.fecha ORDER BY l.hora ASC) AS rowNum')
+            ->leftJoin('profesionales as prof', 'prof.codigo', '=', 'l.prof_cod')
+            ->leftJoin(DB::raw('(SELECT fecha, COUNT(id) cantPami
+                                 FROM turnos tmp
+                                 WHERE obra_social = ?
+                                   AND fecha >= CURDATE()
+                                   AND prof_cod = ?
+                                 GROUP BY fecha) as tomaPami'), 'tomaPami.fecha', '=', 'l.fecha')
+            ->whereRaw('l.fecha > LEFT(CURDATE(), 10)')
+            ->whereNull('l.paciente_id')
+            ->where('l.prof_cod', $profesionalCodigo)
+            ->where(function ($query) use ($obraSocialCodigo, $profesionalCodigo) {
+                $query->whereRaw('(IF(prof.pami = 0, 1, 0) = 1 OR DAYOFWEEK(l.fecha) = prof.pami)')
+                      ->whereRaw('IF(prof.pami = 0, 4, 99) > COALESCE(tomaPami.cantPami, 0)');
+            })
+            ->whereRaw('l.fecha < LAST_DAY(l.fecha) - 2')
+            ->orderBy('l.fecha')
+            ->orderBy('l.hora')
+            ->limit($totalLimit);
+            $horariosDisponibles->whereRaw('tomaPami.fecha IS NOT NULL');
         } else {
             $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
                 ->whereNull('paciente_id')
