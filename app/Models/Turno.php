@@ -316,11 +316,12 @@ class Turno extends Model
         $horariosPorDia = collect();
 
         foreach ($horariosDisponibles as $turno) {
-        $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
-        if (!$horariosPorDia->has($fecha)) {
-            $horariosPorDia->put($fecha, collect());
-        }
-        $horariosPorDia[$fecha]->push($turno);
+            info($turno);
+            $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
+            if (!$horariosPorDia->has($fecha)) {
+                $horariosPorDia->put($fecha, collect());
+            }
+            $horariosPorDia[$fecha]->push($turno);
         }
     
         foreach ($horariosPorDia as $fecha => $turnos) {
