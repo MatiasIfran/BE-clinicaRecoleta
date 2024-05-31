@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Feriado\FeriadoRequest;
 use App\Http\Requests\User\IndexRequest;
 use App\Models\Feriado;
+use Carbon\Carbon;
 
 class FeriadoController extends Controller
 {
@@ -16,7 +17,9 @@ class FeriadoController extends Controller
 
     public function allFeriados()
     {
-        $feriados = Feriado::all();
+        $fechaActual = Carbon::now()->format('Y-m-d');
+        $feriados = Feriado::where('fecha', '>=', $fechaActual)->get();
+        
         if ($feriados->isEmpty()) {
             $data = [
                 'status' => false,
