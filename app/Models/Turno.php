@@ -99,12 +99,12 @@ class Turno extends Model
             ->get();
 
         $feriadosProf = Feriado::where('prof_cod', $profesionalCodigo)
-        ->orWhereNull('prof_cod')
-        ->orWhere('prof_cod', '')
-        ->get();
+            ->orWhereNull('prof_cod')
+            ->orWhere('prof_cod', '')
+            ->get();
 
         $fechasFeriados = $feriadosProf->pluck('fecha')->toArray();
-      
+
         foreach ($horariosDisponibles as $horario) {
             $fechaHorario = $this->calculateFechaHorario($fechaInicio, $fechaFin, $horario->dia);
             $horaActual = $horario->desde;
@@ -132,11 +132,10 @@ class Turno extends Model
                             $turno->save();
                         } catch (\Illuminate\Database\QueryException $ex) {
                             if ($ex->errorInfo[1] === 1062) { // 1062 es el código de error para duplicados en MySQL
-                                $message = 'Error al guardar turno: El turno ya existe para la fecha '.$fecha.' a la hora '.$horaActual;
+                                $message = 'Error al guardar turno: El turno ya existe para la fecha ' . $fecha . ' a la hora ' . $horaActual;
                                 Log::error($message);
                                 $errores[] = $message;
-                            }
-                            else {
+                            } else {
                                 Log::error('Error al guardar turno: ' . $ex->getMessage());
                                 $errores[] = $ex->getMessage();
                             }
@@ -159,14 +158,14 @@ class Turno extends Model
     {
         $fecha = $request->input('fecha');
         $profCod = $request->input('prof_cod');
-    
+
         $turnos = Turno::with(['paciente', 'profesional', 'obraSocial'])
-        ->whereDate('fecha', $fecha)
-        ->where('prof_cod', $profCod)
-        ->orderBy('fecha')
-        ->orderBy('hora')
-        ->get();
-    
+            ->whereDate('fecha', $fecha)
+            ->where('prof_cod', $profCod)
+            ->orderBy('fecha')
+            ->orderBy('hora')
+            ->get();
+
         if ($turnos->isEmpty()) {
             $data = [
                 'status' => false,
@@ -174,7 +173,7 @@ class Turno extends Model
             ];
             return response()->json($data, 404);
         }
-    
+
         $data = [
             'status' => true,
             'turnos' => $turnos,
@@ -202,10 +201,10 @@ class Turno extends Model
         $fecha = $turnoDate->input('fecha');
 
         $turnos = Turno::with(['paciente', 'profesional', 'obra_social'])
-        ->whereDate('fecha', $fecha)
-        ->orderBy('fecha')
-        ->orderBy('hora')
-        ->get();
+            ->whereDate('fecha', $fecha)
+            ->orderBy('fecha')
+            ->orderBy('hora')
+            ->get();
 
         if ($turnos->isEmpty()) {
             $data = [
@@ -277,60 +276,71 @@ class Turno extends Model
         $obraSocialCodigo = $request->input('obraSocial');
         $limitPerDay = 4;
         $totalLimit = 50;
-        
         $fechaActual = Carbon::now()->format('Y-m-d');
 
-        if (false) {
-            $horariosDisponibles = DB::table('turnos as l')
-            ->select('l.fecha', 'l.hora', 'l.id')
-            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY l.fecha ORDER BY l.hora ASC) AS rowNum')
-            ->leftJoin('profesionales as prof', 'prof.codigo', '=', 'l.prof_cod')
-            ->leftJoin(DB::raw('(SELECT fecha, COUNT(id) cantPami
-                                 FROM turnos tmp
-                                 WHERE obra_social = ?
-                                   AND fecha >= CURDATE()
-                                   AND prof_cod = ? 
-                                 GROUP BY fecha) as tomaPami'), 'tomaPami.fecha', '=', 'l.fecha')
-            ->setBindings([$obraSocialCodigo, $profesionalCodigo])
-            ->whereRaw('l.fecha > LEFT(CURDATE(), 10)')
-            ->whereNull('l.paciente_id')
-            ->where('l.prof_cod', $profesionalCodigo)
-            ->where(function ($query) use ($obraSocialCodigo, $profesionalCodigo) {
-                $query->whereRaw('(IF(prof.pami = 0, 1, 0) = 1 OR DAYOFWEEK(l.fecha) = prof.pami)')
-                      ->whereRaw('IF(prof.pami = 0, 4, 99) > COALESCE(tomaPami.cantPami, 0)');
-            })
-            ->whereRaw('l.fecha < LAST_DAY(l.fecha) - 2')
-            ->orderBy('l.fecha')
-            ->orderBy('l.hora')
-            ->limit($totalLimit);
-            $horariosDisponibles->whereRaw('tomaPami.fecha IS NOT NULL');
+        if ($obraSocialCodigo == "10") {
+            DB::statement(DB::raw('SET @row_number := 0, @prev_date := NULL;'));
+
+            $query = '
+            SELECT id, fecha, hora
+            FROM (
+                SELECT l.fecha,
+                    l.hora,
+                    l.id AS id,
+                    @row_number := IF(@prev_date = l.fecha, @row_number + 1, 1) AS rowNum,
+                    @prev_date := l.fecha
+                FROM turnos l
+                LEFT JOIN profesionales prof ON prof.codigo = l.prof_cod
+                LEFT JOIN (
+                    SELECT fecha,
+                        COUNT(id) AS cantPami
+                    FROM turnos tmp
+                    WHERE obra_social = "10"
+                    AND fecha >= NOW()
+                    AND prof_cod = ?
+                    GROUP BY fecha
+                ) tomaPami ON tomaPami.fecha = l.fecha
+                WHERE l.fecha > LEFT(NOW(), 10)
+                AND IFNULL(l.paciente_id, "0") = "0"
+                AND l.prof_cod = ?
+                AND (IF(prof.pami = 0, 1, 0) = 1
+                    OR DAYOFWEEK(l.fecha) = prof.pami)
+                AND IF(prof.pami = 0, 4, 99) > IFNULL(tomaPami.cantPami, 0)
+                AND l.fecha < LAST_DAY(l.fecha) - INTERVAL 2 DAY
+                ORDER BY l.fecha, l.hora
+                ) tmpnro
+                WHERE tmpnro.rowNum < 5;
+            ';
+            $turnosLibres = DB::select($query, [$profesionalCodigo, $profesionalCodigo]);
+            $turnosLibres = collect($turnosLibres);
         } else {
-            $horariosDisponibles = Turno::where('prof_cod', $profesionalCodigo)
+            $turnosLibres = Turno::select('id', 'fecha', 'hora')
+                ->where('prof_cod', $profesionalCodigo)
                 ->whereNull('paciente_id')
                 ->where('fecha', '>=', $fechaActual) // Filtrar turnos a partir de hoy
                 ->orderBy('fecha')
-                ->orderBy('hora');
+                ->orderBy('hora')
+                ->get();
         }
-         
-        $horariosFiltrados = $horariosDisponibles->get();
+
         $horariosPorDia = collect();
 
-        foreach ($horariosDisponibles as $turno) {
+        foreach ($turnosLibres as $turno) {
             $fecha = Carbon::createFromFormat('Y-m-d', $turno->fecha)->format('d-m-y');
             if (!$horariosPorDia->has($fecha)) {
                 $horariosPorDia->put($fecha, collect());
             }
             $horariosPorDia[$fecha]->push($turno);
         }
-    
+
+        $horariosFiltrados = collect();
         foreach ($horariosPorDia as $fecha => $turnos) {
             $limit = min($limitPerDay, $turnos->count());
             $horariosFiltrados = $horariosFiltrados->merge($turnos->take($limit));
         }
-    
         $horariosFiltrados = $horariosFiltrados->take($totalLimit);
-    
-        return $horariosFiltrados;    
+
+        return $horariosFiltrados;
     }
 
     public function obtenerTurnosProfesional(Request $request)
@@ -388,13 +398,13 @@ class Turno extends Model
             } else {
                 $fechasDisponibles->push($fecha);
             }
-    });
+        });
 
-    return response()->json([
-        'status' => true,
-        'fechasDisponibles' => $fechasDisponibles->values(),
-        'fechasNoDisponibles' => $fechasNoDisponibles->values(),
-    ]);
+        return response()->json([
+            'status' => true,
+            'fechasDisponibles' => $fechasDisponibles->values(),
+            'fechasNoDisponibles' => $fechasNoDisponibles->values(),
+        ]);
     }
 
     private function calculateFechaHorario($fechaInicio, $fechaFin, $dia)
@@ -422,7 +432,7 @@ class Turno extends Model
             'Á' => 'A', 'É' => 'E', 'Í' => 'I', 'Ó' => 'O', 'Ú' => 'U',
             'ñ' => 'n', 'Ñ' => 'N',
         ];
-    
+
         $translationMap = [
             'lunes' => 'Monday',
             'martes' => 'Tuesday',
@@ -528,10 +538,10 @@ class Turno extends Model
             'primeraVisita',
             'obra_social',
         ]));
-        
-        if($pacienteId) {
+
+        if ($pacienteId) {
             $primeraVezPaciente = HistoriaClinica::where('id_paciente', $pacienteId)->get();
-            if($primeraVezPaciente->isEmpty()) {
+            if ($primeraVezPaciente->isEmpty()) {
                 $turno->primeraVisita = true;
             }
         }
