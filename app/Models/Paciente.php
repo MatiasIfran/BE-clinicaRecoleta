@@ -52,6 +52,13 @@ class Paciente extends Model
 
         $data = $request->validated();
 
+        $existingPaciente = Paciente::where('NumDocumento', $data['NumDocumento'])->first();
+        if ($existingPaciente) {
+            return response()->json([
+                'status' => false,
+                'error' => 'El número de documento ya existe.',
+            ], 400);
+        }
         $paciente = $this->create($data);
 
         return $paciente;
