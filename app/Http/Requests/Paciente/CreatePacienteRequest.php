@@ -37,6 +37,14 @@ class CreatePacienteRequest extends BaseFormRequest
                                 'integer', 
                                 Rule::exists('tipoDocumento', 'idTipoDocumento')
             ],
+            'CodPos'  => 'nullable|string',
+            'Celular' => 'nullable',
+            'NumAfiliado'  => 'nullable|string',
+            'Plan'  => 'nullable|string',
+            'Plan2'  => 'nullable|string',
+            'Antecedentes' => 'nullable|string',
+            'hc' => 'nullable|string',
+            'Cabecera' => 'nullable|string',
             'usuario' => 'required|string|max:50',
         ];
     }
