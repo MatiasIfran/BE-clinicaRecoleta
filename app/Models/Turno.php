@@ -304,7 +304,7 @@ class Turno extends Model
                 AND IFNULL(l.paciente_id, "0") = "0"
                 AND l.prof_cod = ?
                 AND (IF(prof.pami = 0, 1, 0) = 1
-                    OR DAYOFWEEK(l.fecha) = prof.pami)
+                    OR DAYOFWEEK(l.fecha) = prof.pami+1)
                 AND IF(prof.pami = 0, 4, 99) > IFNULL(tomaPami.cantPami, 0)
                 AND l.fecha < LAST_DAY(l.fecha) - INTERVAL 2 DAY
                 ORDER BY l.fecha, l.hora
