@@ -19,7 +19,9 @@ class ObraSocialController extends Controller
 
     public function allObrasSociales(IndexRequest $request)
     {
-        $obrasSociales = ObraSocial::orderBy('descripcion', 'asc')->get();
+        $obrasSociales = ObraSocial::orderBy('descripcion', 'asc')
+            ->select('id', 'codigo', 'descripcion', 'activa', 'orden', 'maxAnual', 'maxMensual', 'vigencia', 'mensaje1')
+            ->get();
         if ($obrasSociales->isEmpty()) {
             $data = [
                 'status' => false,
@@ -39,6 +41,7 @@ class ObraSocialController extends Controller
     {
         $obrasSociales = ObraSocial::where('activa', '!=', false)
             ->orderBy('descripcion', 'asc')
+            ->select('id', 'codigo', 'descripcion', 'activa', 'orden', 'maxAnual', 'maxMensual', 'vigencia', 'mensaje1')
             ->get();
             
         if ($obrasSociales->isEmpty()) {
@@ -58,8 +61,8 @@ class ObraSocialController extends Controller
 
     public function getObraSocialById($obraSocialId)
     {
-        $obraSocial = ObraSocial::find($obraSocialId);
-
+        $obraSocial = ObraSocial::select('id', 'codigo', 'descripcion', 'activa', 'orden', 'maxAnual', 'maxMensual', 'vigencia', 'mensaje1')
+            ->find($obraSocialId);
         if (!$obraSocial) {
             $data = [
                 'status' => false,
@@ -77,8 +80,9 @@ class ObraSocialController extends Controller
 
     public function getObraSocialByCodigo($obraSocialCodigo)
     {
-        $obraSocial = ObraSocial::where('codigo', $obraSocialCodigo)->first();
-
+        $obraSocial = ObraSocial::where('codigo', $obraSocialCodigo)
+            ->select('id', 'codigo', 'descripcion', 'activa', 'orden', 'maxAnual', 'maxMensual', 'vigencia', 'mensaje1')
+            ->first();
         if (!$obraSocial) {
             $data = [
                 'status' => false,
