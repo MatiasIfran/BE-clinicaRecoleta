@@ -17,7 +17,7 @@ class CodigoPostalController extends Controller
 
     public function allCodigoPostal()
     {
-        $codigosPostales = CodigoPostal::all();
+        $codigosPostales = CodigoPostal::select('id', 'ciudad', 'provincia', 'codigo')->get();
         $data = [
             'status'         => true,
             'codigos_postales' => $codigosPostales,

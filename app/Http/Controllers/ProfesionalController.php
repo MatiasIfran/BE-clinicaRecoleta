@@ -17,7 +17,7 @@ class ProfesionalController extends Controller
 
     public function allProfesionales()
     {
-        $Profesionales = Profesional::all();
+        $Profesionales = Profesional::select('id', 'Apellido', 'Nombre', 'Codigo')->get();
         $data = [
             'status'    => true,
             'profesionales'     => $Profesionales,

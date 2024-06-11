@@ -249,6 +249,7 @@ class Turno extends Model
             ->whereNull('paciente_id')
             ->orderBy('fecha')
             ->orderBy('hora')
+            ->select('id', 'hora')
             ->get();
 
         return $horariosDisponibles;
