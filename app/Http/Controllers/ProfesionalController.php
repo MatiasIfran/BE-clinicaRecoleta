@@ -27,7 +27,9 @@ class ProfesionalController extends Controller
 
     public function allProfesionalesActivos()
     {
-        $Profesionales = Profesional::where('daTurnos', '!=', false)->get();
+        $Profesionales = Profesional::where('daTurnos', '!=', false)
+            ->select('id', 'Apellido', 'Nombre', 'Codigo')
+            ->get();
         $data = [
             'status'    => true,
             'profesionales'     => $Profesionales,
