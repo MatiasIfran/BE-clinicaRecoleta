@@ -46,7 +46,7 @@ class ProfesionalController extends Controller
                 'status'    => false,
                 'error' => 'Profesional no encontrada',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -65,7 +65,7 @@ class ProfesionalController extends Controller
                 'status'    => false,
                 'error' => 'Profesional no encontrada',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [

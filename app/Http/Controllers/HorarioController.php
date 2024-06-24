@@ -25,7 +25,7 @@ class HorarioController extends Controller
                 'status' => false,
                 'message' => 'No hay horarios disponibles en este momento.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -65,7 +65,7 @@ class HorarioController extends Controller
                 'status' => false,
                 'error' => 'No se encontraron horarios para la fecha ' . $dia
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [

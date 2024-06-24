@@ -22,7 +22,7 @@ class HistoriaClinicaController extends Controller
                 'status' => false,
                 'message' => 'No hay historias clinicas disponibles en este momento.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [

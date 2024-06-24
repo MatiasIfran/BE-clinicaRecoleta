@@ -25,7 +25,7 @@ class FeriadoController extends Controller
                 'status' => false,
                 'message' => 'No hay feriados disponibles en este momento.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [

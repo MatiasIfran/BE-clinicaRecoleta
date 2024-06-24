@@ -27,7 +27,7 @@ class ObraSocialController extends Controller
                 'status' => false,
                 'message' => 'No hay obras sociales disponibles en este momento.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -49,7 +49,7 @@ class ObraSocialController extends Controller
                 'status' => false,
                 'message' => 'No hay obras sociales activas en este momento.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [

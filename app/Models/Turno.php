@@ -171,7 +171,7 @@ class Turno extends Model
                 'status' => false,
                 'error' => 'No se encontraron turnos para la fecha ' . $fecha . ' y prof_cod ' . $profCod,
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -211,7 +211,7 @@ class Turno extends Model
                 'status' => false,
                 'error' => 'No se encontraron turnos para la fecha ' . $fecha,
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -377,7 +377,7 @@ class Turno extends Model
                 'status' => false,
                 'error' => 'No se encontraron turnos para las fechas especificadas.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $fechasDisponibles = collect();

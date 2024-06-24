@@ -22,7 +22,7 @@ class TurnoController extends Controller
                 'status' => false,
                 'message' => 'No hay turnos disponibles en este momento.',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -67,7 +67,7 @@ class TurnoController extends Controller
                 'status' => false,
                 'error' => 'No se encontraron turnos para el paciente especificado',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [
@@ -97,13 +97,13 @@ class TurnoController extends Controller
                 'turno' => 'No se encontraron turnos para la fecha especificada.',
             ];
 
-            return response()->json($data, 400);
+            return response()->json($data, 204);
         }
         $data = [
             'status' => true,
             'turnos' => $turno,
         ];
-        return response()->json($data, 201);
+        return response()->json($data, 200);
     }
 
     public function getTurnosDisponiblesProfesional(Request $request)
@@ -119,7 +119,7 @@ class TurnoController extends Controller
                 'turno' => 'No se encontraron turnos disponibles.',
             ];
 
-            return response()->json($data, 400);
+            return response()->json($data, 204);
         }
         $data = [
             'status' => true,

@@ -54,7 +54,7 @@ class Horario extends Model
                 'status' => false,
                 'error' => 'No se encontraron horarios para el profesional especificado',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         $data = [

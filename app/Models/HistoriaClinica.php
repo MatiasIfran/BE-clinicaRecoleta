@@ -53,7 +53,7 @@ class HistoriaClinica extends Model
                  'status' => false,
                  'error' => 'No se encontraron historias clínicas para el profesional especificado',
              ];
-             return response()->json($data, 404);
+             return response()->json($data, 204);
          }
 
          $data = [
@@ -75,7 +75,7 @@ class HistoriaClinica extends Model
                  'status' => false,
                  'error' => 'No se encontraron historias clínicas para el paciente especificado',
              ];
-             return response()->json($data, 404);
+             return response()->json($data, 204);
          }
 
          $data = [

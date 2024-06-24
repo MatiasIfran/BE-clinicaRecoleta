@@ -148,7 +148,7 @@ class PacienteController extends Controller
                 'status' => false,
                 'error'  => 'No se encontraron pacientes',
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 204);
         }
 
         foreach ($pacientes as $paciente) {
