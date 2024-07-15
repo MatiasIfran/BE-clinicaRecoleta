@@ -65,7 +65,7 @@ class TurnoController extends Controller
         if ($turnos->isEmpty()) {
             $data = [
                 'status' => false,
-                'error' => 'No se encontraron turnos para el paciente especificado',
+                'turnos' => 'No se encontraron turnos para el paciente especificado',
             ];
             return response()->json($data, 202);
         }
