@@ -67,7 +67,7 @@ class TurnoController extends Controller
                 'status' => false,
                 'error' => 'No se encontraron turnos para el paciente especificado',
             ];
-            return response()->json($data, 204);
+            return response()->json($data, 202);
         }
 
         $data = [
