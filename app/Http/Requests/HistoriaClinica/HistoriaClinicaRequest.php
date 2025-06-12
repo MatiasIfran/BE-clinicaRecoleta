@@ -33,6 +33,8 @@ class HistoriaClinicaRequest extends BaseFormRequest
             'trata' => 'nullable|string',
             'observ' => 'nullable|string',
             'link_imagen' => 'nullable|string',
+            'files'          => 'nullable|array|max:10',
+            'files.*'        => 'file|mimes:jpg,jpeg,png,pdf,doc,docx|max:5120',
             'fecha' => 'nullable|date_format:Y-m-d',
             'usuario' => 'required|string|max:50',
         ];
