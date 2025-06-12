@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HistoriaClinica;
 use App\Http\Requests\HistoriaClinica\HistoriaClinicaRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -48,20 +49,20 @@ class HistoriaClinicaController extends Controller
         return $historiaClinica;
     }
 
-    public function createHistoriaClinica(HistoriaClinicaRequest $request)
+    public function createHistoriaClinica(HistoriaClinicaRequest $request): JsonResponse
     {
         DB::beginTransaction();
-                $storedPaths = [];
+        $storedPaths = [];
+
         try {
             $hc = (new HistoriaClinica)
                 ->createHistoriaClinicaModel($request);
 
             foreach ($request->file('files', []) as $file) {
-                $path = $file->store("hc_files/{$hc->id}", 'public');
-                $storedPaths[] = $path;
+                $storedPaths[] = $file->store("hc_files/{$hc->id}", 'public');
             }
 
-            if (!empty($storedPaths)) {
+            if ($storedPaths) {
                 $hc->link_imagen = $storedPaths;
                 $hc->save();
             }
@@ -74,8 +75,8 @@ class HistoriaClinicaController extends Controller
             ], 201);
         
         } catch (\Throwable  $e) {
-            foreach ($storedPaths as $p) {
-                Storage::disk('public')->delete($p);
+            foreach ($storedPaths as $path) {
+                Storage::disk('public')->delete($path);
             }
 
             DB::rollBack();
