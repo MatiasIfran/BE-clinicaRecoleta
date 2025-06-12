@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\HistoriaClinica;
 use App\Http\Requests\HistoriaClinica\HistoriaClinicaRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class HistoriaClinicaController extends Controller
 {
@@ -48,18 +50,41 @@ class HistoriaClinicaController extends Controller
 
     public function createHistoriaClinica(HistoriaClinicaRequest $request)
     {
-        $historiaClinica = new HistoriaClinica;
-        $historiaClinica = $historiaClinica->createHistoriaClinicaModel($request);
+        DB::beginTransaction();
+                $storedPaths = [];
+        try {
+            $hc = (new HistoriaClinica)
+                ->createHistoriaClinicaModel($request);
 
-        if ($this->isJsonResponse($historiaClinica)) {
-            return $historiaClinica;
+            foreach ($request->file('files', []) as $file) {
+                $path = $file->store("hc_files/{$hc->id}", 'public');
+                $storedPaths[] = $path;
+            }
+
+            if (!empty($storedPaths)) {
+                $hc->link_imagen = $storedPaths;
+                $hc->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'hc'     => $hc->refresh(),
+            ], 201);
+        
+        } catch (\Throwable  $e) {
+            foreach ($storedPaths as $p) {
+                Storage::disk('public')->delete($p);
+            }
+
+            DB::rollBack();
+
+            return response()->json([
+                'status'  => false,
+                'message' => 'Error al guardar historia clínica: '.$e->getMessage(),
+            ], 500);
         }
-        $data = [
-            'status' => true,
-            'hc' => $historiaClinica,
-        ];
-
-        return response()->json($data, 201);
     }
 
     public function deleteHistoriaClinica($historiaClinicaId)
