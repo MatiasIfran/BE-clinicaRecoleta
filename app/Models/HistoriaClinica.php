@@ -14,6 +14,10 @@ class HistoriaClinica extends Model
     use HasFactory;
     protected $table = 'historias_clinicas';
 
+    protected $casts = [
+        'link_imagen' => 'array',
+    ];
+
     protected $fillable = [
         'id_paciente',
         'prof_cod',

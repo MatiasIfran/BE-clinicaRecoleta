@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class HistoriaClinicaController extends Controller
 {
@@ -100,5 +101,22 @@ class HistoriaClinicaController extends Controller
         $historiaClinica = new HistoriaClinica();
         $historiaClinica = $historiaClinica->updateHistoriaClinicaModel($request, $historiaClinicaId);
         return $historiaClinica;
+    }
+
+    public function file($hcId, $index): BinaryFileResponse    
+    {
+        $hc = HistoriaClinica::findOrFail($hcId);
+
+        $paths = $hc->link_imagen ?? [];
+        abort_unless(isset($paths[$index]), 404, 'Archivo no encontrado');
+
+        $absolute = storage_path('app/public/' . $paths[$index]);
+
+        if (request()->boolean('inline')) {
+            return response()->file($absolute);
+        }
+
+        $origName = basename($paths[$index]);
+        return response()->download($absolute, $origName);
     }
 }

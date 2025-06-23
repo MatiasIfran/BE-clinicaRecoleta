@@ -103,6 +103,7 @@ Route::prefix('historiaclinica')->group(function () {
     Route::post('/create', 'HistoriaClinicaController@createHistoriaClinica');
     Route::delete('/delete/{historiaClinicaId}', 'HistoriaClinicaController@deleteHistoriaClinica');
     Route::put('/update/{historiaClinicaId}', 'HistoriaClinicaController@updateHistoriaClinica')->name('updateHistoriaClinica');
+    Route::get('/{hc}/file/{index}', 'HistoriaClinicaController@file')->middleware('auth:sanctum');
 });
 
 // Put
